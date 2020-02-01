@@ -1,0 +1,18 @@
+#Ignore thumbnails created by windows
+Thumbs.db
+
+#Ignore folder
+/_obj/
+/_lib/
+
+/*/.vs/
+/*/ipch/
+
+#Ignore bin
+/bin/*/game_*.exe
+/bin/*/game_*.ilk
+/bin/*/game_*.pdb
+/bin/*/game_*.exp
+/bin/*/game_*.lib
+/bin/*/game_*.iobj
+/bin/*/game_*.ipdb
