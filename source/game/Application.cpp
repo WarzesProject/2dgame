@@ -1,59 +1,47 @@
 #include "stdafx.h"
 #include "Application.h"
 //-----------------------------------------------------------------------------
-Application::Application()
+Application::Application(const ApplicationConfig &config)
+	: m_config(config)
 {
 	if( SDL_Init(SDL_INIT_VIDEO) != 0 )
-		ThrowSDLError("Can't init: ");
+		ThrowSDLError("Error initializing SDL : ");
 
-	m_window = SDL_CreateWindow("Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN);
+	m_window = SDL_CreateWindow(m_config.title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_config.width, m_config.height, SDL_WINDOW_SHOWN);
 	if( !m_window )
 		ThrowSDLError("Can't create window: ");
-
-	m_surface = SDL_GetWindowSurface(m_window);
-	
-	m_hero = SDL_LoadBMP("../data/sprite/hero.bmp");
-	if( !m_hero )
-		ThrowSDLError("Can't load image: ");
 }
 //-----------------------------------------------------------------------------
 Application::~Application()
 {
-	SDL_FreeSurface(m_hero);
 	SDL_DestroyWindow(m_window);
 	SDL_Quit();
 }
 //-----------------------------------------------------------------------------
-void Application::Run()
+void Application::Run(std::unique_ptr<IGame> game)
 {
-	SDL_Event e;
+	m_game = std::move(game);
+		
 	bool run = true;
 	while( run )
 	{
-		while( SDL_PollEvent(&e) != NULL )
-		{
-			if( e.type == SDL_QUIT )
-			{
-				run = false;
-				break;
-			}
+		run = handleEvents();		
 
-			if( e.type == SDL_KEYDOWN )
-			{
-				if( e.key.keysym.sym == SDLK_UP )
-					m_pos.y -= 1;
-				if( e.key.keysym.sym == SDLK_DOWN )
-					m_pos.y += 1;
-				if( e.key.keysym.sym == SDLK_RIGHT )
-					m_pos.x += 1;
-				if( e.key.keysym.sym == SDLK_LEFT )
-					m_pos.x -= 1;
-			}
-		}
-
-		SDL_FillRect(m_surface, NULL, SDL_MapRGB(m_surface->format, 108, 120, 255));
-		SDL_BlitSurface(m_hero, NULL, m_surface, &m_pos);
 		SDL_UpdateWindowSurface(m_window);
 	}
+
+	m_game.reset();
+}
+//-----------------------------------------------------------------------------
+bool Application::handleEvents()
+{
+	SDL_Event e;
+	while( SDL_PollEvent(&e) != NULL )
+	{
+		if( e.type == SDL_QUIT )
+			return false;		
+	}
+
+	return true;
 }
 //-----------------------------------------------------------------------------

@@ -1,17 +1,26 @@
 #pragma once
 
+#include "IGame.h"
+#include "ApplicationConfig.h"
+
 class Application
 {
 public:
-	Application();
+	Application(const ApplicationConfig &config);
 	~Application();
 
-	void Run();
+	void Run(std::unique_ptr<IGame> game);
 
 private:
-	SDL_Window *m_window = nullptr;
-	SDL_Surface *m_surface = nullptr;
+	Application() = delete;
+	Application(const Application&) = delete;
+	Application(Application&&) = delete;
+	Application& operator=(const Application&) = delete;
+	Application& operator=(Application&&) = delete;
 
-	SDL_Surface *m_hero = nullptr;
-	SDL_Rect m_pos = { 0,0,0,0 };
+	bool handleEvents();
+
+	std::unique_ptr<IGame> m_game = nullptr;
+	ApplicationConfig m_config;
+	SDL_Window *m_window = nullptr;
 };

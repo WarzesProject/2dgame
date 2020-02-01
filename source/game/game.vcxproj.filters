@@ -12,6 +12,9 @@
     <ClCompile Include="Timer.cpp">
       <Filter>Engine\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>GameLogic\GameApp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -23,6 +26,15 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="IGame.h">
+      <Filter>Engine\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>GameLogic\GameApp</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationConfig.h">
+      <Filter>Engine\App</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +49,9 @@
     </Filter>
     <Filter Include="Engine\App">
       <UniqueIdentifier>{a67e6d83-cfd6-4ffd-a390-f092da3ad5e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\GameApp">
+      <UniqueIdentifier>{dc7fd6fe-b52d-4ec4-bcf5-c66e7bd9f9ab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
