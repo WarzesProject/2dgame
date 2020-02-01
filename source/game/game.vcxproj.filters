@@ -15,6 +15,9 @@
     <ClCompile Include="Game.cpp">
       <Filter>GameLogic\GameApp</Filter>
     </ClCompile>
+    <ClCompile Include="VKRenderer.cpp">
+      <Filter>Engine\Render\VK</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -36,6 +39,18 @@
     <ClInclude Include="ApplicationConfig.h">
       <Filter>Engine\App</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="VKRenderer.h">
+      <Filter>Engine\Render\VK</Filter>
+    </ClInclude>
+    <ClInclude Include="VKConfigure.h">
+      <Filter>Engine\Render\VK\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="VKPlatformExtension.h">
+      <Filter>Engine\Render\VK\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -52,6 +67,15 @@
     </Filter>
     <Filter Include="GameLogic\GameApp">
       <UniqueIdentifier>{dc7fd6fe-b52d-4ec4-bcf5-c66e7bd9f9ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Render">
+      <UniqueIdentifier>{e7cc06be-c9d6-4e14-8c1a-04d0a82a901e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Render\VK">
+      <UniqueIdentifier>{c8739449-da81-43f8-b491-43a62a89151b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Render\VK\Core">
+      <UniqueIdentifier>{a8434673-1e28-4f18-ba41-b8846d16e9a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
