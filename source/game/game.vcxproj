@@ -181,9 +181,8 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="VKConfigure.h" />
+    <ClInclude Include="VKCore.h" />
     <ClInclude Include="VKRenderer.h" />
-    <ClInclude Include="VKPlatformExtension.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />

@@ -45,10 +45,7 @@
     <ClInclude Include="VKRenderer.h">
       <Filter>Engine\Render\VK</Filter>
     </ClInclude>
-    <ClInclude Include="VKConfigure.h">
-      <Filter>Engine\Render\VK\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="VKPlatformExtension.h">
+    <ClInclude Include="VKCore.h">
       <Filter>Engine\Render\VK\Core</Filter>
     </ClInclude>
   </ItemGroup>
