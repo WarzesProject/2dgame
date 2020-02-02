@@ -621,8 +621,8 @@ void VKRenderer::createGraphicsPipeline()
 
 	vk::PipelineShaderStageCreateInfo shaderStages[] = { vertShaderStageInfo, fragShaderStageInfo };
 
-	auto bindingDescription = Vertex::GetBindingDescription();
-	auto attributeDescriptions = Vertex::GetAttributeDescriptions();
+	auto bindingDescription = Vertex3::GetBindingDescription();
+	auto attributeDescriptions = Vertex3::GetAttributeDescriptions();
 
 	vk::PipelineVertexInputStateCreateInfo vertexInputInfo(
 		vk::PipelineVertexInputStateCreateFlags(),
@@ -1073,13 +1073,13 @@ void VKRenderer::loadModel()
 	if( !tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, MODEL_PATH.c_str()) )
 		throw std::runtime_error(warn + err);
 
-	std::unordered_map<Vertex, uint32_t> uniqueVertices = {};
+	std::unordered_map<Vertex3, uint32_t> uniqueVertices = {};
 
 	for( const auto& shape : shapes )
 	{
 		for( const auto& index : shape.mesh.indices )
 		{
-			Vertex vertex = {};
+			Vertex3 vertex = {};
 
 			vertex.pos = {
 				attrib.vertices[3 * index.vertex_index + 0],

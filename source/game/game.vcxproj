@@ -181,6 +181,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Vertex.h" />
     <ClInclude Include="VKCore.h" />
     <ClInclude Include="VKRenderer.h" />
   </ItemGroup>
@@ -196,6 +197,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="VKRenderer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
