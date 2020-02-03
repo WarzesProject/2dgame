@@ -7,6 +7,8 @@
 #include "AudioEngine.h"
 #include "ResourceManager.h"
 #include "EventHandler.h"
+#include "ScreenManager.h"
+#include "FPSLimiter.h"
 
 class Application
 {
@@ -16,6 +18,8 @@ public:
 
 	void Run(std::unique_ptr<IGame> game);
 
+	void OnSDLEvent(SDL_Event &ev);
+
 private:
 	Application() = delete;
 	Application(const Application&) = delete;
@@ -23,6 +27,8 @@ private:
 	Application& operator=(const Application&) = delete;
 	Application& operator=(Application&&) = delete;
 
+	void update();
+	void draw();
 	bool handleEvents();
 
 	ApplicationConfig m_config;
@@ -33,4 +39,8 @@ private:
 	AudioEngine m_audioSystem;
 	ResourceManager m_resourceManager;
 	EventHandler m_eventHandler;
+	ScreenManager m_screenManager;
+	IGameScreen* m_currentScreen = nullptr;
+	FPSLimiter m_limiter;
+	bool m_isRunning = false;
 };

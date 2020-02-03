@@ -48,6 +48,12 @@
     <ClCompile Include="EventHandler.cpp">
       <Filter>Engine\App</Filter>
     </ClCompile>
+    <ClCompile Include="ScreenManager.cpp">
+      <Filter>Engine\GameScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScreen.cpp">
+      <Filter>GameLogic\GameScreen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -114,6 +120,15 @@
     <ClInclude Include="EventHandler.h">
       <Filter>Engine\App</Filter>
     </ClInclude>
+    <ClInclude Include="ScreenManager.h">
+      <Filter>Engine\GameScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameScreen.h">
+      <Filter>Engine\GameScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScreen.h">
+      <Filter>GameLogic\GameScreen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -151,6 +166,12 @@
     </Filter>
     <Filter Include="Engine\GUI">
       <UniqueIdentifier>{e78b04c6-1011-4aba-ab92-b69ec0efe2ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameScreen">
+      <UniqueIdentifier>{c873b589-56e5-4d94-8ae6-6b0a9ae8df8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\GameScreen">
+      <UniqueIdentifier>{4eb6ad80-fa4f-444d-84a0-c97f49e9a5c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
