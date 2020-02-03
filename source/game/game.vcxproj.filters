@@ -60,6 +60,12 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Engine\Render</Filter>
     </ClCompile>
+    <ClCompile Include="IOManager.cpp">
+      <Filter>Engine\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GLSLProgram.cpp">
+      <Filter>Engine\Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -141,6 +147,12 @@
     <ClInclude Include="Sprite.h">
       <Filter>Engine\Render</Filter>
     </ClInclude>
+    <ClInclude Include="IOManager.h">
+      <Filter>Engine\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSLProgram.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -184,6 +196,9 @@
     </Filter>
     <Filter Include="GameLogic\GameScreen">
       <UniqueIdentifier>{4eb6ad80-fa4f-444d-84a0-c97f49e9a5c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\IO">
+      <UniqueIdentifier>{6c63864d-1018-4ad4-8c07-4c91317c4642}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

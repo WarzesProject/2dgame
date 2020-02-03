@@ -184,8 +184,10 @@
     <ClInclude Include="FPSLimiter.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="GLSLProgram.h" />
     <ClInclude Include="IGameScreen.h" />
     <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="IOManager.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="Sprite.h" />
@@ -211,7 +213,9 @@
     <ClCompile Include="FPSLimiter.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="GLSLProgram.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
