@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "BuildOptions.h"
+
 #pragma warning( disable : 4514 )
 #pragma warning( disable : 4820 )
 
@@ -28,10 +30,14 @@
 
 #include <SDL2-2.0.10/SDL.h>
 #include <SDL2-2.0.10/SDL_syswm.h>
-#include <SDL2-2.0.10/SDL_vulkan.h>
+#if RENDER_VULKAN
+#	include <SDL2-2.0.10/SDL_vulkan.h>
+#endif
 
-#define VK_USE_PLATFORM_WIN32_KHR
-#include <vulkan/vulkan.hpp>
+#if RENDER_VULKAN
+#	define VK_USE_PLATFORM_WIN32_KHR
+#	include <vulkan/vulkan.hpp>
+#endif
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -42,7 +48,7 @@
 
 #include <stb/stb_image.h>
 
-#include <tinyobjloader/tiny_obj_loader.h>
+//#include <tinyobjloader/tiny_obj_loader.h>
 
 //[=========================================================================]
 //[ Core Header                                                             ]

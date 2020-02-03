@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#if RENDER_VULKAN
 #include "VKRenderer.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
@@ -6,6 +7,76 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include <tinyobjloader/tiny_obj_loader.h>
 #undef TINYOBJLOADER_IMPLEMENTATION
+//-----------------------------------------------------------------------------
+vk::VertexInputBindingDescription Vertex2::GetBindingDescription()
+{
+	vk::VertexInputBindingDescription bindingDescription = {};
+	bindingDescription.binding = 0;
+	bindingDescription.stride = sizeof(Vertex2);
+	bindingDescription.inputRate = vk::VertexInputRate::eVertex;
+
+	return bindingDescription;
+}
+//-----------------------------------------------------------------------------
+std::array<vk::VertexInputAttributeDescription, 4> Vertex2::GetAttributeDescriptions()
+{
+	std::array<vk::VertexInputAttributeDescription, 4> attributeDescriptions = {};
+
+	attributeDescriptions[0].binding = 0;
+	attributeDescriptions[0].location = 0;
+	attributeDescriptions[0].format = vk::Format::eR32G32Sfloat;
+	attributeDescriptions[0].offset = offsetof(Vertex2, pos);
+
+	attributeDescriptions[1].binding = 0;
+	attributeDescriptions[1].location = 1;
+	attributeDescriptions[1].format = vk::Format::eR32G32B32A32Sfloat;
+	attributeDescriptions[1].offset = offsetof(Vertex2, color);
+
+	attributeDescriptions[2].binding = 0;
+	attributeDescriptions[2].location = 2;
+	attributeDescriptions[2].format = vk::Format::eR32G32Sfloat;
+	attributeDescriptions[2].offset = offsetof(Vertex2, texCoord);
+
+	attributeDescriptions[3].binding = 0;
+	attributeDescriptions[3].location = 3;
+	attributeDescriptions[3].format = vk::Format::eR32G32B32A32Sint;
+	attributeDescriptions[3].offset = offsetof(Vertex2, data);
+
+	return attributeDescriptions;
+}
+//-----------------------------------------------------------------------------
+vk::VertexInputBindingDescription Vertex3::GetBindingDescription()
+{
+	vk::VertexInputBindingDescription bindingDescription = {};
+	bindingDescription.binding = 0;
+	bindingDescription.stride = sizeof(Vertex3);
+	bindingDescription.inputRate = vk::VertexInputRate::eVertex;
+
+	return bindingDescription;
+}
+//-----------------------------------------------------------------------------
+std::array<vk::VertexInputAttributeDescription, 3> Vertex3::GetAttributeDescriptions()
+{
+	std::array<vk::VertexInputAttributeDescription, 3> attributeDescriptions = {};
+
+	attributeDescriptions[0].binding = 0;
+	attributeDescriptions[0].location = 0;
+	attributeDescriptions[0].format = vk::Format::eR32G32B32Sfloat;
+	attributeDescriptions[0].offset = offsetof(Vertex3, pos);
+
+	attributeDescriptions[1].binding = 0;
+	attributeDescriptions[1].location = 1;
+	attributeDescriptions[1].format = vk::Format::eR32G32B32Sfloat;
+	attributeDescriptions[1].offset = offsetof(Vertex3, color);
+
+	attributeDescriptions[2].binding = 0;
+	attributeDescriptions[2].location = 2;
+	attributeDescriptions[2].format = vk::Format::eR32G32Sfloat;
+	attributeDescriptions[2].offset = offsetof(Vertex3, texCoord);
+
+	return attributeDescriptions;
+}
+//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 const std::string MODEL_PATH = "../data/models/cube.obj";
 const std::string TEXTURE_PATH = "../data/sprite/no_sprite.png";
@@ -1341,3 +1412,4 @@ bool VKRenderer::hasStencilComponent(vk::Format format)
 	return format == vk::Format::eD32SfloatS8Uint || format == vk::Format::eD24UnormS8Uint;
 }
 //-----------------------------------------------------------------------------
+#endif

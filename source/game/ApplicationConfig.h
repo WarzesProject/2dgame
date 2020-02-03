@@ -2,8 +2,12 @@
 
 enum class RenderType
 {
+#if RENDER_VULKAN
 	Vulkan,
-	OpenGL
+#endif
+#if RENDER_OPENGL
+	OpenGL,
+#endif
 };
 
 struct ApplicationConfig
@@ -14,5 +18,5 @@ struct ApplicationConfig
 	const char *title = "Test";
 
 	// render config
-	RenderType renderType = RenderType::Vulkan;
+	RenderType renderType = RenderType::OpenGL;
 };

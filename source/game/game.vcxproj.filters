@@ -18,9 +18,6 @@
     <ClCompile Include="VKRenderer.cpp">
       <Filter>Engine\Render\VK</Filter>
     </ClCompile>
-    <ClCompile Include="Vertex.cpp">
-      <Filter>Engine\Render\Core</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -48,11 +45,8 @@
     <ClInclude Include="VKRenderer.h">
       <Filter>Engine\Render\VK</Filter>
     </ClInclude>
-    <ClInclude Include="VKCore.h">
-      <Filter>Engine\Render\VK\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Engine\Render\Core</Filter>
+    <ClInclude Include="BuildOptions.h">
+      <Filter>Engine\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -76,12 +70,6 @@
     </Filter>
     <Filter Include="Engine\Render\VK">
       <UniqueIdentifier>{c8739449-da81-43f8-b491-43a62a89151b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Render\VK\Core">
-      <UniqueIdentifier>{a8434673-1e28-4f18-ba41-b8846d16e9a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Render\Core">
-      <UniqueIdentifier>{d7bdf399-20df-492e-8fa6-4d900444f639}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

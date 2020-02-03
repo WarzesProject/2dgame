@@ -1,22 +1,27 @@
 #include "stdafx.h"
 #include "Application.h"
-#include "VKRenderer.h"
+#if RENDER_VULKAN
+#	include "VKRenderer.h"
+#endif
 //-----------------------------------------------------------------------------
 Application::Application(const ApplicationConfig &config)
 	: m_config(config)
 {
 	if( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0 )
 		ThrowSDLError("Fail to Initialize SDL: ");
-
+#if RENDER_VULKAN
 	if( m_config.renderType == RenderType::Vulkan )
 	{
 		if( SDL_Vulkan_LoadLibrary(nullptr) != 0 )
 			ThrowSDLError("Error initializing SDL Vulkan : ");
 	}	
+#endif
 
-	int windowFlags = SDL_WINDOW_SHOWN;
+	Uint32 windowFlags = SDL_WINDOW_SHOWN;
+#if RENDER_VULKAN
 	if( m_config.renderType == RenderType::Vulkan )
 		windowFlags |= SDL_WINDOW_VULKAN;
+#endif
 	//windowFlags |= SDL_WINDOW_FULLSCREEN;
 	//windowFlags |= SDL_WINDOW_RESIZABLE;
 	//windowFlags |= SDL_WINDOW_ALLOW_HIGHDPI;
@@ -26,16 +31,20 @@ Application::Application(const ApplicationConfig &config)
 	if( !m_window )
 		ThrowSDLError("Fail to Create Window with SDL: ");
 
+#if RENDER_VULKAN
 	if( m_config.renderType == RenderType::Vulkan )
 		m_render = std::make_unique<VKRenderer>(m_window);
+#endif
 }
 //-----------------------------------------------------------------------------
 Application::~Application()
 {
 	m_render.reset();
 	SDL_DestroyWindow(m_window);
+#if RENDER_VULKAN
 	if( m_config.renderType == RenderType::Vulkan )
 		SDL_Vulkan_UnloadLibrary();
+#endif
 	SDL_Quit();
 }
 //-----------------------------------------------------------------------------
