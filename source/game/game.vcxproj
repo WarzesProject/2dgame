@@ -179,11 +179,13 @@
     <ClInclude Include="BuildOptions.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="DebugRenderer.h" />
     <ClInclude Include="EventConfig.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="FontCache.h" />
     <ClInclude Include="FPSLimiter.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameRenderer.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="GLSLProgram.h" />
     <ClInclude Include="IGameScreen.h" />
@@ -200,6 +202,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextureCache.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSheet.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Vertex.h" />
@@ -211,10 +214,12 @@
     <ClCompile Include="AudioEngine.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="DebugRenderer.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="FontCache.cpp" />
     <ClCompile Include="FPSLimiter.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameRenderer.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="GLSLProgram.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
@@ -233,6 +238,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TextureCache.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="VKRenderer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

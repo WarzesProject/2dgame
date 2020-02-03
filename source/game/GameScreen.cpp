@@ -25,7 +25,10 @@ void GameScreen::OnEntry()
 {
 	m_camera.Init(m_app->GetScreenWidth(), m_app->GetScreenHeight());
 	m_camera.SetScale(1.0f);
+	m_camera.SetPosition(glm::vec2(m_app->GetScreenWidth() / 2, m_app->GetScreenHeight() / 2));
 	ResourceManager::GetMusic("../data/musics/XYZ.ogg").Play();
+
+	m_renderer.Init(m_app->GetScreenWidth(), m_app->GetScreenHeight());
 }
 //-----------------------------------------------------------------------------
 void GameScreen::OnExit()
@@ -45,7 +48,8 @@ void GameScreen::Update()
 void GameScreen::Draw()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.2f, 0.6f, 1.0f, 1.0f);
+	m_renderer.Render(m_camera);
 }
 //-----------------------------------------------------------------------------
 int GameScreen::GetNextScreenIndex() const

@@ -69,6 +69,15 @@
     <ClCompile Include="MainMenuScreen.cpp">
       <Filter>GameLogic\GameScreen</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugRenderer.cpp">
+      <Filter>Engine\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="GameRenderer.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -165,6 +174,15 @@
     <ClInclude Include="MainMenuScreen.h">
       <Filter>GameLogic\GameScreen</Filter>
     </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugRenderer.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="GameRenderer.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -211,6 +229,9 @@
     </Filter>
     <Filter Include="Engine\IO">
       <UniqueIdentifier>{6c63864d-1018-4ad4-8c07-4c91317c4642}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{08383fd2-aaf9-46b7-9f9e-e5bfb0d3aff4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

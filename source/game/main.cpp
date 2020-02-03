@@ -19,6 +19,10 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **args)
 	try
 	{
 		ApplicationConfig config;
+		config.width = 1500;
+		config.height = 800;
+
+
 		Application app(config);
 		app.Run(std::make_unique<Game>());
 	}

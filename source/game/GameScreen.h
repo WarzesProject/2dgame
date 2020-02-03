@@ -2,6 +2,7 @@
 
 #include "IGameScreen.h"
 #include "Camera2D.h"
+#include "GameRenderer.h"
 
 class GameScreen : public IGameScreen
 {
@@ -23,4 +24,5 @@ public:
 
 private:
 	Camera2D m_camera;
+	GameRenderer m_renderer;
 };
