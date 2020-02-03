@@ -1,59 +1,47 @@
 #include "stdafx.h"
-#include "GameScreen.h"
-#include "Application.h"
+#include "MainMenuScreen.h"
 //-----------------------------------------------------------------------------
-GameScreen::GameScreen()
-{
-	m_screenIndex = 0;
-}
-//-----------------------------------------------------------------------------
-GameScreen::~GameScreen()
+MainMenuScreen::MainMenuScreen()
 {
 }
 //-----------------------------------------------------------------------------
-void GameScreen::Build()
+MainMenuScreen::~MainMenuScreen()
+{
+}
+//-----------------------------------------------------------------------------
+void MainMenuScreen::Build()
 {
 
 }
 //-----------------------------------------------------------------------------
-void GameScreen::Destroy()
+void MainMenuScreen::Destroy()
 {
 
 }
 //-----------------------------------------------------------------------------
-void GameScreen::OnEntry()
+void MainMenuScreen::OnEntry()
 {
-	m_camera.Init(m_app->GetScreenWidth(), m_app->GetScreenHeight());
-	m_camera.SetScale(1.0f);
-	ResourceManager::GetMusic("../data/musics/XYZ.ogg").Play();
 }
 //-----------------------------------------------------------------------------
-void GameScreen::OnExit()
+void MainMenuScreen::OnExit()
 {
-	ResourceManager::GetMusic("../data/musics/XYZ.ogg").Stop();
 }
 //-----------------------------------------------------------------------------
-void GameScreen::Update()
+void MainMenuScreen::Update()
 {
-	m_camera.Update();
 
-	SDL_Event ev;
-	while( SDL_PollEvent(&ev) )
-		m_app->OnSDLEvent(ev);
 }
 //-----------------------------------------------------------------------------
-void GameScreen::Draw()
+void MainMenuScreen::Draw()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 }
 //-----------------------------------------------------------------------------
-int GameScreen::GetNextScreenIndex() const
+int MainMenuScreen::GetNextScreenIndex() const
 {
 	return -1;
 }
 //-----------------------------------------------------------------------------
-int GameScreen::GetPreviousScreenIndex() const
+int MainMenuScreen::GetPreviousScreenIndex() const
 {
 	return -1;
 }

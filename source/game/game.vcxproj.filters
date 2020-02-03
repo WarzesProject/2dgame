@@ -66,6 +66,9 @@
     <ClCompile Include="GLSLProgram.cpp">
       <Filter>Engine\Render</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuScreen.cpp">
+      <Filter>GameLogic\GameScreen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -155,6 +158,12 @@
     </ClInclude>
     <ClInclude Include="TileSheet.h">
       <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="EventConfig.h">
+      <Filter>GameLogic\GameApp</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuScreen.h">
+      <Filter>GameLogic\GameScreen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

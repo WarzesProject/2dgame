@@ -179,6 +179,7 @@
     <ClInclude Include="BuildOptions.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="EventConfig.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="FontCache.h" />
     <ClInclude Include="FPSLimiter.h" />
@@ -188,6 +189,7 @@
     <ClInclude Include="IGameScreen.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IOManager.h" />
+    <ClInclude Include="MainMenuScreen.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="Sprite.h" />
@@ -218,6 +220,7 @@
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenuScreen.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="Sprite.cpp" />

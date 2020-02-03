@@ -36,7 +36,8 @@ Application::Application(const ApplicationConfig &config)
 //-----------------------------------------------------------------------------
 Application::~Application()
 {
-	m_currentScreen->OnExit();
+	if ( m_currentScreen )
+		m_currentScreen->OnExit();
 	m_screenManager.Destroy();
 	m_game.reset();
 	m_eventHandler.Destroy();
@@ -55,7 +56,7 @@ void Application::Run(std::unique_ptr<IGame> game)
 {
 	m_game = std::move(game);
 
-	m_game->OnInit(&m_screenManager);
+	m_game->OnInit(&m_screenManager, &m_eventHandler);
 	m_currentScreen = m_screenManager.GetCurrentScreen();
 	m_currentScreen->OnEntry();
 	m_currentScreen->SetGameState(ScreenState::RUNNING);
@@ -77,8 +78,6 @@ void Application::Run(std::unique_ptr<IGame> game)
 		m_limiter.End();
 		m_window->SwapBuffer();
 	}
-
-	m_game.reset();
 }
 //-----------------------------------------------------------------------------
 void Application::OnSDLEvent(SDL_Event &ev)

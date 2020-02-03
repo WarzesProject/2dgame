@@ -20,6 +20,15 @@ public:
 
 	void OnSDLEvent(SDL_Event &ev);
 
+	int GetScreenWidth()
+	{
+		return m_config.width;
+	}
+	int GetScreenHeight()
+	{
+		return m_config.height;
+	}
+
 private:
 	Application() = delete;
 	Application(const Application&) = delete;
