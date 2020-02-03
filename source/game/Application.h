@@ -4,6 +4,9 @@
 #include "ApplicationConfig.h"
 #include "Renderer.h"
 #include "Window.h"
+#include "AudioEngine.h"
+#include "ResourceManager.h"
+#include "EventHandler.h"
 
 class Application
 {
@@ -27,4 +30,7 @@ private:
 	std::unique_ptr<Renderer> m_render = nullptr;
 	std::unique_ptr<Window> m_window = nullptr;
 	std::unique_ptr<IGame> m_game = nullptr;	
+	AudioEngine m_audioSystem;
+	ResourceManager m_resourceManager;
+	EventHandler m_eventHandler;
 };

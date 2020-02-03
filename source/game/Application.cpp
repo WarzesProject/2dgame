@@ -20,6 +20,11 @@ Application::Application(const ApplicationConfig &config)
 
 	m_window = std::make_unique<Window>(m_config);
 
+	m_audioSystem.Init();
+	m_resourceManager.Init(&m_audioSystem);
+
+	m_eventHandler.Init(m_config.width, m_config.height);
+
 #if RENDER_VULKAN
 	if( m_config.renderType == RenderType::Vulkan )
 		m_render = std::make_unique<VKRenderer>(m_window);
@@ -28,6 +33,9 @@ Application::Application(const ApplicationConfig &config)
 //-----------------------------------------------------------------------------
 Application::~Application()
 {
+	m_eventHandler.destroy();
+	m_resourceManager.destroy();
+	m_audioSystem.Destroy();
 	m_render.reset();
 	m_window.reset();
 #if RENDER_VULKAN

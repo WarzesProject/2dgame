@@ -17,6 +17,7 @@
 #include <exception>
 #include <chrono>
 #include <memory>
+#include <algorithm>
 #include <optional>
 #include <iostream>
 #include <fstream>
@@ -37,6 +38,8 @@
 #include <SDL2-2.0.10/SDL.h>
 #include <SDL2-2.0.10/SDL_syswm.h>
 #include <SDL2-2.0.10/SDL_mixer.h>
+#include <SDL2-2.0.10/SDL_ttf.h>
+
 #if RENDER_VULKAN
 #	include <SDL2-2.0.10/SDL_vulkan.h>
 #endif
