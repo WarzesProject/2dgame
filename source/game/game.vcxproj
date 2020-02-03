@@ -177,6 +177,7 @@
     <ClInclude Include="ApplicationConfig.h" />
     <ClInclude Include="AudioEngine.h" />
     <ClInclude Include="BuildOptions.h" />
+    <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="FontCache.h" />
@@ -202,6 +203,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="AudioEngine.cpp" />
+    <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="FontCache.cpp" />

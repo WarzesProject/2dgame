@@ -54,6 +54,9 @@
     <ClCompile Include="GameScreen.cpp">
       <Filter>GameLogic\GameScreen</Filter>
     </ClCompile>
+    <ClCompile Include="Camera2D.cpp">
+      <Filter>Engine\Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -128,6 +131,9 @@
     </ClInclude>
     <ClInclude Include="GameScreen.h">
       <Filter>GameLogic\GameScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera2D.h">
+      <Filter>Engine\Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
