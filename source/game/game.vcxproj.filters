@@ -57,6 +57,9 @@
     <ClCompile Include="Camera2D.cpp">
       <Filter>Engine\Render</Filter>
     </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Engine\Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -133,6 +136,9 @@
       <Filter>GameLogic\GameScreen</Filter>
     </ClInclude>
     <ClInclude Include="Camera2D.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
       <Filter>Engine\Render</Filter>
     </ClInclude>
   </ItemGroup>

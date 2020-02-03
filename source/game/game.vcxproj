@@ -188,6 +188,7 @@
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ScreenManager.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="SpriteFont.h" />
     <ClInclude Include="Texture.h" />
@@ -214,6 +215,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="SpriteFont.cpp" />
     <ClCompile Include="stdafx.cpp">
