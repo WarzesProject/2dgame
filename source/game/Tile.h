@@ -4,7 +4,7 @@
 #include "Texture.h"
 #include "DebugRenderer.h"
 
-#define TILESIZE 40.0f
+constexpr auto TILESIZE = 40.0f;
 
 class Tile
 {

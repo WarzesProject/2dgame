@@ -78,6 +78,15 @@
     <ClCompile Include="GameRenderer.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -181,6 +190,15 @@
       <Filter>Engine\Render</Filter>
     </ClInclude>
     <ClInclude Include="GameRenderer.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
       <Filter>Framework</Filter>
     </ClInclude>
   </ItemGroup>

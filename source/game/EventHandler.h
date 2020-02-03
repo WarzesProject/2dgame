@@ -41,68 +41,68 @@ public:
 
 	void Update(float deltaTime);
 
-	void updateJoystickAxis(int axe, int value, SDL_Window* window);
+	void UpdateJoystickAxis(int axe, int value, SDL_Window* window);
 
-	void updateJoystickHats(int value);
+	void UpdateJoystickHats(int value);
 
-	void pressKey(unsigned int keyID);
+	void PressKey(unsigned int keyID);
 
-	void releaseKey(unsigned int keyID);
+	void ReleaseKey(unsigned int keyID);
 
-	bool isKeyDown(unsigned int keyID);
+	bool IsKeyDown(unsigned int keyID);
 
-	bool isKeyPressed(unsigned int keyID);
+	bool IsKeyPressed(unsigned int keyID);
 
-	bool isEventDown(unsigned int eventID);
+	bool IsEventDown(unsigned int eventID);
 
-	bool isEventPressed(unsigned int eventID);
+	bool IsEventPressed(unsigned int eventID);
 
-	void releaseEvent(unsigned int eventID);
+	void ReleaseEvent(unsigned int eventID);
 
-	bool isJoyConnect()
+	bool IsJoyConnect()
 	{
 		return m_joystick != nullptr;
 	}
 
-	void addEvent(unsigned int eventID, unsigned int keyID, unsigned int joyID)
+	void AddEvent(unsigned int eventID, unsigned int keyID, unsigned int joyID)
 	{
 		m_eventConfig[eventID] = EventConfig(keyID, joyID);
 	}
 
-	void updateMapping(unsigned int eventID, PlayWith util);
+	void UpdateMapping(unsigned int eventID, PlayWith util);
 
-	std::string getMapping(unsigned int eventID, PlayWith util);
+	std::string GetMapping(unsigned int eventID, PlayWith util);
 
-	std::string getMapping(unsigned int eventID);
+	std::string GetMapping(unsigned int eventID);
 
-	void updateConfig();
-	void saveConfig();
-	void clearConfig();
-	bool loadConfigFile();
-	bool saveConfigFile();
+	void UpdateConfig();
+	void SaveConfig();
+	void ClearConfig();
+	bool LoadConfigFile();
+	bool SaveConfigFile();
 
-	void setMouseCoords(float x, float y);
-	void setPlayWith(PlayWith util)
+	void SetMouseCoords(float x, float y);
+	void SetPlayWith(PlayWith util)
 	{
 		m_playWith = util;
 	}
 
-	glm::vec2 getMouseCoords() const
+	glm::vec2 GetMouseCoords() const
 	{
 		return m_mouseCoords;
 	}
-	PlayWith getPlayWith()
+	PlayWith GetPlayWith()
 	{
 		return m_playWith;
 	}
-	EventConfig getEventKey(unsigned int eventID)
+	EventConfig GetEventKey(unsigned int eventID)
 	{
 		return m_eventConfig[eventID];
 	}
 
 private:
 	bool wasKeyDown(unsigned int keyID);
-	std::string getMapping(unsigned int eventID, PlayWith util, std::unordered_map<unsigned int, EventConfig>& map);
+	std::string GetMapping(unsigned int eventID, PlayWith util, std::unordered_map<unsigned int, EventConfig>& map);
 
 	std::unordered_map<unsigned int, EventConfig> m_eventConfig;
 	std::unordered_map<unsigned int, EventConfig> m_eventConfigTemp;

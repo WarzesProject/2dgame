@@ -6,7 +6,7 @@ const glm::vec4 Tile::m_uvRect(0.0f, 0.0f, 1.0f, 1.0f);
 //-----------------------------------------------------------------------------
 Tile::Tile()
 {
-	Init(ResourceManager::GetTexture("../data/sprite/ground.png"), 0, 0, true);
+	Init(ResourceManager::GetTexture("../data/sprite/no_sprite.png"), 0, 0, true);
 }
 //-----------------------------------------------------------------------------
 void Tile::Init(const Texture& texture, int x, int y, bool crossable)
@@ -30,7 +30,7 @@ void Tile::Init(Tile& tile, int x, int y)
 //-----------------------------------------------------------------------------
 void Tile::Reset()
 {
-	m_texture = ResourceManager::GetTexture(".../data/sprite/ground.png");
+	m_texture = ResourceManager::GetTexture(".../data/sprite/no_sprite.png");
 	m_crossable = true;
 	m_color.SetColor(255, 255, 255, 255);
 }

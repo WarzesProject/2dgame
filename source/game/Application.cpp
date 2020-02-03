@@ -82,7 +82,7 @@ void Application::Run(std::unique_ptr<IGame> game)
 //-----------------------------------------------------------------------------
 void Application::OnSDLEvent(SDL_Event &ev)
 {
-	if ( m_eventHandler.getPlayWith() == PlayWith::KEYBOARD )
+	if ( m_eventHandler.GetPlayWith() == PlayWith::KEYBOARD )
 	{
 		switch ( ev.type )
 		{
@@ -90,19 +90,19 @@ void Application::OnSDLEvent(SDL_Event &ev)
 			m_currentScreen->SetGameState(ScreenState::CHANGE_PREVIOUS);
 			break;
 		case SDL_MOUSEMOTION:
-			m_eventHandler.setMouseCoords((float)ev.motion.x, (float)ev.motion.y);
+			m_eventHandler.SetMouseCoords((float)ev.motion.x, (float)ev.motion.y);
 			break;
 		case SDL_KEYDOWN:
-			m_eventHandler.pressKey(ev.key.keysym.sym);
+			m_eventHandler.PressKey(ev.key.keysym.sym);
 			break;
 		case SDL_KEYUP:
-			m_eventHandler.releaseKey(ev.key.keysym.sym);
+			m_eventHandler.ReleaseKey(ev.key.keysym.sym);
 			break;
 		case SDL_MOUSEBUTTONDOWN:
-			m_eventHandler.pressKey(ev.button.button);
+			m_eventHandler.PressKey(ev.button.button);
 			break;
 		case SDL_MOUSEBUTTONUP:
-			m_eventHandler.releaseKey(ev.button.button);
+			m_eventHandler.ReleaseKey(ev.button.button);
 			break;
 		}
 	}
@@ -114,16 +114,16 @@ void Application::OnSDLEvent(SDL_Event &ev)
 			m_currentScreen->SetGameState(ScreenState::CHANGE_PREVIOUS);
 			break;
 		case SDL_JOYBUTTONDOWN:
-			m_eventHandler.pressKey(ev.jbutton.button + MARGIN);
+			m_eventHandler.PressKey(ev.jbutton.button + MARGIN);
 			break;
 		case SDL_JOYBUTTONUP:
-			m_eventHandler.releaseKey(ev.jbutton.button + MARGIN);
+			m_eventHandler.ReleaseKey(ev.jbutton.button + MARGIN);
 			break;
 		case SDL_JOYAXISMOTION:
-			m_eventHandler.updateJoystickAxis(ev.jaxis.axis, ev.jaxis.value, m_window->GetSDLWindow());
+			m_eventHandler.UpdateJoystickAxis(ev.jaxis.axis, ev.jaxis.value, m_window->GetSDLWindow());
 			break;
 		case SDL_JOYHATMOTION:
-			m_eventHandler.updateJoystickHats(ev.jhat.value + MARGIN);
+			m_eventHandler.UpdateJoystickHats(ev.jhat.value + MARGIN);
 			break;
 		}
 	}

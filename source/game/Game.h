@@ -1,8 +1,10 @@
-#pragma once
+﻿#pragma once
 
 #include "IGame.h"
 #include "GameScreen.h"
 #include "MainMenuScreen.h"
+
+TODO("класс можно удалить, вместо этого передавая скрины напрямую");
 
 class Game final : public IGame
 {

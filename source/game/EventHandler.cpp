@@ -47,27 +47,27 @@ void EventHandler::Update(float deltaTime)
 	m_axisTimeLapse += deltaTime;
 }
 //-----------------------------------------------------------------------------
-void EventHandler::pressKey(unsigned int keyID)
+void EventHandler::PressKey(unsigned int keyID)
 {
 	m_keyMap[keyID] = true;
 }
 //-----------------------------------------------------------------------------
-void EventHandler::releaseKey(unsigned int keyID)
+void EventHandler::ReleaseKey(unsigned int keyID)
 {
 	m_keyMap[keyID] = false;
 }
 //-----------------------------------------------------------------------------
-void EventHandler::releaseEvent(unsigned int eventID)
+void EventHandler::ReleaseEvent(unsigned int eventID)
 {
 	auto itEvent = m_eventConfig.find(eventID);
 	if ( itEvent != m_eventConfig.end() )
 	{
 		unsigned int keyID = (m_playWith == PlayWith::KEYBOARD) ? itEvent->second.keyID : itEvent->second.joyID;
-		releaseKey(keyID);
+		ReleaseKey(keyID);
 	}
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::isEventDown(unsigned int eventID)
+bool EventHandler::IsEventDown(unsigned int eventID)
 {
 	/* Retrieve the right key */
 	unsigned int keyID = eventID;
@@ -77,10 +77,10 @@ bool EventHandler::isEventDown(unsigned int eventID)
 		keyID = (m_playWith == PlayWith::KEYBOARD) ? itEvent->second.keyID : itEvent->second.joyID;
 	}
 
-	return isKeyDown(keyID);
+	return IsKeyDown(keyID);
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::isKeyDown(unsigned int keyID)
+bool EventHandler::IsKeyDown(unsigned int keyID)
 {
 	auto it = m_keyMap.find(keyID);
 	if ( it != m_keyMap.end() )
@@ -103,7 +103,7 @@ bool EventHandler::wasKeyDown(unsigned int keyID)
 	return false;
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::isEventPressed(unsigned int eventID)
+bool EventHandler::IsEventPressed(unsigned int eventID)
 {
 	/* Retrieve the right key */
 	unsigned int keyID = eventID;
@@ -113,50 +113,50 @@ bool EventHandler::isEventPressed(unsigned int eventID)
 		keyID = (m_playWith == PlayWith::KEYBOARD) ? itEvent->second.keyID : itEvent->second.joyID;
 	}
 
-	return (isKeyDown(keyID) && !wasKeyDown(keyID));
+	return (IsKeyDown(keyID) && !wasKeyDown(keyID));
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::isKeyPressed(unsigned int keyID)
+bool EventHandler::IsKeyPressed(unsigned int keyID)
 {
-	return (isKeyDown(keyID) && !wasKeyDown(keyID));
+	return (IsKeyDown(keyID) && !wasKeyDown(keyID));
 }
 //-----------------------------------------------------------------------------
-void EventHandler::setMouseCoords(float x, float y)
+void EventHandler::SetMouseCoords(float x, float y)
 {
 	m_mouseCoords.x = x;
 	m_mouseCoords.y = y;
 }
 //-----------------------------------------------------------------------------
-void EventHandler::updateJoystickAxis(int axe, int value, SDL_Window* window)
+void EventHandler::UpdateJoystickAxis(int axe, int value, SDL_Window* window)
 {
 	if ( axe == 0 )
 	{
 		if ( value < -JOY_DEAD_ZONE )
-			pressKey(Joystick::AXE1_LEFT);
+			PressKey(Joystick::AXE1_LEFT);
 		else
-			releaseKey(Joystick::AXE1_LEFT);
+			ReleaseKey(Joystick::AXE1_LEFT);
 		if ( value > JOY_DEAD_ZONE )
-			pressKey(Joystick::AXE1_RIGHT);
+			PressKey(Joystick::AXE1_RIGHT);
 		else
-			releaseKey(Joystick::AXE1_RIGHT);
+			ReleaseKey(Joystick::AXE1_RIGHT);
 	}
 	else if ( axe == 1 )
 	{
 		if ( value < -JOY_DEAD_ZONE )
-			pressKey(Joystick::AXE1_UP);
+			PressKey(Joystick::AXE1_UP);
 		else
-			releaseKey(Joystick::AXE1_UP);
+			ReleaseKey(Joystick::AXE1_UP);
 		if ( value > JOY_DEAD_ZONE )
-			pressKey(Joystick::AXE1_DOWN);
+			PressKey(Joystick::AXE1_DOWN);
 		else
-			releaseKey(Joystick::AXE1_DOWN);
+			ReleaseKey(Joystick::AXE1_DOWN);
 	}
 	else if ( axe == 5 )
 	{
 		if ( value > JOY_DEAD_ZONE )
-			pressKey(Joystick::RT);
+			PressKey(Joystick::RT);
 		else
-			releaseKey(Joystick::RT);
+			ReleaseKey(Joystick::RT);
 	}
 	else if ( axe == 2 || axe == 4 )
 	{
@@ -190,21 +190,21 @@ void EventHandler::updateJoystickAxis(int axe, int value, SDL_Window* window)
 	}
 }
 //-----------------------------------------------------------------------------
-void EventHandler::updateJoystickHats(int value)
+void EventHandler::UpdateJoystickHats(int value)
 {
-	releaseKey(Joystick::DPAD_LEFT);
-	releaseKey(Joystick::DPAD_RIGHT);
-	releaseKey(Joystick::DPAD_UP);
-	releaseKey(Joystick::DPAD_DOWN);
+	ReleaseKey(Joystick::DPAD_LEFT);
+	ReleaseKey(Joystick::DPAD_RIGHT);
+	ReleaseKey(Joystick::DPAD_UP);
+	ReleaseKey(Joystick::DPAD_DOWN);
 
-	pressKey(value);
+	PressKey(value);
 }
 //-----------------------------------------------------------------------------
-void EventHandler::updateMapping(unsigned int eventID, PlayWith util)
+void EventHandler::UpdateMapping(unsigned int eventID, PlayWith util)
 {
 	for ( auto& it : m_keyMap )
 	{
-		if ( isKeyPressed(it.first) && it.first != SDL_BUTTON_LEFT )
+		if ( IsKeyPressed(it.first) && it.first != SDL_BUTTON_LEFT )
 		{
 			if ( util == PlayWith::KEYBOARD )
 				m_eventConfigTemp[eventID].keyID = it.first;
@@ -214,7 +214,7 @@ void EventHandler::updateMapping(unsigned int eventID, PlayWith util)
 	}
 }
 //-----------------------------------------------------------------------------
-void EventHandler::updateConfig()
+void EventHandler::UpdateConfig()
 {
 	for ( auto& it : m_eventConfig )
 	{
@@ -222,16 +222,16 @@ void EventHandler::updateConfig()
 	}
 }
 //-----------------------------------------------------------------------------
-void EventHandler::saveConfig()
+void EventHandler::SaveConfig()
 {
 	for ( auto& it : m_eventConfigTemp )
 	{
 		m_eventConfig[it.first] = it.second;
 	}
-	saveConfigFile();
+	SaveConfigFile();
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::loadConfigFile()
+bool EventHandler::LoadConfigFile()
 {
 	std::ifstream file(FILENAME);
 	if ( file.fail() )
@@ -259,12 +259,12 @@ bool EventHandler::loadConfigFile()
 	else
 		m_playWith = PlayWith::KEYBOARD;
 
-	updateConfig();
+	UpdateConfig();
 
 	return true;
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::saveConfigFile()
+bool EventHandler::SaveConfigFile()
 {
 	std::ofstream file(FILENAME);
 	if ( file.fail() )
@@ -284,22 +284,22 @@ bool EventHandler::saveConfigFile()
 	return true;
 }
 //-----------------------------------------------------------------------------
-void EventHandler::clearConfig()
+void EventHandler::ClearConfig()
 {
 	m_eventConfigTemp.clear();
 }
 //-----------------------------------------------------------------------------
-std::string EventHandler::getMapping(unsigned int eventID)
+std::string EventHandler::GetMapping(unsigned int eventID)
 {
-	return getMapping(eventID, m_playWith, m_eventConfig);
+	return GetMapping(eventID, m_playWith, m_eventConfig);
 }
 //-----------------------------------------------------------------------------
-std::string EventHandler::getMapping(unsigned int eventID, PlayWith util)
+std::string EventHandler::GetMapping(unsigned int eventID, PlayWith util)
 {
-	return getMapping(eventID, util, m_eventConfigTemp);
+	return GetMapping(eventID, util, m_eventConfigTemp);
 }
 //-----------------------------------------------------------------------------
-std::string EventHandler::getMapping(unsigned int eventID, PlayWith util, std::unordered_map<unsigned int, EventConfig>& map)
+std::string EventHandler::GetMapping(unsigned int eventID, PlayWith util, std::unordered_map<unsigned int, EventConfig>& map)
 {
 	unsigned int keyID;
 

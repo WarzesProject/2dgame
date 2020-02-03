@@ -30,17 +30,4 @@ public:
 private:
 	bool m_debug;
 	float m_lineWidth;
-
-	ColorRGBA8 m_debugColor;
-	GLSLProgram m_lightProgram;
-	GLSLProgram m_textureProgram; ///< The shader program
-	SpriteBatch m_spriteBatch; ///< Draws all agents
-	SpriteBatch m_lightSpriteBatch; ///< Draws all lights
-	SpriteBatch m_fontSpriteBatch; ///< Draws fonts
-	DebugRenderer m_debugRenderer;
-
-	TileRenderer m_tileRenderer;
-
-
-	std::vector<Tile> temptiles;
 };

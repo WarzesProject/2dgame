@@ -180,6 +180,7 @@
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DebugRenderer.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="EventConfig.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="FontCache.h" />
@@ -191,9 +192,11 @@
     <ClInclude Include="IGameScreen.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IOManager.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="MainMenuScreen.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ScreenManager.h" />
+    <ClInclude Include="Shape.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="SpriteFont.h" />
@@ -215,6 +218,7 @@
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DebugRenderer.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="FontCache.cpp" />
     <ClCompile Include="FPSLimiter.cpp" />
@@ -224,10 +228,12 @@
     <ClCompile Include="GLSLProgram.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="IOManager.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScreen.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
+    <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="SpriteFont.cpp" />
