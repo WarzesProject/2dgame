@@ -175,22 +175,28 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="ApplicationConfig.h" />
+    <ClInclude Include="AudioEngine.h" />
     <ClInclude Include="BuildOptions.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="FPSLimiter.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="IGame.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TextureCache.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="VKRenderer.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="AudioEngine.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="FPSLimiter.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -198,6 +204,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TextureCache.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="VKRenderer.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

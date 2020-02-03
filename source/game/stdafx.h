@@ -1,5 +1,9 @@
 ﻿#pragma once
 
+#define SE_STRINGIZE( _n ) SE_STRINGIZE_2( _n )
+#define SE_STRINGIZE_2( _n ) #_n
+#define TODO( _msg ) __pragma(message("" __FILE__ "(" SE_STRINGIZE(__LINE__) "): TODO: " _msg))
+
 #include "BuildOptions.h"
 
 #pragma warning( disable : 4514 )
@@ -20,16 +24,19 @@
 #include <string_view>
 #include <vector>
 #include <set>
+#include <map>
+#include <unordered_map>
 
 //[=========================================================================]
 //[ 3rd-party                                                               ]
 //[=========================================================================]
-#include <SDKDDKVer.h>
 #define WIN32_LEAN_AND_MEAN 
 #define NOMINMAX
+#include <SDKDDKVer.h>
 
 #include <SDL2-2.0.10/SDL.h>
 #include <SDL2-2.0.10/SDL_syswm.h>
+#include <SDL2-2.0.10/SDL_mixer.h>
 #if RENDER_VULKAN
 #	include <SDL2-2.0.10/SDL_vulkan.h>
 #endif
@@ -47,8 +54,8 @@
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm/glm.hpp>
-#include <glm/glm/gtc/matrix_transform.hpp>
-#include <glm/glm/gtx/hash.hpp>
+//#include <glm/glm/gtc/matrix_transform.hpp>
+//#include <glm/glm/gtx/hash.hpp>
 
 #include <stb/stb_image.h>
 

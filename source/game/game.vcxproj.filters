@@ -24,6 +24,15 @@
     <ClCompile Include="Window.cpp">
       <Filter>Engine\App</Filter>
     </ClCompile>
+    <ClCompile Include="TextureCache.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLoader.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioEngine.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -60,6 +69,18 @@
     <ClInclude Include="Window.h">
       <Filter>Engine\App</Filter>
     </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureCache.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLoader.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioEngine.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -85,6 +106,15 @@
     </Filter>
     <Filter Include="Engine\Utility">
       <UniqueIdentifier>{ff039be2-3342-40d6-9cfd-3c1bc2bec1b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Render\GL">
+      <UniqueIdentifier>{7f144e71-fc0d-40e2-b80a-cd27d1551917}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource">
+      <UniqueIdentifier>{cb54bec0-ff6a-4bec-9981-0995afd99057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Audio">
+      <UniqueIdentifier>{04df6b66-3b0e-4b1c-842d-e92ebf70f418}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
