@@ -9,6 +9,10 @@
 #if RENDER_VULKAN
 #	pragma comment( lib, "vulkan-1.lib" )
 #endif
+#if RENDER_OPENGL
+#	pragma comment( lib, "OpenGL32.lib" )
+#endif
+
 //-----------------------------------------------------------------------------
 int main([[maybe_unused]] int argc, [[maybe_unused]] char **args)
 {

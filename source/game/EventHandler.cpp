@@ -17,7 +17,7 @@ void EventHandler::Init(int screenWidth, int screenHeight)
 	}
 }
 //-----------------------------------------------------------------------------
-void EventHandler::destroy()
+void EventHandler::Destroy()
 {
 	if ( m_joystick != nullptr )
 		SDL_JoystickClose(m_joystick);
@@ -25,7 +25,7 @@ void EventHandler::destroy()
 	SDL_JoystickEventState(SDL_DISABLE);
 }
 //-----------------------------------------------------------------------------
-void EventHandler::update(float deltaTime)
+void EventHandler::Update(float deltaTime)
 {
 	// If gamepad is connected during game
 	if ( SDL_NumJoysticks() > 0 && m_joystick == nullptr )

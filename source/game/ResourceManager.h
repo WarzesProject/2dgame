@@ -8,14 +8,14 @@ class ResourceManager
 {
 public:
 	static bool Init(AudioEngine *audioEngine);
-	static void destroy();
+	static void Destroy();
 
-	static Sound getSound(const std::string soundPath);
-	static Music getMusic(const std::string musicPath);
+	static Sound GetSound(const std::string soundPath);
+	static Music GetMusic(const std::string musicPath);
 
-	static Texture getTexture(const std::string texturePath);
+	static Texture GetTexture(const std::string texturePath);
 
-	static SpriteFont getFont(const std::string fontPath, int size = 32);
+	static SpriteFont GetFont(const std::string fontPath, int size = 32);
 
 private:
 	static TextureCache m_textureCache;

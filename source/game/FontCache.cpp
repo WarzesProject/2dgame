@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "FontCache.h"
 //-----------------------------------------------------------------------------
-SpriteFont FontCache::getFont(const std::string fontPath, int size)
+SpriteFont FontCache::GetFont(const std::string fontPath, int size)
 {
 	auto mit = m_fontMap.find(fontPath);
 
@@ -16,7 +16,7 @@ SpriteFont FontCache::getFont(const std::string fontPath, int size)
 	return mit->second;
 }
 //-----------------------------------------------------------------------------
-void FontCache::destroy()
+void FontCache::Destroy()
 {
 	for ( auto& p : m_fontMap )
 		p.second.Dispose();

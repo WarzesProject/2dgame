@@ -11,28 +11,28 @@ bool ResourceManager::Init(AudioEngine *audioEngine)
 	return true;
 }
 //-----------------------------------------------------------------------------
-void ResourceManager::destroy()
+void ResourceManager::Destroy()
 {
-	m_fontCache.destroy();
+	m_fontCache.Destroy();
 }
 //-----------------------------------------------------------------------------
-Sound ResourceManager::getSound(const std::string soundPath)
+Sound ResourceManager::GetSound(const std::string soundPath)
 {
 	return m_audioEngine->LoadSound(soundPath);
 }
 //-----------------------------------------------------------------------------
-Music ResourceManager::getMusic(const std::string musicPath)
+Music ResourceManager::GetMusic(const std::string musicPath)
 {
 	return m_audioEngine->LoadMusic(musicPath);
 }
 //-----------------------------------------------------------------------------
-Texture ResourceManager::getTexture(const std::string texturePath)
+Texture ResourceManager::GetTexture(const std::string texturePath)
 {
 	return m_textureCache.GetTexture(texturePath);
 }
 //-----------------------------------------------------------------------------
-SpriteFont ResourceManager::getFont(const std::string fontPath, int size/* = 32*/)
+SpriteFont ResourceManager::GetFont(const std::string fontPath, int size/* = 32*/)
 {
-	return m_fontCache.getFont(fontPath, size);
+	return m_fontCache.GetFont(fontPath, size);
 }
 //-----------------------------------------------------------------------------

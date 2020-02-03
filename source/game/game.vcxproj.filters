@@ -149,5 +149,8 @@
     <Filter Include="Engine\Audio">
       <UniqueIdentifier>{04df6b66-3b0e-4b1c-842d-e92ebf70f418}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GUI">
+      <UniqueIdentifier>{e78b04c6-1011-4aba-ab92-b69ec0efe2ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

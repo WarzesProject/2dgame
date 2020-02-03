@@ -37,9 +37,9 @@ class EventHandler
 {
 public:
 	void Init(int screenWidth, int screenHeight);
-	void destroy();
+	void Destroy();
 
-	void update(float deltaTime);
+	void Update(float deltaTime);
 
 	void updateJoystickAxis(int axe, int value, SDL_Window* window);
 
