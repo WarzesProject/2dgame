@@ -153,6 +153,9 @@
     <ClInclude Include="GLSLProgram.h">
       <Filter>Engine\Render</Filter>
     </ClInclude>
+    <ClInclude Include="TileSheet.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

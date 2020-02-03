@@ -198,6 +198,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextureCache.h" />
+    <ClInclude Include="TileSheet.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="VKRenderer.h" />
