@@ -39,6 +39,10 @@
 #	include <vulkan/vulkan.hpp>
 #endif
 
+#if RENDER_OPENGL
+#	include <glad/glad.h>
+#endif
+
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #define GLM_ENABLE_EXPERIMENTAL

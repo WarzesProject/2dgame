@@ -3,6 +3,7 @@
 #include "IGame.h"
 #include "ApplicationConfig.h"
 #include "Renderer.h"
+#include "Window.h"
 
 class Application
 {
@@ -22,7 +23,8 @@ private:
 	bool handleEvents();
 
 	ApplicationConfig m_config;
-	SDL_Window *m_window = nullptr;
+	
 	std::unique_ptr<Renderer> m_render = nullptr;
+	std::unique_ptr<Window> m_window = nullptr;
 	std::unique_ptr<IGame> m_game = nullptr;	
 };

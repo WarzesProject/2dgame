@@ -18,6 +18,12 @@
     <ClCompile Include="VKRenderer.cpp">
       <Filter>Engine\Render\VK</Filter>
     </ClCompile>
+    <ClCompile Include="FPSLimiter.cpp">
+      <Filter>Engine\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Engine\App</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -48,6 +54,12 @@
     <ClInclude Include="BuildOptions.h">
       <Filter>Engine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="FPSLimiter.h">
+      <Filter>Engine\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Engine\App</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -70,6 +82,9 @@
     </Filter>
     <Filter Include="Engine\Render\VK">
       <UniqueIdentifier>{c8739449-da81-43f8-b491-43a62a89151b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utility">
+      <UniqueIdentifier>{ff039be2-3342-40d6-9cfd-3c1bc2bec1b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -16,6 +16,11 @@ struct ApplicationConfig
 	int width = 640;
 	int height = 480;
 	const char *title = "Test";
+	bool fullscreen = false;
+	bool windowedFullscreen = true;
+	bool resizable = false;
+	bool highDPI = false;
+
 
 	// render config
 	RenderType renderType = RenderType::OpenGL;

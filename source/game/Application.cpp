@@ -7,8 +7,9 @@
 Application::Application(const ApplicationConfig &config)
 	: m_config(config)
 {
-	if( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0 )
+	if( SDL_Init(SDL_INIT_EVERYTHING) != 0 )
 		ThrowSDLError("Fail to Initialize SDL: ");
+
 #if RENDER_VULKAN
 	if( m_config.renderType == RenderType::Vulkan )
 	{
@@ -17,19 +18,7 @@ Application::Application(const ApplicationConfig &config)
 	}	
 #endif
 
-	Uint32 windowFlags = SDL_WINDOW_SHOWN;
-#if RENDER_VULKAN
-	if( m_config.renderType == RenderType::Vulkan )
-		windowFlags |= SDL_WINDOW_VULKAN;
-#endif
-	//windowFlags |= SDL_WINDOW_FULLSCREEN;
-	//windowFlags |= SDL_WINDOW_RESIZABLE;
-	//windowFlags |= SDL_WINDOW_ALLOW_HIGHDPI;
-
-
-	m_window = SDL_CreateWindow(m_config.title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_config.width, m_config.height, windowFlags);
-	if( !m_window )
-		ThrowSDLError("Fail to Create Window with SDL: ");
+	m_window = std::make_unique<Window>(m_config);
 
 #if RENDER_VULKAN
 	if( m_config.renderType == RenderType::Vulkan )
@@ -40,7 +29,7 @@ Application::Application(const ApplicationConfig &config)
 Application::~Application()
 {
 	m_render.reset();
-	SDL_DestroyWindow(m_window);
+	m_window.reset();
 #if RENDER_VULKAN
 	if( m_config.renderType == RenderType::Vulkan )
 		SDL_Vulkan_UnloadLibrary();
@@ -57,8 +46,8 @@ void Application::Run(std::unique_ptr<IGame> game)
 	{
 		run = handleEvents();
 
-		m_render->Draw();
-		SDL_UpdateWindowSurface(m_window);
+		//m_render->Draw();
+		m_window->SwapBuffer();
 	}
 
 	m_game.reset();
@@ -72,8 +61,8 @@ bool Application::handleEvents()
 		if( event.type == SDL_QUIT )
 			return false;	
 
-		if( event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED )
-			m_render->Resize();
+		//if( event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED )
+		//	m_render->Resize();
 	}
 
 	return true;
