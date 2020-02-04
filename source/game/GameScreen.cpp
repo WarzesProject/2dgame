@@ -1,11 +1,17 @@
 #include "stdafx.h"
 #include "GameScreen.h"
 #include "Application.h"
+#include "TileSheet.h"
 
 GLSLProgram m_colorProgram;
 SpriteBatch m_spriteBatch;
 Texture texture;
 ColorRGBA8 color;
+SpriteFont spriteFont;
+
+
+Texture texture2;
+TileSheet tiletexture;
 
 //-----------------------------------------------------------------------------
 GameScreen::GameScreen()
@@ -43,6 +49,11 @@ void GameScreen::OnEntry()
 	m_spriteBatch.Init();
 
 	texture = ResourceManager::GetTexture("../data/sprite/logo1.png");
+	texture2 = ResourceManager::GetTexture("../data/sprite/blue_ninja.png");
+
+	tiletexture.Init(texture2, glm::ivec2(10, 2));
+
+	spriteFont = ResourceManager::GetFont("../data/fonts/chintzy.ttf", 40);
 
 	color.r = 255;
 	color.g = 255;
@@ -125,7 +136,22 @@ void GameScreen::Draw()
 		m_spriteBatch.Draw(dest, uv, texture.id, 0.0f, color);
 	}
 	m_spriteBatch.End();
+	m_spriteBatch.RenderBatch();
 
+	const ColorRGBA8 fontColor(255, 0, 0, 255);
+	m_spriteBatch.Begin();
+	spriteFont.Draw(m_spriteBatch, "Hell", glm::vec2(100.0f, 480 - 32.0f), glm::vec2(1.0f), 0.0f, fontColor);
+	m_spriteBatch.End();
+	m_spriteBatch.RenderBatch();
+	
+	
+	m_spriteBatch.Begin();
+	{
+		glm::vec4 dest(300.0f, 0.0f, 200.0f, 200.0f);
+		glm::vec4 uvRect = tiletexture.GetUV(0);
+		m_spriteBatch.Draw(dest, uvRect, tiletexture.texture.id, 0.0f, color);
+	}
+	m_spriteBatch.End();
 	m_spriteBatch.RenderBatch();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
