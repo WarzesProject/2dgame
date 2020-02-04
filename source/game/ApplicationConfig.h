@@ -21,7 +21,7 @@ struct ApplicationConfig
 	bool resizable = false;
 	bool highDPI = false;
 
-
 	// render config
 	RenderType renderType = RenderType::OpenGL;
+	float MaxFPS = 60.0f;
 };

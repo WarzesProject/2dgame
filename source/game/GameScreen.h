@@ -24,5 +24,4 @@ public:
 
 private:
 	Camera2D m_camera;
-	GameRenderer m_renderer;
 };

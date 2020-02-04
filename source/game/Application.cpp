@@ -29,7 +29,7 @@ Application::Application(const ApplicationConfig &config)
 
 	m_screenManager.Init(this);
 
-	m_limiter.SetMaxFPS(50000);
+	m_limiter.SetMaxFPS(m_config.MaxFPS);
 
 	m_isRunning = true;
 }

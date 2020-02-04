@@ -29,6 +29,11 @@ public:
 		return m_config.height;
 	}
 
+	const EventHandler& GetEventHandler() const
+	{
+		return m_eventHandler;
+	}
+
 private:
 	Application() = delete;
 	Application(const Application&) = delete;
