@@ -19,9 +19,9 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **args)
 	try
 	{
 		ApplicationConfig config;
-		config.width = 640;
-		config.height = 480;
-		//config.MaxFPS = 99999;
+		config.width = 1024;
+		config.height = 768;
+		config.MaxFPS = 99999;
 
 		Application app(config);
 		app.Run(std::make_unique<Game>());

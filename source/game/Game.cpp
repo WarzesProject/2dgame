@@ -26,9 +26,11 @@ void Game::OnInit(ScreenManager *screenMgr, EventHandler *eventHandler)
 
 	//m_mainMenuScreen = std::make_unique<MainMenuScreen>();
 	m_gameplayScreen = std::make_unique<GameScreen>();	
+	//m_tempScreen = std::make_unique<TempScreen>();
 
 	//creenMgr->AddScreen(m_mainMenuScreen.get());
 	screenMgr->AddScreen(m_gameplayScreen.get());
+	//screenMgr->AddScreen(m_tempScreen.get());
 	screenMgr->SetScreen(m_gameplayScreen->GetScreenIndex());
 }
 //-----------------------------------------------------------------------------

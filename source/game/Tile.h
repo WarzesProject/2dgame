@@ -4,12 +4,19 @@
 #include "Texture.h"
 #include "DebugRenderer.h"
 
-constexpr auto TILESIZE = 40.0f;
+constexpr auto TILESIZE = 32.0f;
 
 class Tile
 {
 public:
 	Tile();
+
+private:
+
+
+
+
+public:
 	void Init(const Texture& texture, int x, int y, bool crossable);
 	void Init(Tile& tile, int x, int y);
 	void Reset();
@@ -24,8 +31,7 @@ public:
 	void UpdatePosition(glm::vec2& pos) { m_destRect.x = pos.x; m_destRect.y = pos.y; }
 	void SetCenter(glm::vec2& center)
 	{
-		center.x = m_destRect.x +
-			(TILESIZE / 2.0f); center.y = m_destRect.y + (TILESIZE / 2.0f);
+		center.x = m_destRect.x + (TILESIZE / 2.0f); center.y = m_destRect.y + (TILESIZE / 2.0f);
 	}
 
 	int GetX() { return m_position.x; }

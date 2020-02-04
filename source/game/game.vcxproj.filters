@@ -57,16 +57,7 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="GameRenderer.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
     <ClCompile Include="Shape.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
     <ClCompile Include="Camera2D.cpp">
@@ -86,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="SpriteFont.cpp">
       <Filter>Engine\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="TempScreen.cpp">
+      <Filter>GameLogic\GameScreen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,16 +153,7 @@
     <ClInclude Include="Tile.h">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="GameRenderer.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
     <ClInclude Include="Shape.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.h">
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="Camera2D.h">
@@ -200,6 +185,9 @@
     </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="TempScreen.h">
+      <Filter>GameLogic\GameScreen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

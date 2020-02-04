@@ -3,11 +3,11 @@
 #include "IGameScreen.h"
 #include "Camera2D.h"
 
-class GameScreen : public IGameScreen
+class TempScreen : public IGameScreen
 {
 public:
-	GameScreen();
-	~GameScreen();
+	TempScreen();
+	~TempScreen();
 
 	virtual void Build() override;
 	virtual void Destroy() override;
@@ -20,4 +20,7 @@ public:
 
 	virtual int GetNextScreenIndex() const override;
 	virtual int GetPreviousScreenIndex() const override;
+
+private:
+	Camera2D m_camera;
 };

@@ -65,7 +65,6 @@ void Application::Run(std::unique_ptr<IGame> game)
 	if ( m_config.renderType == RenderType::Vulkan )
 		m_render = std::make_unique<VKRenderer>(m_window);
 #endif
-
 		
 	bool run = true;
 	while( run && m_isRunning )
@@ -131,12 +130,18 @@ void Application::OnSDLEvent(SDL_Event &ev)
 //-----------------------------------------------------------------------------
 void Application::update()
 {
+	SDL_Event ev;
+
 	if ( m_currentScreen )
 	{
 		switch ( m_currentScreen->GetGameState() )
 		{
 		case ScreenState::RUNNING:
-			m_currentScreen->Update();
+			{
+				while ( SDL_PollEvent(&ev) )
+					OnSDLEvent(ev);
+				m_currentScreen->Update();
+			}
 			break;
 		case ScreenState::CHANGE_NEXT:
 			m_currentScreen->OnExit();
@@ -171,8 +176,6 @@ void Application::update()
 //-----------------------------------------------------------------------------
 void Application::draw()
 {
-	//m_render->Draw();
-
 	if ( m_currentScreen && m_currentScreen->GetGameState() == ScreenState::RUNNING )
 	{
 		glViewport(0, 0, m_window->GetScreenWidth(), m_window->GetScreenHeight());
