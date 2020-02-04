@@ -6,6 +6,3 @@
 	path = source/3rdparty/include/stb
 	url = https://github.com/nothings/stb
 	branch = master
-[submodule "source/3rdparty/include/JsonBox"]
-	path = source/3rdparty/include/JsonBox
-	url = https://github.com/anhero/JsonBox
