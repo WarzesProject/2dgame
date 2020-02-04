@@ -1,33 +1,46 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "DebugRenderer.h"
 //-----------------------------------------------------------------------------
-const float PI = 3.14159265359f;
+constexpr float PI = 3.14159265359f;
 //-----------------------------------------------------------------------------
-const char* FRAGMENT_SRC = R"(#version 130
-		in vec4 fragmentColor;
-		in vec2 fragmentPosition;
-		out vec4 color;
-		void main() {	
-			color = fragmentColor;
-		})";
+constexpr const char *VERTEX_SRC = R"(
+	#version 130
+
+	in vec2 vertexPosition;
+	in vec4 vertexColor;
+
+	out vec4 fragmentColor;
+	out vec2 fragmentPosition;
+
+	uniform mat4 cameraMatrix;
+
+	void main()
+	{
+		//Set the x,y position on the screen
+		gl_Position.xy = (cameraMatrix * vec4(vertexPosition, 0.0, 1.0)).xy;
+		gl_Position.z = 0.0;
+		//Indicate that the coordinates are normalized
+		gl_Position.w = 1.0;
+
+		fragmentColor = vertexColor;
+		fragmentPosition = vertexPosition;
+	}
+)";
+
 //-----------------------------------------------------------------------------
-const char* VERTEX_SRC = R"(#version 130
-		in vec2 vertexPosition;
-		in vec4 vertexColor;
-		out vec4 fragmentColor;
-		out vec2 fragmentPosition;
-		uniform mat4 cameraMatrix;
-		void main() {
-			gl_Position.xy = (cameraMatrix * vec4(vertexPosition, 0.0, 1.0)).xy;
-			gl_Position.z = 0.0;
-			gl_Position.w = 1.0;
-			fragmentColor = vertexColor;
-			fragmentPosition = vertexPosition;
-		})";
-//-----------------------------------------------------------------------------
-DebugRenderer::DebugRenderer()
-{
-}
+constexpr const char *FRAGMENT_SRC = R"(
+	#version 130
+
+	in vec4 fragmentColor;
+	in vec2 fragmentPosition;
+
+	out vec4 color;
+
+	void main() 
+	{	
+		color = fragmentColor;
+	}
+)";
 //-----------------------------------------------------------------------------
 DebugRenderer::~DebugRenderer()
 {
@@ -65,14 +78,17 @@ void DebugRenderer::Init()
 //-----------------------------------------------------------------------------
 void DebugRenderer::End()
 {
+	const GLsizeiptr verticesSize = static_cast<GLsizeiptr>(m_vertices.size() * sizeof(DebugVertex));
+	const GLsizeiptr indicesSize = static_cast<GLsizeiptr>(m_indices.size() * sizeof(GLuint));
+
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-	glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(DebugVertex), nullptr, GL_DYNAMIC_DRAW);
-	glBufferSubData(GL_ARRAY_BUFFER, 0, m_vertices.size() * sizeof(DebugVertex), m_vertices.data());
+	glBufferData(GL_ARRAY_BUFFER, verticesSize, nullptr, GL_DYNAMIC_DRAW);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, verticesSize, m_vertices.data());
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(GLuint), nullptr, GL_DYNAMIC_DRAW);
-	glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, m_indices.size() * sizeof(GLuint), m_indices.data());
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize, nullptr, GL_DYNAMIC_DRAW);
+	glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, indicesSize, m_indices.data());
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	m_numElements = m_indices.size();
@@ -80,18 +96,17 @@ void DebugRenderer::End()
 	m_vertices.clear();
 }
 //-----------------------------------------------------------------------------
-glm::vec2 rotatePoint(const glm::vec2& position, float angle)
+glm::vec2 rotatePoint(const glm::vec2 &position, float angle)
 {
 	glm::vec2 newPoint;
-
 	newPoint.x = position.x * cos(angle) - position.y * sin(angle);
 	newPoint.y = position.x * sin(angle) + position.y * cos(angle);
 	return newPoint;
 }
 //-----------------------------------------------------------------------------
-void DebugRenderer::DrawLine(const glm::vec2& a, const glm::vec2& b, const ColorRGBA8& color)
+void DebugRenderer::DrawLine(const glm::vec2 &a, const glm::vec2 &b, const ColorRGBA8 &color)
 {
-	int i = m_vertices.size();
+	size_t i = m_vertices.size();
 	m_vertices.resize(m_vertices.size() + 2);
 
 	m_vertices[i].position = a;
@@ -103,14 +118,14 @@ void DebugRenderer::DrawLine(const glm::vec2& a, const glm::vec2& b, const Color
 	m_indices.push_back(i + 1);
 }
 //-----------------------------------------------------------------------------
-void DebugRenderer::DrawPolygon(const std::vector<glm::vec2>& points, const ColorRGBA8& color)
+void DebugRenderer::DrawPolygon(const std::vector<glm::vec2> &points, const ColorRGBA8 &color)
 {
 	// Set up vertexes
-	int start = m_vertices.size();
-	int size = points.size();
+	size_t start = m_vertices.size();
+	size_t size = points.size();
 	m_vertices.resize(m_vertices.size() + size);
 
-	for( int i = 0; i < size; i++ )
+	for( size_t i = 0; i < size; i++ )
 	{
 		m_vertices[start + i].position = points[i];
 		m_vertices[start + i].color = color;
@@ -118,7 +133,7 @@ void DebugRenderer::DrawPolygon(const std::vector<glm::vec2>& points, const Colo
 
 	// Set up indices
 	m_indices.reserve(m_indices.size() + size * 2);
-	for( int i = 0; i < size - 1; i++ )
+	for( size_t i = 0; i < size - 1; i++ )
 	{
 		m_indices.push_back(start + i);
 		m_indices.push_back(start + i + 1);
@@ -128,14 +143,14 @@ void DebugRenderer::DrawPolygon(const std::vector<glm::vec2>& points, const Colo
 	m_indices.push_back(start);
 }
 //-----------------------------------------------------------------------------
-void DebugRenderer::DrawPolygon(const std::vector<glm::vec2>& points, const ColorRGBA8& color, float angle)
+void DebugRenderer::DrawPolygon(const std::vector<glm::vec2> &points, const ColorRGBA8 &color, float angle)
 {
 	// Set up vertexes
-	int start = m_vertices.size();
-	int size = points.size();
+	size_t start = m_vertices.size();
+	size_t size = points.size();
 	m_vertices.resize(m_vertices.size() + size);
 
-	for( int i = 0; i < size; i++ )
+	for( size_t i = 0; i < size; i++ )
 	{
 		m_vertices[start + i].position = rotatePoint(points[i], angle);
 		m_vertices[start + i].color = color;
@@ -143,7 +158,7 @@ void DebugRenderer::DrawPolygon(const std::vector<glm::vec2>& points, const Colo
 
 	// Set up indices
 	m_indices.reserve(m_indices.size() + size * 2);
-	for( int i = 0; i < size - 1; i++ )
+	for( size_t i = 0; i < size - 1; i++ )
 	{
 		m_indices.push_back(start + i);
 		m_indices.push_back(start + i + 1);
@@ -153,9 +168,9 @@ void DebugRenderer::DrawPolygon(const std::vector<glm::vec2>& points, const Colo
 	m_indices.push_back(start);
 }
 //-----------------------------------------------------------------------------
-void DebugRenderer::DrawBox(const glm::vec4& destRect, const ColorRGBA8& color)
+void DebugRenderer::DrawBox(const glm::vec4 &destRect, const ColorRGBA8 &color)
 {
-	int i = m_vertices.size();
+	size_t i = m_vertices.size();
 	m_vertices.resize(m_vertices.size() + 4);
 
 	m_vertices[i].position.x = destRect.x;
@@ -167,7 +182,7 @@ void DebugRenderer::DrawBox(const glm::vec4& destRect, const ColorRGBA8& color)
 	m_vertices[i + 3].position.x = destRect.x + destRect.z;
 	m_vertices[i + 3].position.y = destRect.y + destRect.w;
 
-	for( int j = i; j < i + 4; j++ )
+	for( size_t j = i; j < i + 4; j++ )
 	{
 		m_vertices[j].color = color;
 	}
@@ -187,9 +202,9 @@ void DebugRenderer::DrawBox(const glm::vec4& destRect, const ColorRGBA8& color)
 	m_indices.push_back(i);
 }
 //-----------------------------------------------------------------------------
-void DebugRenderer::DrawBox(const glm::vec2& position, const glm::vec2& dimensions, const ColorRGBA8& color)
+void DebugRenderer::DrawBox(const glm::vec2 &position, const glm::vec2 &dimensions, const ColorRGBA8 &color)
 {
-	int i = m_vertices.size();
+	size_t i = m_vertices.size();
 	m_vertices.resize(m_vertices.size() + 4);
 
 	m_vertices[i].position.x = position.x;
@@ -201,10 +216,8 @@ void DebugRenderer::DrawBox(const glm::vec2& position, const glm::vec2& dimensio
 	m_vertices[i + 3].position.x = position.x + dimensions.x;
 	m_vertices[i + 3].position.y = position.y + dimensions.y;
 
-	for( int j = i; j < i + 4; j++ )
-	{
+	for( size_t j = i; j < i + 4; j++ )
 		m_vertices[j].color = color;
-	}
 
 	m_indices.reserve(m_indices.size() + 8);
 
@@ -221,9 +234,9 @@ void DebugRenderer::DrawBox(const glm::vec2& position, const glm::vec2& dimensio
 	m_indices.push_back(i);
 }
 //-----------------------------------------------------------------------------
-void DebugRenderer::DrawBox(const glm::vec4& destRect, const ColorRGBA8& color, float angle)
+void DebugRenderer::DrawBox(const glm::vec4 &destRect, const ColorRGBA8 &color, float angle)
 {
-	int i = m_vertices.size();
+	size_t i = m_vertices.size();
 	m_vertices.resize(m_vertices.size() + 4);
 
 	glm::vec2 halfDims(destRect.z / 2.0f, destRect.w / 2.0f);
@@ -242,10 +255,8 @@ void DebugRenderer::DrawBox(const glm::vec4& destRect, const ColorRGBA8& color, 
 	m_vertices[i + 2].position = rotatePoint(br, angle) + halfDims + positionOffset;
 	m_vertices[i + 3].position = rotatePoint(tr, angle) + halfDims + positionOffset;
 
-	for( int j = i; j < i + 4; j++ )
-	{
+	for( size_t j = i; j < i + 4; j++ )
 		m_vertices[j].color = color;
-	}
 
 	m_indices.reserve(m_indices.size() + 8);
 
@@ -262,18 +273,18 @@ void DebugRenderer::DrawBox(const glm::vec4& destRect, const ColorRGBA8& color, 
 	m_indices.push_back(i);
 }
 //-----------------------------------------------------------------------------
-void DebugRenderer::DrawBox(const glm::vec2& position, const glm::vec2& dimensions, const ColorRGBA8& color, float angle)
+void DebugRenderer::DrawBox(const glm::vec2 &position, const glm::vec2 &dimensions, const ColorRGBA8 &color, float angle)
 {
-	int i = m_vertices.size();
+	size_t i = m_vertices.size();
 	m_vertices.resize(m_vertices.size() + 4);
 
 	glm::vec2 halfDims(dimensions.x / 2.0f, dimensions.y / 2.0f);
 
 	// Get points centered at origin
-	glm::vec2 tl(-halfDims.x, halfDims.y); // top left point
+	glm::vec2 tl(-halfDims.x, halfDims.y);  // top left point
 	glm::vec2 bl(-halfDims.x, -halfDims.y); // bottom left point
-	glm::vec2 br(halfDims.x, -halfDims.y); // bottom right point
-	glm::vec2 tr(halfDims.x, halfDims.y); // top right point
+	glm::vec2 br(halfDims.x, -halfDims.y);  // bottom right point
+	glm::vec2 tr(halfDims.x, halfDims.y);   // top right point
 
 	glm::vec2 positionOffset(position.x, position.y);
 
@@ -283,10 +294,8 @@ void DebugRenderer::DrawBox(const glm::vec2& position, const glm::vec2& dimensio
 	m_vertices[i + 2].position = rotatePoint(br, angle) + halfDims + positionOffset;
 	m_vertices[i + 3].position = rotatePoint(tr, angle) + halfDims + positionOffset;
 
-	for( int j = i; j < i + 4; j++ )
-	{
+	for( size_t j = i; j < i + 4; j++ )
 		m_vertices[j].color = color;
-	}
 
 	m_indices.reserve(m_indices.size() + 8);
 
@@ -303,7 +312,7 @@ void DebugRenderer::DrawBox(const glm::vec2& position, const glm::vec2& dimensio
 	m_indices.push_back(i);
 }
 //-----------------------------------------------------------------------------
-void DebugRenderer::DrawBox(const glm::vec4& destRect, const ColorRGBA8& color, const glm::vec2& direction)
+void DebugRenderer::DrawBox(const glm::vec4 &destRect, const ColorRGBA8 &color, const glm::vec2 &direction)
 {
 	const glm::vec2 right(1.0f, 0.0f);  // Origine direction
 	float angle = acos(glm::dot(right, direction));
@@ -313,35 +322,35 @@ void DebugRenderer::DrawBox(const glm::vec4& destRect, const ColorRGBA8& color, 
 	DrawBox(destRect, color, angle);
 }
 //-----------------------------------------------------------------------------
-void DebugRenderer::DrawCircle(const glm::vec2& center, const ColorRGBA8& color, float radius)
+void DebugRenderer::DrawCircle(const glm::vec2 &center, const ColorRGBA8 &color, float radius)
 {
-	const int NUm_VERTICES = (radius * 4 > 100) ? 100 : (int)radius * 4;
+	const int NUM_VERTICES = (radius * 4 > 100) ? 100 : (int)radius * 4;
 
 	// Set up vertexes
-	int start = m_vertices.size();
-	m_vertices.resize(m_vertices.size() + NUm_VERTICES);
+	size_t start = m_vertices.size();
+	m_vertices.resize(m_vertices.size() + NUM_VERTICES);
 
-	for( int i = 0; i < NUm_VERTICES; i++ )
+	for( int i = 0; i < NUM_VERTICES; i++ )
 	{
-		float angle = ((float)i / NUm_VERTICES) * PI * 2.0f;
+		float angle = ((float)i / NUM_VERTICES) * PI * 2.0f;
 		m_vertices[start + i].position.x = cos(angle) * radius + center.x;
 		m_vertices[start + i].position.y = sin(angle) * radius + center.y;
 		m_vertices[start + i].color = color;
 	}
 
 	// Set up indices
-	m_indices.reserve(m_indices.size() + NUm_VERTICES * 2);
-	for( int i = 0; i < NUm_VERTICES - 1; i++ )
+	m_indices.reserve(m_indices.size() + NUM_VERTICES * 2);
+	for( int i = 0; i < NUM_VERTICES - 1; i++ )
 	{
 		m_indices.push_back(start + i);
 		m_indices.push_back(start + i + 1);
 	}
 
-	m_indices.push_back(start + NUm_VERTICES - 1);
+	m_indices.push_back(start + NUM_VERTICES - 1);
 	m_indices.push_back(start);
 }
 //-----------------------------------------------------------------------------
-void DebugRenderer::Render(const glm::mat4& projectionMatrix, float lineWith)
+void DebugRenderer::Render(const glm::mat4 &projectionMatrix, float lineWith)
 {
 	m_program.Use();
 	{
@@ -350,7 +359,7 @@ void DebugRenderer::Render(const glm::mat4& projectionMatrix, float lineWith)
 
 		glLineWidth(lineWith);
 		glBindVertexArray(m_vao);
-		glDrawElements(GL_LINES, m_numElements, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_LINES, static_cast<GLsizei>(m_numElements), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
 	m_program.Unuse();
@@ -359,17 +368,11 @@ void DebugRenderer::Render(const glm::mat4& projectionMatrix, float lineWith)
 void DebugRenderer::Dispose()
 {
 	if( m_vao )
-	{
 		glDeleteVertexArrays(1, &m_vao);
-	}
 	if( m_vbo )
-	{
 		glDeleteBuffers(1, &m_vbo);
-	}
 	if( m_ibo )
-	{
 		glDeleteBuffers(1, &m_ibo);
-	}
 
 	m_program.Dispose();
 }

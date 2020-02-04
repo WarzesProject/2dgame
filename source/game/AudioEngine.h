@@ -1,16 +1,12 @@
-#pragma once
+﻿#pragma once
 
 class Sound
 {
 	friend class AudioEngine;
 public:
+	// если loops == -1, то проигрывать бесконечно
 	void Play(int loops = 0);
-	void Play(int loops, Uint8 distance);
-
-	const std::string& GetFilePath() const
-	{
-		return m_filePath;
-	}
+	void Play(int loops, uint8_t distance);
 
 private:
 	static int m_lastChannel;
@@ -22,6 +18,7 @@ class Music
 {
 	friend class AudioEngine;
 public:
+	// если loops == -1, то проигрывать бесконечно
 	void Play(int loops = -1);
 
 	static int Playing();
@@ -31,11 +28,6 @@ public:
 	static void Resume();
 
 	static void Stop();
-
-	const std::string& GetFilePath() const
-	{
-		return m_filePath;
-	}
 
 private:
 	Mix_Music *m_music = nullptr;
@@ -52,7 +44,7 @@ public:
 	Music LoadMusic(std::string_view filePath);
 
 private:
-	bool m_initialized;
-	std::unordered_map<std::string, Mix_Chunk*> m_effectMap;
+	std::unordered_map<std::string, Mix_Chunk*> m_soundMap;
 	std::unordered_map<std::string, Mix_Music*> m_musicMap;
+	bool m_initialized = false;
 };

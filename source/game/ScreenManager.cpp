@@ -2,7 +2,7 @@
 #include "ScreenManager.h"
 #include "IGameScreen.h"
 //-----------------------------------------------------------------------------
-void ScreenManager::Init(Application* app)
+void ScreenManager::Init(Application *app)
 {
 	m_app = app;
 }

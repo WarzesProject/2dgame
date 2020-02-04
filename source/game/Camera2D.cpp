@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Camera2D.h"
 //-----------------------------------------------------------------------------
 void Camera2D::Init(float screenWidth, float screenHeight)
@@ -31,7 +31,7 @@ double Camera2D::GetScreenLenght() const
 //-----------------------------------------------------------------------------
 glm::vec2 Camera2D::ConvertScreenToWorld(glm::vec2 screenCoords)
 {
-	// invert y direction
+	// invert Y direction
 	screenCoords.y = m_screenHeight - screenCoords.y;
 	// Make it so that 0 is the center
 	screenCoords -= glm::vec2(m_screenWidth / 2, m_screenHeight / 2);
@@ -45,7 +45,7 @@ glm::vec2 Camera2D::ConvertScreenToWorld(glm::vec2 screenCoords)
 	return screenCoords;
 }
 //-----------------------------------------------------------------------------
-void Camera2D::SetScreenBox(glm::vec4& box)
+void Camera2D::SetScreenBox(glm::vec4 &box)
 {
 	box.x = m_position.x - (m_screenWidth / (2 * m_scale));
 	box.y = m_position.y - (m_screenHeight / (2 * m_scale));
@@ -53,7 +53,7 @@ void Camera2D::SetScreenBox(glm::vec4& box)
 	box.w = m_screenHeight;
 }
 //-----------------------------------------------------------------------------
-bool Camera2D::IsBoxInView(const glm::vec2& position, const glm::vec2& dimension)
+bool Camera2D::IsBoxInView(const glm::vec2 &position, const glm::vec2 &dimension)
 {
 	// Convert screen dimension in scaled dimension
 	glm::vec2 scaleDimension = glm::vec2(m_screenWidth, m_screenHeight) / m_scale;
@@ -73,7 +73,7 @@ bool Camera2D::IsBoxInView(const glm::vec2& position, const glm::vec2& dimension
 	return (xDepth > 0 && yDepth > 0);
 }
 //-----------------------------------------------------------------------------
-bool Camera2D::IsBoxInView(const glm::vec2& position)
+bool Camera2D::IsBoxInView(const glm::vec2 &position)
 {
 	// Convert screen dimension in scaled dimension
 	glm::vec2 scaleDimension = glm::vec2(m_screenWidth, m_screenHeight) / m_scale;
@@ -87,7 +87,7 @@ bool Camera2D::IsBoxInView(const glm::vec2& position)
 	return (xDepth > 0 && yDepth > 0);
 }
 //-----------------------------------------------------------------------------
-bool Camera2D::IsBoxInView(const glm::vec4& destRect)
+bool Camera2D::IsBoxInView(const glm::vec4 &destRect)
 {
 	// Convert screen dimension in scaled dimension
 	glm::vec2 scaleDimension = glm::vec2(m_screenWidth, m_screenHeight) / m_scale;

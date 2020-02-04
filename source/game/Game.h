@@ -9,9 +9,6 @@ TODO("класс можно удалить, вместо этого переда
 class Game final : public IGame
 {
 public:
-	Game();
-	~Game();
-
 	void OnInit(ScreenManager *screenMgr, EventHandler *eventHandler) final;
 
 private:

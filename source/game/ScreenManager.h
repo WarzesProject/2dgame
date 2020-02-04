@@ -8,16 +8,16 @@ class Application;
 class ScreenManager
 {
 public:
+	void Init(Application *app);
+	void Destroy();
+
+
 	IGameScreen* MoveNext();
 	IGameScreen* MovePrevious();
 
 	void AddScreen(IGameScreen *screen);
 
 	void SetScreen(int screenIndex);
-
-	void Init(Application* game);
-
-	void Destroy();
 
 	IGameScreen* GetCurrentScreen();
 

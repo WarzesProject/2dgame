@@ -1,14 +1,14 @@
-#pragma once
+﻿#pragma once
 
 class GLSLProgram
 {
 public:
-	void CompileShaders(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath);
-	void CompileShadersFromSource(const char* vertexSource, const char* fragmentSource);
+	void CompileShadersFromFile(std::string_view vertexShaderFilePath, std::string_view fragmentShaderFilePath);
+	void CompileShadersFromSource(std::string_view vertexSource, std::string_view fragmentSource);
 
-	void AddAttribute(const std::string& attributeName);
+	void AddAttribute(std::string_view attributeName);
 
-	GLint GetUniformLocation(const std::string& uniformName);
+	GLint GetUniformLocation(std::string_view uniformName);
 
 	void LinkShaders();
 
@@ -18,7 +18,7 @@ public:
 	void Dispose();
 
 private:
-	void compileShaders(const char* source, const std::string& name, GLuint& id);
+	void compileShaders(const char *source, std::string_view name, const GLuint &id);
 
 	int m_numAttributtes = 0;
 	GLuint m_programID = 0;	

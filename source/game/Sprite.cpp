@@ -2,17 +2,10 @@
 #include "Sprite.h"
 #include "ResourceManager.h"
 //-----------------------------------------------------------------------------
-Sprite::Sprite()
-{
-	m_vboID = 0;
-}
-//-----------------------------------------------------------------------------
 Sprite::~Sprite()
 {
 	if ( m_vboID != 0 )
-	{
 		glDeleteBuffers(1, &m_vboID);
-	}
 }
 //-----------------------------------------------------------------------------
 void Sprite::Init(float x, float y, float width, float height, const std::string texturePath)
@@ -25,9 +18,7 @@ void Sprite::Init(float x, float y, float width, float height, const std::string
 	m_texture = ResourceManager::GetTexture(texturePath);
 
 	if ( m_vboID == 0 )
-	{
 		glGenBuffers(1, &m_vboID);
-	}
 
 	Vertex2D vertexData[6];
 
@@ -49,10 +40,8 @@ void Sprite::Init(float x, float y, float width, float height, const std::string
 	vertexData[5].SetPosition(x + width, y + height);
 	vertexData[5].SetUV(1.0f, 1.0f);
 
-	for ( unsigned int i = 0; i < 6; i++ )
-	{
+	for ( size_t i = 0; i < 6; i++ )
 		vertexData[i].SetColor(255, 255, 255, 255);
-	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
@@ -69,6 +58,8 @@ void Sprite::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
 
 	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
 
 	// this is the position attribute pointer
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex2D), (void*)offsetof(Vertex2D, position));
@@ -80,6 +71,8 @@ void Sprite::Draw()
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 
 	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

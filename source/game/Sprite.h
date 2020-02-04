@@ -5,7 +5,6 @@
 class Sprite
 {
 public:
-	Sprite();
 	~Sprite();
 
 	void Init(float x, float y, float width, float height, const std::string texturePath);
@@ -13,10 +12,10 @@ public:
 	void Draw();
 
 private:
-	float m_x;
-	float m_y;
-	float m_width;
-	float m_height;
-	GLuint m_vboID;
+	float m_x = 0.0f;
+	float m_y = 0.0f;
+	float m_width = 0.0f;
+	float m_height = 0.0f;
+	GLuint m_vboID = 0;
 	Texture m_texture;
 };

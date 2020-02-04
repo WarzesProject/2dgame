@@ -21,7 +21,7 @@ class GameRenderer
 {
 public:
 	void Init(float screenWidth, float screenHeight);
-	void ClearAmbientColor(const ColorRGBA8& color);
+	void ClearAmbientColor(const ColorRGBA8 &color);
 	void Render(Camera2D& camera);
 	void Dispose();
 	void SetDebug(bool debug) { m_debug = debug; }

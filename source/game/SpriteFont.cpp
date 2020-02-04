@@ -319,7 +319,7 @@ void SpriteFont::Justify(const char* s, glm::vec4& destRect, Justification just)
 	}
 }
 //-----------------------------------------------------------------------------
-void SpriteFont::Draw(SpriteBatch& batch, const char* s, const glm::vec2& position, const glm::vec2& scaling,
+void SpriteFont::Draw(SpriteBatch& batch, const char* s, const glm::vec2 &position, const glm::vec2& scaling,
 	float depth, ColorRGBA8 tint, Justification just /* = Justification::LEFT */)
 {
 	glm::vec2 tp = position;
@@ -347,7 +347,7 @@ void SpriteFont::Draw(SpriteBatch& batch, const char* s, const glm::vec2& positi
 	}
 }
 //-----------------------------------------------------------------------------
-void SpriteFont::Draw(SpriteBatch& batch, const char* s, const glm::vec4& destRect,
+void SpriteFont::Draw(SpriteBatch& batch, const char* s, const glm::vec4 &destRect,
 	float depth, ColorRGBA8 tint, Justification just /* = Justification::LEFT */)
 {
 	glm::vec4 tp(destRect);

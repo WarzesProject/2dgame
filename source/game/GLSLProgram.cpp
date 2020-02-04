@@ -1,8 +1,8 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "GLSLProgram.h"
 #include "IOManager.h"
 //-----------------------------------------------------------------------------
-void GLSLProgram::CompileShaders(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath)
+void GLSLProgram::CompileShadersFromFile(std::string_view vertexShaderFilePath, std::string_view fragmentShaderFilePath)
 {
 	std::string vertexSource;
 	std::string fragSource;
@@ -10,30 +10,23 @@ void GLSLProgram::CompileShaders(const std::string& vertexShaderFilePath, const 
 	IOManager::ReadFileToBuffer(vertexShaderFilePath, vertexSource);
 	IOManager::ReadFileToBuffer(fragmentShaderFilePath, fragSource);
 
-	CompileShadersFromSource(vertexSource.c_str(), fragSource.c_str());
+	CompileShadersFromSource(vertexSource, fragSource);
 }
 //-----------------------------------------------------------------------------
-void GLSLProgram::CompileShadersFromSource(const char* vertexSource, const char* fragmentSource)
+void GLSLProgram::CompileShadersFromSource(std::string_view vertexSource, std::string_view fragmentSource)
 {
-	//Vertex and fragment shaders are successfully compiled.
-	//Now time to link them together into a program.
-	//Get a program object.
 	m_programID = glCreateProgram();
 
 	m_vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	if ( m_vertexShaderID == 0 )
-	{
-		SDL_Log("Vertex shader failed to be created!");
-	}
+		Throw("Vertex shader failed to be created!");
 
 	m_fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 	if ( m_fragmentShaderID == 0 )
-	{
-		SDL_Log("Fragment shader failed to be created!");
-	}
+		Throw("Fragment shader failed to be created!");
 
-	compileShaders(vertexSource, "Vertex shader", m_vertexShaderID);
-	compileShaders(fragmentSource, "Fragment shader", m_fragmentShaderID);
+	compileShaders(vertexSource.data(), "Vertex shader", m_vertexShaderID);
+	compileShaders(fragmentSource.data(), "Fragment shader", m_fragmentShaderID);
 }
 //-----------------------------------------------------------------------------
 void GLSLProgram::LinkShaders()
@@ -73,16 +66,16 @@ void GLSLProgram::LinkShaders()
 	glDeleteShader(m_fragmentShaderID);
 }
 //-----------------------------------------------------------------------------
-void GLSLProgram::AddAttribute(const std::string& attributeName)
+void GLSLProgram::AddAttribute(std::string_view attributeName)
 {
-	glBindAttribLocation(m_programID, m_numAttributtes++, attributeName.c_str());
+	glBindAttribLocation(m_programID, m_numAttributtes++, attributeName.data());
 }
 //-----------------------------------------------------------------------------
-GLint GLSLProgram::GetUniformLocation(const std::string& uniformName)
+GLint GLSLProgram::GetUniformLocation(std::string_view uniformName)
 {
-	GLint location = glGetUniformLocation(m_programID, uniformName.c_str());
+	GLint location = glGetUniformLocation(m_programID, uniformName.data());
 	if ( location == GL_INVALID_INDEX )
-		Throw("Uniform " + uniformName + " not found in shader!");
+		Throw("Uniform " + std::string(uniformName.data()) + " not found in shader!");
 	return location;
 }
 //-----------------------------------------------------------------------------
@@ -90,30 +83,25 @@ void GLSLProgram::Use()
 {
 	glUseProgram(m_programID);
 	for ( int i = 0; i < m_numAttributtes; i++ )
-	{
 		glEnableVertexAttribArray(i);
-	}
 }
 //-----------------------------------------------------------------------------
 void GLSLProgram::Unuse()
 {
 	glUseProgram(0);
 	for ( int i = 0; i < m_numAttributtes; i++ )
-	{
 		glDisableVertexAttribArray(i);
-	}
 }
 //-----------------------------------------------------------------------------
 void GLSLProgram::Dispose()
 {
 	if ( m_programID )
-	{
 		glDeleteProgram(m_programID);
-	}
+
 	m_numAttributtes = 0;
 }
 //-----------------------------------------------------------------------------
-void GLSLProgram::compileShaders(const char* source, const std::string& name, GLuint& id)
+void GLSLProgram::compileShaders(const char* source, std::string_view name, const GLuint &id)
 {
 	glShaderSource(id, 1, &source, nullptr);
 
@@ -135,7 +123,7 @@ void GLSLProgram::compileShaders(const char* source, const std::string& name, GL
 		// Exit with failure.
 		glDeleteShader(id); // Don't leak the shader.
 
-		Throw(&(errorLog[0]) + std::string("Shader ") + name + " failed to compile!");
+		Throw(&(errorLog[0]) + std::string("Shader ") + name.data() + " failed to compile!");
 	}
 }
 //-----------------------------------------------------------------------------

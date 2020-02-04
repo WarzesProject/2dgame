@@ -38,7 +38,7 @@ void GameRenderer::Init(float screenWidth, float screenHeight)
 
 }
 //-----------------------------------------------------------------------------
-void GameRenderer::ClearAmbientColor(const ColorRGBA8& color)
+void GameRenderer::ClearAmbientColor(const ColorRGBA8 &color)
 {
 	glClearColor(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f);
 }

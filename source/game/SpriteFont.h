@@ -39,9 +39,9 @@ public:
 	void Justify(const char* s, glm::vec2& position, const glm::vec2& scaling, Justification just);
 	void Justify(const char* s, glm::vec4& destRect, Justification just);
 
-	void Draw(SpriteBatch& batch, const char* s, const glm::vec2& position, const glm::vec2& scaling, float depth, ColorRGBA8 tint, Justification just = Justification::LEFT);
+	void Draw(SpriteBatch& batch, const char* s, const glm::vec2 &position, const glm::vec2& scaling, float depth, ColorRGBA8 tint, Justification just = Justification::LEFT);
 
-	void Draw(SpriteBatch& batch, const char* s, const glm::vec4& destRect, float depth, ColorRGBA8 tint, Justification just = Justification::LEFT);
+	void Draw(SpriteBatch& batch, const char* s, const glm::vec4 &destRect, float depth, ColorRGBA8 tint, Justification just = Justification::LEFT);
 
 private:
 	static std::vector<int>* createRows(glm::ivec4* rects, int rectsLength, int r, int padding, int& w);

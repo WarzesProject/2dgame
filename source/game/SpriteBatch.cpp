@@ -10,7 +10,7 @@ enum Corner
 	TL = 3		// Top left
 };
 //-----------------------------------------------------------------------------
-Glyph::Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8& color, float angle)
+Glyph::Glyph(const glm::vec4 &destRect, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle)
 {
 	this->textureID = textureID;
 	this->depth = depth;
@@ -46,9 +46,8 @@ Glyph::Glyph(const glm::vec4& destRect, const glm::vec4& uvRect, GLuint textureI
 	this->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
 }
 //-----------------------------------------------------------------------------
-Glyph::Glyph(const glm::vec2& position, const glm::vec2& dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8& color, float angle)
+Glyph::Glyph(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle)
 {
-
 	this->textureID = textureID;
 	this->depth = depth;
 
@@ -82,7 +81,7 @@ Glyph::Glyph(const glm::vec2& position, const glm::vec2& dimensions, const glm::
 	this->topRight.SetPosition(position.x + tr.x, position.y + tr.y);
 	this->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
 }//-----------------------------------------------------------------------------
-Glyph::Glyph(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8& color)
+Glyph::Glyph(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
 {
 	this->textureID = textureID;
 	this->depth = depth;
@@ -104,7 +103,7 @@ Glyph::Glyph(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID
 	this->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
 }
 //-----------------------------------------------------------------------------
-Glyph::Glyph(const glm::vec2& position, const glm::vec2& dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8& color)
+Glyph::Glyph(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
 {
 	this->textureID = textureID;
 	this->depth = depth;
@@ -126,7 +125,7 @@ Glyph::Glyph(const glm::vec2& position, const glm::vec2& dimensions, const glm::
 	this->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
 }
 //-----------------------------------------------------------------------------
-Glyph::Glyph(const std::vector<glm::vec2>& points, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8& color)
+Glyph::Glyph(const std::vector<glm::vec2> &points, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
 {
 	this->textureID = textureID;
 	this->depth = depth;
@@ -196,32 +195,32 @@ void SpriteBatch::End()
 	createRenderBatches();
 }
 //-----------------------------------------------------------------------------
-void SpriteBatch::Draw(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8& color)
+void SpriteBatch::Draw(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
 {
 	m_glyphs.emplace_back(destRet, uvRect, textureID, depth, color);
 }
 //-----------------------------------------------------------------------------
-void SpriteBatch::Draw(const glm::vec2& position, const glm::vec2& dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8& color)
+void SpriteBatch::Draw(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
 {
 	m_glyphs.emplace_back(position, dimensions, uvRect, textureID, depth, color);
 }
 //-----------------------------------------------------------------------------
-void SpriteBatch::Draw(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8& color, float angle)
+void SpriteBatch::Draw(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle)
 {
 	m_glyphs.emplace_back(destRet, uvRect, textureID, depth, color, angle);
 }
 //-----------------------------------------------------------------------------
-void SpriteBatch::Draw(const glm::vec2& position, const glm::vec2& dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8& color, float angle)
+void SpriteBatch::Draw(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle)
 {
 	m_glyphs.emplace_back(position, dimensions, uvRect, textureID, depth, color, angle);
 }
 //-----------------------------------------------------------------------------
-void SpriteBatch::Draw(const std::vector<glm::vec2>& points, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8& color)
+void SpriteBatch::Draw(const std::vector<glm::vec2> &points, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
 {
 	m_glyphs.emplace_back(points, uvRect, textureID, depth, color);
 }
 //-----------------------------------------------------------------------------
-void SpriteBatch::Draw(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8& color, const glm::vec2& direction)
+void SpriteBatch::Draw(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, const glm::vec2 &direction)
 {
 	// Here, we use dot product to compute the angle between 
 	// the origine direction and current direction.

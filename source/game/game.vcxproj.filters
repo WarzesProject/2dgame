@@ -33,12 +33,6 @@
     <ClCompile Include="AudioEngine.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteBatch.cpp">
-      <Filter>Engine\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteFont.cpp">
-      <Filter>Engine\Render</Filter>
-    </ClCompile>
     <ClCompile Include="FontCache.cpp">
       <Filter>Engine\Resource</Filter>
     </ClCompile>
@@ -54,26 +48,14 @@
     <ClCompile Include="GameScreen.cpp">
       <Filter>GameLogic\GameScreen</Filter>
     </ClCompile>
-    <ClCompile Include="Camera2D.cpp">
-      <Filter>Engine\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Engine\Render</Filter>
-    </ClCompile>
     <ClCompile Include="IOManager.cpp">
       <Filter>Engine\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="GLSLProgram.cpp">
-      <Filter>Engine\Render</Filter>
     </ClCompile>
     <ClCompile Include="MainMenuScreen.cpp">
       <Filter>GameLogic\GameScreen</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugRenderer.cpp">
-      <Filter>Engine\Render</Filter>
     </ClCompile>
     <ClCompile Include="GameRenderer.cpp">
       <Filter>Framework</Filter>
@@ -86,6 +68,24 @@
     </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera2D.cpp">
+      <Filter>Engine\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugRenderer.cpp">
+      <Filter>Engine\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="GLSLProgram.cpp">
+      <Filter>Engine\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Engine\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteBatch.cpp">
+      <Filter>Engine\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteFont.cpp">
+      <Filter>Engine\Render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -108,9 +108,6 @@
     <ClInclude Include="ApplicationConfig.h">
       <Filter>Engine\App</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Engine\Render</Filter>
-    </ClInclude>
     <ClInclude Include="VKRenderer.h">
       <Filter>Engine\Render\VK</Filter>
     </ClInclude>
@@ -123,9 +120,6 @@
     <ClInclude Include="Window.h">
       <Filter>Engine\App</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Engine\Render</Filter>
-    </ClInclude>
     <ClInclude Include="TextureCache.h">
       <Filter>Engine\Resource</Filter>
     </ClInclude>
@@ -134,15 +128,6 @@
     </ClInclude>
     <ClInclude Include="AudioEngine.h">
       <Filter>Engine\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Engine\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteBatch.h">
-      <Filter>Engine\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteFont.h">
-      <Filter>Engine\Render</Filter>
     </ClInclude>
     <ClInclude Include="FontCache.h">
       <Filter>Engine\Resource</Filter>
@@ -162,20 +147,8 @@
     <ClInclude Include="GameScreen.h">
       <Filter>GameLogic\GameScreen</Filter>
     </ClInclude>
-    <ClInclude Include="Camera2D.h">
-      <Filter>Engine\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Engine\Render</Filter>
-    </ClInclude>
     <ClInclude Include="IOManager.h">
       <Filter>Engine\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="GLSLProgram.h">
-      <Filter>Engine\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="TileSheet.h">
-      <Filter>Engine\Render</Filter>
     </ClInclude>
     <ClInclude Include="EventConfig.h">
       <Filter>GameLogic\GameApp</Filter>
@@ -185,9 +158,6 @@
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugRenderer.h">
-      <Filter>Engine\Render</Filter>
     </ClInclude>
     <ClInclude Include="GameRenderer.h">
       <Filter>Framework</Filter>
@@ -201,6 +171,36 @@
     <ClInclude Include="Level.h">
       <Filter>Framework</Filter>
     </ClInclude>
+    <ClInclude Include="Camera2D.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugRenderer.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSLProgram.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteBatch.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteFont.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="TileSheet.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Engine\Render</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -209,20 +209,38 @@
     <Filter Include="GameLogic">
       <UniqueIdentifier>{59886e93-5e9f-44c6-9bbb-53ff9ff5be82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Core">
-      <UniqueIdentifier>{b745fcdc-832b-46ac-acb4-975f0149588c}</UniqueIdentifier>
+    <Filter Include="GameLogic\GameApp">
+      <UniqueIdentifier>{dc7fd6fe-b52d-4ec4-bcf5-c66e7bd9f9ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic\GameScreen">
+      <UniqueIdentifier>{4eb6ad80-fa4f-444d-84a0-c97f49e9a5c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{08383fd2-aaf9-46b7-9f9e-e5bfb0d3aff4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Audio">
+      <UniqueIdentifier>{04df6b66-3b0e-4b1c-842d-e92ebf70f418}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Render">
+      <UniqueIdentifier>{b987ed62-a995-4b95-adf7-afdb9544f22c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameScreen">
+      <UniqueIdentifier>{c873b589-56e5-4d94-8ae6-6b0a9ae8df8e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\App">
       <UniqueIdentifier>{a67e6d83-cfd6-4ffd-a390-f092da3ad5e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameLogic\GameApp">
-      <UniqueIdentifier>{dc7fd6fe-b52d-4ec4-bcf5-c66e7bd9f9ab}</UniqueIdentifier>
+    <Filter Include="Engine\Core">
+      <UniqueIdentifier>{b745fcdc-832b-46ac-acb4-975f0149588c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Render">
-      <UniqueIdentifier>{e7cc06be-c9d6-4e14-8c1a-04d0a82a901e}</UniqueIdentifier>
+    <Filter Include="Engine\GUI">
+      <UniqueIdentifier>{e78b04c6-1011-4aba-ab92-b69ec0efe2ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Render\VK">
-      <UniqueIdentifier>{c8739449-da81-43f8-b491-43a62a89151b}</UniqueIdentifier>
+    <Filter Include="Engine\IO">
+      <UniqueIdentifier>{6c63864d-1018-4ad4-8c07-4c91317c4642}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource">
+      <UniqueIdentifier>{cb54bec0-ff6a-4bec-9981-0995afd99057}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Utility">
       <UniqueIdentifier>{ff039be2-3342-40d6-9cfd-3c1bc2bec1b4}</UniqueIdentifier>
@@ -230,26 +248,8 @@
     <Filter Include="Engine\Render\GL">
       <UniqueIdentifier>{7f144e71-fc0d-40e2-b80a-cd27d1551917}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Resource">
-      <UniqueIdentifier>{cb54bec0-ff6a-4bec-9981-0995afd99057}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Audio">
-      <UniqueIdentifier>{04df6b66-3b0e-4b1c-842d-e92ebf70f418}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\GUI">
-      <UniqueIdentifier>{e78b04c6-1011-4aba-ab92-b69ec0efe2ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\GameScreen">
-      <UniqueIdentifier>{c873b589-56e5-4d94-8ae6-6b0a9ae8df8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameLogic\GameScreen">
-      <UniqueIdentifier>{4eb6ad80-fa4f-444d-84a0-c97f49e9a5c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\IO">
-      <UniqueIdentifier>{6c63864d-1018-4ad4-8c07-4c91317c4642}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Framework">
-      <UniqueIdentifier>{08383fd2-aaf9-46b7-9f9e-e5bfb0d3aff4}</UniqueIdentifier>
+    <Filter Include="Engine\Render\VK">
+      <UniqueIdentifier>{c8739449-da81-43f8-b491-43a62a89151b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

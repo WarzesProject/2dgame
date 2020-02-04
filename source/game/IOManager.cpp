@@ -5,17 +5,17 @@
 //-----------------------------------------------------------------------------
 namespace fs = std::filesystem;
 //-----------------------------------------------------------------------------
-bool IOManager::ReadFileToBuffer(const std::string filePath, std::vector<unsigned char>& buffer)
+bool IOManager::ReadFileToBuffer(std::string_view filePath, std::vector<unsigned char>& buffer)
 {
 	std::ifstream file(filePath, std::ios::binary);
 	if ( file.fail() )
-		Throw("Can load file : " + filePath);
+		Throw("Can load file : " + std::string(filePath.data()));
 
 	//seek to the end
 	file.seekg(0, std::ios::end);
 
 	//get the file size
-	int fileSize = (int)file.tellg();
+	size_t fileSize = (size_t)file.tellg();
 
 	//seek to the beginning
 	file.seekg(0, std::ios::beg);
@@ -30,12 +30,12 @@ bool IOManager::ReadFileToBuffer(const std::string filePath, std::vector<unsigne
 	return true;
 }
 //-----------------------------------------------------------------------------
-bool IOManager::ReadFileToBuffer(const std::string filePath, std::string& buffer)
+bool IOManager::ReadFileToBuffer(std::string_view filePath, std::string& buffer)
 {
 	std::ifstream file(filePath, std::ios::binary);
 	if ( file.fail() )
 	{
-		perror(filePath.c_str());
+		perror(filePath.data());
 		return false;
 	}
 
