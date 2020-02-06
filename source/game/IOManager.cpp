@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 namespace fs = std::filesystem;
 //-----------------------------------------------------------------------------
-bool IOManager::ReadFileToBuffer(std::string_view filePath, std::vector<unsigned char>& buffer)
+bool IOManager::ReadFileToBuffer(std::string_view filePath, std::vector<unsigned char> &buffer)
 {
 	std::ifstream file(filePath, std::ios::binary);
 	if ( file.fail() )
@@ -30,7 +30,7 @@ bool IOManager::ReadFileToBuffer(std::string_view filePath, std::vector<unsigned
 	return true;
 }
 //-----------------------------------------------------------------------------
-bool IOManager::ReadFileToBuffer(std::string_view filePath, std::string& buffer)
+bool IOManager::ReadFileToBuffer(std::string_view filePath, std::string &buffer)
 {
 	std::ifstream file(filePath, std::ios::binary);
 	if ( file.fail() )
@@ -58,7 +58,7 @@ bool IOManager::ReadFileToBuffer(std::string_view filePath, std::string& buffer)
 	return true;
 }
 //-----------------------------------------------------------------------------
-bool IOManager::GetDirectoryEntries(const char* path, std::vector<DirEntry>& rvEntries)
+bool IOManager::GetDirectoryEntries(const char* path, std::vector<DirEntry> &rvEntries)
 {
 	auto dpath = fs::path(path);
 	// Must be directory
@@ -80,7 +80,7 @@ bool IOManager::GetDirectoryEntries(const char* path, std::vector<DirEntry>& rvE
 	return true;
 }
 //-----------------------------------------------------------------------------
-bool IOManager::MakeDirectory(const char* path)
+bool IOManager::MakeDirectory(const char *path)
 {
 	return fs::create_directory(fs::path(path));
 }

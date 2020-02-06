@@ -1,22 +1,17 @@
 #pragma once
 
-#define JOY_DEAD_ZONE 2000
-#define JOY_AXE_MAX  32767
-#define MARGIN 500
+constexpr auto JOY_DEAD_ZONE = 2000;
+constexpr auto JOY_AXE_MAX = 32767;
+constexpr auto MARGIN = 500;
 
 struct EventConfig
 {
-	EventConfig() :keyID(0), joyID(0)
-	{
-	}
-	EventConfig(unsigned int key, unsigned int joy) :keyID(key), joyID(joy)
-	{
-	}
-	unsigned int keyID;
-	unsigned int joyID;
+	EventConfig() = default;
+	EventConfig(unsigned int key, unsigned int joy) :keyID(key), joyID(joy) {}
+	unsigned int keyID = 0;
+	unsigned int joyID = 0;
 };
 
-// Allow to pick what user wants to play with.
 enum class PlayWith
 {
 	KEYBOARD, GAMEPAD
@@ -41,7 +36,7 @@ public:
 
 	void Update(float deltaTime);
 
-	void UpdateJoystickAxis(int axe, int value, SDL_Window* window);
+	void UpdateJoystickAxis(int axe, int value, SDL_Window *window);
 
 	void UpdateJoystickHats(int value);
 
@@ -102,7 +97,7 @@ public:
 
 private:
 	bool wasKeyDown(unsigned int keyID);
-	std::string GetMapping(unsigned int eventID, PlayWith util, std::unordered_map<unsigned int, EventConfig>& map);
+	std::string getMapping(unsigned int eventID, PlayWith util, std::unordered_map<unsigned int, EventConfig> &map);
 
 	std::unordered_map<unsigned int, EventConfig> m_eventConfig;
 	std::unordered_map<unsigned int, EventConfig> m_eventConfigTemp;
@@ -111,7 +106,7 @@ private:
 	glm::vec2 m_mouseCoords = glm::vec2(0);	
 	glm::vec2 m_joyAxeValue = glm::vec2(0);	
 	PlayWith m_playWith = PlayWith::KEYBOARD;
-	SDL_Joystick * m_joystick = nullptr;
+	SDL_Joystick *m_joystick = nullptr;
 	int m_screenWidth, m_screenHeight;
 	float m_axisTimeLapse = 0.0f;
 };

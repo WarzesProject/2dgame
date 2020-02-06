@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "EventHandler.h"
 //-----------------------------------------------------------------------------
-#define FILENAME "padconfig.conf"
-#define JOY_AXE_DEFAULT_SPEED 30
-#define AXIS_TIMELAPSE 50.0f
+constexpr auto FILENAME = "padconfig.conf";
+constexpr auto JOY_AXE_DEFAULT_SPEED = 30;
+constexpr auto AXIS_TIMELAPSE = 50.0f;
 //-----------------------------------------------------------------------------
 void EventHandler::Init(int screenWidth, int screenHeight)
 {
@@ -27,7 +27,6 @@ void EventHandler::Destroy()
 //-----------------------------------------------------------------------------
 void EventHandler::Update(float deltaTime)
 {
-	// If gamepad is connected during game
 	if ( SDL_NumJoysticks() > 0 && m_joystick == nullptr )
 	{
 		SDL_JoystickEventState(SDL_ENABLE);
@@ -40,10 +39,9 @@ void EventHandler::Update(float deltaTime)
 		m_playWith = PlayWith::KEYBOARD;
 	}
 
-	for ( auto& it : m_keyMap )
-	{
+	for ( auto &it : m_keyMap )
 		m_previousKeyMap[it.first] = it.second;
-	}
+
 	m_axisTimeLapse += deltaTime;
 }
 //-----------------------------------------------------------------------------
@@ -69,13 +67,10 @@ void EventHandler::ReleaseEvent(unsigned int eventID)
 //-----------------------------------------------------------------------------
 bool EventHandler::IsEventDown(unsigned int eventID)
 {
-	/* Retrieve the right key */
 	unsigned int keyID = eventID;
 	auto itEvent = m_eventConfig.find(eventID);
 	if ( itEvent != m_eventConfig.end() )
-	{
 		keyID = (m_playWith == PlayWith::KEYBOARD) ? itEvent->second.keyID : itEvent->second.joyID;
-	}
 
 	return IsKeyDown(keyID);
 }
@@ -84,9 +79,7 @@ bool EventHandler::IsKeyDown(unsigned int keyID)
 {
 	auto it = m_keyMap.find(keyID);
 	if ( it != m_keyMap.end() )
-	{
 		return it->second;
-	}
 
 	return false;
 }
@@ -94,24 +87,18 @@ bool EventHandler::IsKeyDown(unsigned int keyID)
 bool EventHandler::wasKeyDown(unsigned int keyID)
 {
 	auto it = m_previousKeyMap.find(keyID);
-
 	if ( it != m_previousKeyMap.end() )
-	{
 		return it->second;
-	}
 
 	return false;
 }
 //-----------------------------------------------------------------------------
 bool EventHandler::IsEventPressed(unsigned int eventID)
 {
-	/* Retrieve the right key */
 	unsigned int keyID = eventID;
 	auto itEvent = m_eventConfig.find(eventID);
 	if ( itEvent != m_eventConfig.end() )
-	{
 		keyID = (m_playWith == PlayWith::KEYBOARD) ? itEvent->second.keyID : itEvent->second.joyID;
-	}
 
 	return (IsKeyDown(keyID) && !wasKeyDown(keyID));
 }
@@ -216,18 +203,14 @@ void EventHandler::UpdateMapping(unsigned int eventID, PlayWith util)
 //-----------------------------------------------------------------------------
 void EventHandler::UpdateConfig()
 {
-	for ( auto& it : m_eventConfig )
-	{
+	for ( auto &it : m_eventConfig )
 		m_eventConfigTemp[it.first] = it.second;
-	}
 }
 //-----------------------------------------------------------------------------
 void EventHandler::SaveConfig()
 {
-	for ( auto& it : m_eventConfigTemp )
-	{
+	for ( auto &it : m_eventConfigTemp )
 		m_eventConfig[it.first] = it.second;
-	}
 	SaveConfigFile();
 }
 //-----------------------------------------------------------------------------
@@ -291,15 +274,15 @@ void EventHandler::ClearConfig()
 //-----------------------------------------------------------------------------
 std::string EventHandler::GetMapping(unsigned int eventID)
 {
-	return GetMapping(eventID, m_playWith, m_eventConfig);
+	return getMapping(eventID, m_playWith, m_eventConfig);
 }
 //-----------------------------------------------------------------------------
 std::string EventHandler::GetMapping(unsigned int eventID, PlayWith util)
 {
-	return GetMapping(eventID, util, m_eventConfigTemp);
+	return getMapping(eventID, util, m_eventConfigTemp);
 }
 //-----------------------------------------------------------------------------
-std::string EventHandler::GetMapping(unsigned int eventID, PlayWith util, std::unordered_map<unsigned int, EventConfig>& map)
+std::string EventHandler::getMapping(unsigned int eventID, PlayWith util, std::unordered_map<unsigned int, EventConfig> &map)
 {
 	unsigned int keyID;
 

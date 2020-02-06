@@ -1,6 +1,6 @@
 #pragma once
 
-#define SCREEN_INDEX_NO_SCREEN -1
+constexpr auto SCREEN_INDEX_NO_SCREEN = -1;
 
 class IGameScreen;
 class Application;
@@ -11,14 +11,11 @@ public:
 	void Init(Application *app);
 	void Destroy();
 
-
 	IGameScreen* MoveNext();
 	IGameScreen* MovePrevious();
 
 	void AddScreen(IGameScreen *screen);
-
 	void SetScreen(int screenIndex);
-
 	IGameScreen* GetCurrentScreen();
 
 protected:

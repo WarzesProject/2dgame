@@ -16,13 +16,19 @@
 //[=========================================================================]
 //[ STL Header                                                              ]
 //[=========================================================================]
+#include <ctime>
+#include <cmath>
+#include <cstdlib>
 #include <exception>
 #include <chrono>
 #include <memory>
 #include <algorithm>
+#include <random>
+#include <functional>
 #include <optional>
 #include <iostream>
 #include <fstream>
+#include <ostream>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -60,11 +66,11 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
-//#include <glm/glm/gtx/hash.hpp>
+#include <glm/glm/gtx/rotate_vector.hpp>
 
 #include <stb/stb_image.h>
 
-//#include <tinyobjloader/tiny_obj_loader.h>
+#include <pugixml/src/pugixml.hpp>
 
 //[=========================================================================]
 //[ Core Header                                                             ]
@@ -75,3 +81,6 @@
 #define N_ELEMENTS_IN_ARRAY(ELEMENTS)	sizeof(ELEMENTS) / sizeof(ELEMENTS[0])
 
 #pragma warning( pop )
+
+
+#undef GetObject

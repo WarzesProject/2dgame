@@ -6,3 +6,7 @@
 	path = source/3rdparty/include/stb
 	url = https://github.com/nothings/stb
 	branch = master
+[submodule "source/3rdparty/include/pugixml"]
+	path = source/3rdparty/include/pugixml
+	url = https://github.com/zeux/pugixml
+	branch = master

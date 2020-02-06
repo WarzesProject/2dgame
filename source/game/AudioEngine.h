@@ -20,13 +20,9 @@ class Music
 public:
 	// если loops == -1, то проигрывать бесконечно
 	void Play(int loops = -1);
-
 	static int Playing();
-
 	static void Pause();
-
 	static void Resume();
-
 	static void Stop();
 
 private:

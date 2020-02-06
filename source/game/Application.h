@@ -16,15 +16,13 @@ public:
 	Application(const ApplicationConfig &config);
 	~Application();
 
-	void Run(std::unique_ptr<IGame> game);
+	void Run(std::unique_ptr<IGame> game);	
 
-	void OnSDLEvent(SDL_Event &ev);
-
-	int GetScreenWidth()
+	int GetScreenWidth() const
 	{
 		return m_config.width;
 	}
-	int GetScreenHeight()
+	int GetScreenHeight() const
 	{
 		return m_config.height;
 	}
@@ -43,7 +41,7 @@ private:
 
 	void update();
 	void draw();
-	bool handleEvents();
+	void onSDLEvent(SDL_Event &ev);
 
 	ApplicationConfig m_config;
 	
@@ -54,7 +52,7 @@ private:
 	ResourceManager m_resourceManager;
 	EventHandler m_eventHandler;
 	ScreenManager m_screenManager;
-	IGameScreen* m_currentScreen = nullptr;
+	IGameScreen *m_currentScreen = nullptr;
 	FPSLimiter m_limiter;
 	bool m_isRunning = false;
 };

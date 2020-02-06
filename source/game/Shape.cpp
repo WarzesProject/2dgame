@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Shape.h"
-//-----------------------------------------------------------------------------
+
 Shape::Shape(float x, float y, float width, float height, ShapeType type) :
-	position(x, y), destRect(x, y, width, height), type(type)
+position(x, y), destRect(x, y, width, height), type(type)
 {
 }
-//-----------------------------------------------------------------------------
-void Shape::Init(float x, float y, float w, float h, ShapeType type)
+
+void Shape::init(float x, float y, float w, float h, ShapeType type)
 {
 	destRect.x = position.x = x;
 	destRect.y = position.y = y;
@@ -14,7 +14,7 @@ void Shape::Init(float x, float y, float w, float h, ShapeType type)
 	destRect.w = h;
 	type = type;
 }
-//-----------------------------------------------------------------------------
+
 std::ostream& operator<<(std::ostream& os, const Shape& s)
 {
 	os << ((s.type == ShapeType::BOX) ? "BOX" : "CIRCLE")
@@ -25,74 +25,74 @@ std::ostream& operator<<(std::ostream& os, const Shape& s)
 
 	return os;
 }
-//-----------------------------------------------------------------------------
-std::string Shape::GetTypeName()
+
+std::string Shape::getTypeName()
 {
 	return (type == ShapeType::BOX) ? "BOX" : "CIRCLE";
 }
-//-----------------------------------------------------------------------------
-ShapeType Shape::GetTypeByName(const std::string& type)
+
+ShapeType Shape::getTypeByName(const std::string& type)
 {
 	return (type == "BOX") ? ShapeType::BOX : ShapeType::CIRCLE;
 }
-//-----------------------------------------------------------------------------
-void Shape::Draw(DebugRenderer& debugRenderer, ColorRGBA8 color)
+
+void Shape::draw(DebugRenderer& debugRenderer, ColorRGBA8 color)
 {
-	if( type == ShapeType::BOX )
+	if ( type == ShapeType::BOX )
 		debugRenderer.DrawBox(destRect, color, 0.0f);
 	else
-		debugRenderer.DrawCircle(GetCenter(), color, GetCenterWidth());
+		debugRenderer.DrawCircle(getCenter(), color, getCenterWidth());
 }
-//-----------------------------------------------------------------------------
-bool Shape::Contains(glm::vec2& p)
+
+bool Shape::contains(glm::vec2& p)
 {
 	return (
 		p.x > destRect.x && p.x < destRect.x + destRect.z &&
 		p.y > destRect.y && p.y < destRect.y + destRect.w
 		);
 }
-//-----------------------------------------------------------------------------
-bool Shape::CollideWith(Shape& s, glm::vec2& collisionDepth)
+
+bool Shape::collideWith(Shape& s, glm::vec2& collisionDepth)
 {
-	if( s.type == ShapeType::CIRCLE && type == ShapeType::CIRCLE )
-		return CircleCollideCircle(s, collisionDepth);
+	if ( s.type == ShapeType::CIRCLE && type == ShapeType::CIRCLE )
+		return circleCollideCircle(s, collisionDepth);
 	else
-		return CircleCollideBox(s, collisionDepth);
+		return circleCollideBox(s, collisionDepth);
 }
-//-----------------------------------------------------------------------------
-void Shape::IncrPosition(glm::vec2& incr)
+
+void Shape::incrPosition(const glm::vec2& incr)
 {
-	IncrPositionX(incr.x);
-	IncrPositionY(incr.y);
+	incrPositionX(incr.x);
+	incrPositionY(incr.y);
 }
-//-----------------------------------------------------------------------------
-void Shape::IncrPosition(float x, float y)
+
+void Shape::incrPosition(float x, float y)
 {
-	IncrPositionX(x);
-	IncrPositionY(y);
+	incrPositionX(x);
+	incrPositionY(y);
 }
-//-----------------------------------------------------------------------------
-void Shape::IncrPositionX(float x)
+
+void Shape::incrPositionX(float x)
 {
 	position.x += x;
 	destRect.x = position.x;
 }
-//-----------------------------------------------------------------------------
-void Shape::IncrPositionY(float y)
+
+void Shape::incrPositionY(float y)
 {
 	position.y += y;
 	destRect.y = position.y;
 }
-//-----------------------------------------------------------------------------
-bool Shape::CircleCollideCircle(Shape& s, glm::vec2& collisionDepth)
+
+bool Shape::circleCollideCircle(Shape& s, glm::vec2& collisionDepth)
 {
-	float minDist = GetCenterWidth() + s.GetCenterWidth();
-	glm::vec2 distVec = GetCenter() - s.GetCenter();
+	float minDist = getCenterWidth() + s.getCenterWidth();
+	glm::vec2 distVec = getCenter() - s.getCenter();
 	float collision = minDist - glm::length(distVec);
 
-	if( collision > 0 )
+	if ( collision > 0 )
 	{
-		if( collision == minDist )
+		if ( collision == minDist )
 			collisionDepth = glm::normalize(glm::vec2(1.0f, 1.0f)) * collision;
 		else
 			collisionDepth = glm::normalize(distVec) * collision;
@@ -101,19 +101,19 @@ bool Shape::CircleCollideCircle(Shape& s, glm::vec2& collisionDepth)
 
 	return false;
 }
-//-----------------------------------------------------------------------------
-bool Shape::CircleCollideBox(Shape& s, glm::vec2& collisionDepth)
-{
-	float minDistX = GetCenterWidth() + s.GetCenterWidth();
-	float minDistY = GetCenterHeight() + s.GetCenterHeight();
 
-	glm::vec2 distVec = GetCenter() - s.GetCenter();
+bool Shape::circleCollideBox(Shape& s, glm::vec2& collisionDepth)
+{
+	float minDistX = getCenterWidth() + s.getCenterWidth();
+	float minDistY = getCenterHeight() + s.getCenterHeight();
+
+	glm::vec2 distVec = getCenter() - s.getCenter();
 	float collisionX = minDistX - abs(distVec.x);
 	float collisionY = minDistY - abs(distVec.y);
 
-	if( collisionX > 0 && collisionY > 0 )
+	if ( collisionX > 0 && collisionY > 0 )
 	{
-		if( collisionX < collisionY )
+		if ( collisionX < collisionY )
 		{
 			collisionDepth.x = (distVec.x < 0) ? -collisionX : collisionX;
 		}
@@ -127,38 +127,38 @@ bool Shape::CircleCollideBox(Shape& s, glm::vec2& collisionDepth)
 
 	return false;
 }
-//-----------------------------------------------------------------------------
-bool Shape::CollideTile(glm::vec2& centertilePos, float width)
-{
-	float minDistX = GetCenterWidth() + (width / 2.0f);
-	float minDistY = GetCenterHeight() + (width / 2.0f);
 
-	glm::vec2 distVec = GetCenter() - centertilePos;
+bool Shape::collideTile(const glm::vec2& centertilePos, float width)
+{
+	float minDistX = getCenterWidth() + (width / 2.0f);
+	float minDistY = getCenterHeight() + (width / 2.0f);
+
+	glm::vec2 distVec = getCenter() - centertilePos;
 	float collisionX = minDistX - abs(distVec.x);
 	float collisionY = minDistY - abs(distVec.y);
 
-	if( collisionX > 0 && collisionY > 0 )
+	if ( collisionX > 0 && collisionY > 0 )
 	{
-		if( collisionX < collisionY )
+		if ( collisionX < collisionY )
 		{
-			if( distVec.x < 0 )
+			if ( distVec.x < 0 )
 			{
-				IncrPositionX(-collisionX);
+				incrPositionX(-collisionX);
 			}
 			else
 			{
-				IncrPositionX(collisionX);
+				incrPositionX(collisionX);
 			}
 		}
 		else
 		{
-			if( distVec.y < 0 )
+			if ( distVec.y < 0 )
 			{
-				IncrPositionY(-collisionY);
+				incrPositionY(-collisionY);
 			}
 			else
 			{
-				IncrPositionY(collisionY);
+				incrPositionY(collisionY);
 			}
 		}
 		return true;
@@ -166,8 +166,8 @@ bool Shape::CollideTile(glm::vec2& centertilePos, float width)
 
 	return false;
 }
-//-----------------------------------------------------------------------------
-bool Shape::SimpleCollision(glm::vec2& c1, float x1, float y1, glm::vec2& c2, float x2, float y2, glm::vec2& col)
+
+bool Shape::simpleCollision(const glm::vec2& c1, float x1, float y1, const glm::vec2& c2, float x2, float y2, glm::vec2& col)
 {
 	float minDistX = x1 + x2;
 	float minDistY = y1 + y2;
@@ -176,15 +176,15 @@ bool Shape::SimpleCollision(glm::vec2& c1, float x1, float y1, glm::vec2& c2, fl
 	col.x = minDistX - abs(distVec.x);
 	col.y = minDistY - abs(distVec.y);
 
-	if( col.x > 0 && col.y > 0 )
+	if ( col.x > 0 && col.y > 0 )
 	{
 		return true;
 	}
 
 	return false;
 }
-//-----------------------------------------------------------------------------
-bool Shape::SimpleCollision(glm::vec2& c1, float x1, float y1, glm::vec2& c2, float x2, float y2)
+
+bool Shape::simpleCollision(const glm::vec2& c1, float x1, float y1, const glm::vec2& c2, float x2, float y2)
 {
 	float minDistX = x1 + x2;
 	float minDistY = y1 + y2;
@@ -193,35 +193,34 @@ bool Shape::SimpleCollision(glm::vec2& c1, float x1, float y1, glm::vec2& c2, fl
 	float collisionX = minDistX - abs(distVec.x);
 	float collisionY = minDistY - abs(distVec.y);
 
-	if( collisionX > 0 && collisionY > 0 )
+	if ( collisionX > 0 && collisionY > 0 )
 	{
 		return true;
 	}
 
 	return false;
 }
-//-----------------------------------------------------------------------------
-bool Shape::PointIntriangle(glm::vec2& pt, glm::vec2& t1, glm::vec2& t2, glm::vec2& t3)
+
+bool Shape::pointIntriangle(const glm::vec2& pt, glm::vec2& t1, glm::vec2& t2, glm::vec2& t3)
 {
-	bool b1 = InSameSide(pt, t1, t2);
-	bool b2 = InSameSide(pt, t2, t3);
-	bool b3 = InSameSide(pt, t3, t1);
+	bool b1 = inSameSide(pt, t1, t2);
+	bool b2 = inSameSide(pt, t2, t3);
+	bool b3 = inSameSide(pt, t3, t1);
 	return b1 && b2 && b3;
 }
-//-----------------------------------------------------------------------------
-bool Shape::InSameSide(glm::vec2& pt, glm::vec2& t1, glm::vec2& t2)
+
+bool Shape::inSameSide(const glm::vec2& pt, const glm::vec2& t1, const glm::vec2& t2)
 {
 	float v = ((t2.y - t1.y) * (pt.x - t1.x) + (-t2.x + t1.x) * (pt.y - t1.y));
 	return v >= 0.0f;
 }
-//-----------------------------------------------------------------------------
-bool Shape::CircleContains(float x, float y, float r, glm::vec2& pt)
+
+bool Shape::circleContains(float x, float y, float r, glm::vec2& pt)
 {
 	return sqrt(pow(x - pt.x, 2) + pow(y - pt.y, 2)) <= r;
 }
-//-----------------------------------------------------------------------------
-bool Shape::BoxContains(float x, float y, float w, float h, glm::vec2& pt)
+
+bool Shape::boxContains(float x, float y, float w, float h, glm::vec2& pt)
 {
 	return (pt.x > x && pt.x < x + w && pt.y > y && pt.y < y + h);
 }
-//-----------------------------------------------------------------------------

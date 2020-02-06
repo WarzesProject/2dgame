@@ -30,6 +30,19 @@ public:
 			this->invW = 1.0f;
 		}
 	}
+
+	glm::vec4& GetUV(int index)
+	{
+		int xTile = index % dims.x;
+		int yTile = index / dims.x;
+
+		uvs.x = (xTile + invX) / (float)dims.x;
+		uvs.y = (yTile + invY) / (float)dims.y;
+		uvs.z = invZ / dims.x;
+		uvs.w = invW / dims.y;
+
+		return uvs;
+	}
 	
 	glm::vec4& GetUV(int xTile, int yTile)
 	{

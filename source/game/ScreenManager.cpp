@@ -25,7 +25,7 @@ IGameScreen* ScreenManager::MovePrevious()
 	return GetCurrentScreen();
 }
 //-----------------------------------------------------------------------------
-void ScreenManager::AddScreen(IGameScreen* screen)
+void ScreenManager::AddScreen(IGameScreen *screen)
 {
 	screen->Build();
 	screen->SetApplication(m_app);
@@ -41,9 +41,7 @@ void ScreenManager::SetScreen(int screenIndex)
 void ScreenManager::Destroy()
 {
 	for ( size_t i = 0; i < m_screens.size(); i++ )
-	{
 		m_screens[i]->Destroy();
-	}
 
 	m_screens.clear();
 	m_currentScreenIndex = SCREEN_INDEX_NO_SCREEN;

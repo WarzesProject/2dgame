@@ -1,15 +1,5 @@
 #pragma once
 
-enum class RenderType
-{
-#if RENDER_VULKAN
-	Vulkan,
-#endif
-#if RENDER_OPENGL
-	OpenGL,
-#endif
-};
-
 struct ApplicationConfig
 {
 	// window config
@@ -22,6 +12,5 @@ struct ApplicationConfig
 	bool highDPI = false;
 
 	// render config
-	RenderType renderType = RenderType::OpenGL;
 	float MaxFPS = 60.0f;
 };
