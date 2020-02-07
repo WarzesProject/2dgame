@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include "ApplicationConfig.h"
+
 class Sound
 {
 	friend class AudioEngine;
@@ -33,14 +35,14 @@ private:
 class AudioEngine
 {
 public:
-	bool Init();
-	void Destroy();
+	AudioEngine(ApplicationConfig::Audio &config);
+	~AudioEngine();
 
 	Sound LoadSound(std::string_view filePath);
 	Music LoadMusic(std::string_view filePath);
 
 private:
+	ApplicationConfig::Audio &m_config;
 	std::unordered_map<std::string, Mix_Chunk*> m_soundMap;
 	std::unordered_map<std::string, Mix_Music*> m_musicMap;
-	bool m_initialized = false;
 };

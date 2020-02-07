@@ -9,16 +9,13 @@ public:
 	void End();
 
 	void SetMaxFPS(float maxFPS);
-	float GetFPS() const
-	{
-		return m_fps;
-	}
+	float GetFPS() const { return m_fps; }
 
 private:
 	void calculateFPS();
 
-	float m_fps;
-	float m_maxFPS;
-	float m_frameTime;
-	unsigned int m_startTicks;
+	float m_fps = 0.0f;
+	float m_maxFPS = 0.0f;
+	float m_frameTime = 0.0f;
+	unsigned int m_startTicks = 0;
 };

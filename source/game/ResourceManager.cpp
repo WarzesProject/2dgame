@@ -1,38 +1,46 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "ResourceManager.h"
 //-----------------------------------------------------------------------------
-TextureCache ResourceManager::m_textureCache;
-AudioEngine *ResourceManager::m_audioEngine = nullptr;
-FontCache ResourceManager::m_fontCache;
+TODO("сделать очистку ресурсов по завершению");
 //-----------------------------------------------------------------------------
-bool ResourceManager::Init(AudioEngine *audioEngine)
+TextureCache ResourceManager::m_textureCache;
+std::shared_ptr<AudioEngine> ResourceManager::m_audioEngine = nullptr;
+FontCache ResourceManager::m_fontCache;
+ApplicationConfig::Resources *ResourceManager::m_config = nullptr;
+//-----------------------------------------------------------------------------
+ResourceManager::ResourceManager(ApplicationConfig::Resources &config, std::shared_ptr<AudioEngine> audioEngine)
 {
+	m_config = &config;
 	m_audioEngine = audioEngine;
-	return true;
 }
 //-----------------------------------------------------------------------------
-void ResourceManager::Destroy()
+ResourceManager::~ResourceManager()
 {
 	m_fontCache.Destroy();
+	m_audioEngine.reset();
 }
 //-----------------------------------------------------------------------------
-Sound ResourceManager::GetSound(const std::string soundPath)
+Sound ResourceManager::GetSound(const std::string_view soundPath)
 {
-	return m_audioEngine->LoadSound(soundPath);
+	const std::string path = m_config->coreFolder + std::string(soundPath);
+	return m_audioEngine->LoadSound(path);
 }
 //-----------------------------------------------------------------------------
-Music ResourceManager::GetMusic(const std::string musicPath)
+Music ResourceManager::GetMusic(const std::string_view musicPath)
 {
-	return m_audioEngine->LoadMusic(musicPath);
+	const std::string path = m_config->coreFolder + std::string(musicPath);
+	return m_audioEngine->LoadMusic(path);
 }
 //-----------------------------------------------------------------------------
-Texture ResourceManager::GetTexture(const std::string texturePath)
+Texture ResourceManager::GetTexture(const std::string_view texturePath)
 {
-	return m_textureCache.GetTexture(texturePath);
+	const std::string path = m_config->coreFolder + std::string(texturePath);
+	return m_textureCache.GetTexture(path);
 }
 //-----------------------------------------------------------------------------
-SpriteFont ResourceManager::GetFont(const std::string fontPath, int size/* = 32*/)
+SpriteFont ResourceManager::GetFont(const std::string_view fontPath, int size)
 {
-	return m_fontCache.GetFont(fontPath, size);
+	const std::string path = m_config->coreFolder + std::string(fontPath);
+	return m_fontCache.GetFont(path, size);
 }
 //-----------------------------------------------------------------------------

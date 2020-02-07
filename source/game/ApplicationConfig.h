@@ -2,15 +2,38 @@
 
 struct ApplicationConfig
 {
-	// window config
-	int width = 640;
-	int height = 480;
-	const char *title = "Test";
-	bool fullscreen = false;
-	bool windowedFullscreen = true;
-	bool resizable = false;
-	bool highDPI = false;
+	// app config
+	struct App
+	{
+		bool enableConsole = true;
+	} app;
 
-	// render config
-	float MaxFPS = 60.0f;
+	// window config
+	struct Window
+	{
+		int width = 640;
+		int height = 480;
+		const char *title = "Test";
+		bool fullscreen = false;
+		bool windowedFullscreen = true;
+		bool resizable = false;
+		bool highDPI = false;
+	} window;
+
+	// graphics config
+	struct Graphics
+	{		
+		float maxFPS = 60.0f;
+	} graphics;
+
+	// audio config
+	struct Audio
+	{
+
+	} audio;
+
+	struct Resources
+	{
+		const char *coreFolder = "";
+	} resources;
 };

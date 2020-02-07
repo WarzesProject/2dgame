@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IGameScreen.h"
+#include "oldIGameScreen.h"
 
-class MainMenuScreen : public IGameScreen
+class MainMenuScreen : public oldIGameScreen
 {
 public:
 	MainMenuScreen();

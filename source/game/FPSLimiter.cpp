@@ -33,9 +33,7 @@ void FPSLimiter::calculateFPS()
 {
 	static float frameTimes[NUM_SAMPLES];
 	static int currentFrame = 0;
-
 	static float prevTiks = (float)SDL_GetTicks();
-
 	float currentTick = (float)SDL_GetTicks();
 
 	m_frameTime = currentTick - prevTiks;

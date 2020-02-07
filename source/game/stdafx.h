@@ -48,18 +48,7 @@
 #include <SDL2-2.0.10/SDL_mixer.h>
 #include <SDL2-2.0.10/SDL_ttf.h>
 
-#if RENDER_VULKAN
-#	include <SDL2-2.0.10/SDL_vulkan.h>
-#endif
-
-#if RENDER_VULKAN
-#	define VK_USE_PLATFORM_WIN32_KHR
-#	include <vulkan/vulkan.hpp>
-#endif
-
-#if RENDER_OPENGL
-#	include <glad/glad.h>
-#endif
+#include <glad/glad.h>
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -71,6 +60,9 @@
 #include <stb/stb_image.h>
 
 #include <pugixml/src/pugixml.hpp>
+
+#include <io.h>
+#include <fcntl.h>
 
 //[=========================================================================]
 //[ Core Header                                                             ]

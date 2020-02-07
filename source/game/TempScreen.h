@@ -1,9 +1,9 @@
 #pragma once
 
-#include "IGameScreen.h"
+#include "oldIGameScreen.h"
 #include "Camera2D.h"
 
-class TempScreen : public IGameScreen
+class TempScreen : public oldIGameScreen
 {
 public:
 	TempScreen();

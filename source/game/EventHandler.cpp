@@ -5,11 +5,10 @@ constexpr auto FILENAME = "padconfig.conf";
 constexpr auto JOY_AXE_DEFAULT_SPEED = 30;
 constexpr auto AXIS_TIMELAPSE = 50.0f;
 //-----------------------------------------------------------------------------
-void EventHandler::Init(int screenWidth, int screenHeight)
+EventHandler::EventHandler(int &screenWidth, int &screenHeight)
+	: m_screenWidth(screenWidth)
+	, m_screenHeight(screenHeight)
 {
-	m_screenWidth = screenWidth;
-	m_screenHeight = screenHeight;
-
 	if ( SDL_NumJoysticks() > 0 )
 	{
 		SDL_JoystickEventState(SDL_ENABLE);
@@ -17,7 +16,7 @@ void EventHandler::Init(int screenWidth, int screenHeight)
 	}
 }
 //-----------------------------------------------------------------------------
-void EventHandler::Destroy()
+EventHandler::~EventHandler()
 {
 	if ( m_joystick != nullptr )
 		SDL_JoystickClose(m_joystick);
@@ -259,10 +258,9 @@ bool EventHandler::SaveConfigFile()
 	file << (int)m_playWith << '\n';
 	file << m_eventConfig.size() << '\n';
 
-	for ( auto& it : m_eventConfig )
-	{
+	for ( auto &it : m_eventConfig )
 		file << it.first << ' ' << it.second.keyID << ' ' << it.second.joyID << '\n';
-	}
+
 	file.close();
 	return true;
 }

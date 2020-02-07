@@ -8,6 +8,8 @@ Texture TextureCache::GetTexture(std::string_view texturePath)
 
 	if ( mit == m_textureMap.end() )
 	{
+		SDL_Log("Texture %s Load", texturePath.data());
+
 		Texture newTexture = ImageLoader::Load(texturePath);
 
 		if ( newTexture.height > 0 && newTexture.width > 0 )

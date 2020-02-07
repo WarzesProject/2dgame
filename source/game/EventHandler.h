@@ -7,7 +7,7 @@ constexpr auto MARGIN = 500;
 struct EventConfig
 {
 	EventConfig() = default;
-	EventConfig(unsigned int key, unsigned int joy) :keyID(key), joyID(joy) {}
+	EventConfig(unsigned int key, unsigned int joy) : keyID(key), joyID(joy) {}
 	unsigned int keyID = 0;
 	unsigned int joyID = 0;
 };
@@ -31,33 +31,24 @@ class GameWindow;
 class EventHandler
 {
 public:
-	void Init(int screenWidth, int screenHeight);
-	void Destroy();
+	EventHandler(int &screenWidth, int &screenHeight);
+	~EventHandler();
 
 	void Update(float deltaTime);
-
 	void UpdateJoystickAxis(int axe, int value, SDL_Window *window);
-
 	void UpdateJoystickHats(int value);
 
 	void PressKey(unsigned int keyID);
-
 	void ReleaseKey(unsigned int keyID);
 
 	bool IsKeyDown(unsigned int keyID);
-
 	bool IsKeyPressed(unsigned int keyID);
-
 	bool IsEventDown(unsigned int eventID);
-
 	bool IsEventPressed(unsigned int eventID);
 
 	void ReleaseEvent(unsigned int eventID);
 
-	bool IsJoyConnect()
-	{
-		return m_joystick != nullptr;
-	}
+	bool IsJoyConnect() const { return m_joystick != nullptr; }
 
 	void AddEvent(unsigned int eventID, unsigned int keyID, unsigned int joyID)
 	{
@@ -67,7 +58,6 @@ public:
 	void UpdateMapping(unsigned int eventID, PlayWith util);
 
 	std::string GetMapping(unsigned int eventID, PlayWith util);
-
 	std::string GetMapping(unsigned int eventID);
 
 	void UpdateConfig();
@@ -77,23 +67,11 @@ public:
 	bool SaveConfigFile();
 
 	void SetMouseCoords(float x, float y);
-	void SetPlayWith(PlayWith util)
-	{
-		m_playWith = util;
-	}
+	void SetPlayWith(PlayWith util) { m_playWith = util; }
 
-	glm::vec2 GetMouseCoords() const
-	{
-		return m_mouseCoords;
-	}
-	PlayWith GetPlayWith()
-	{
-		return m_playWith;
-	}
-	EventConfig GetEventKey(unsigned int eventID)
-	{
-		return m_eventConfig[eventID];
-	}
+	glm::vec2 GetMouseCoords() const { return m_mouseCoords; }
+	PlayWith GetPlayWith() { return m_playWith; }
+	EventConfig GetEventKey(unsigned int eventID) { return m_eventConfig[eventID]; }
 
 private:
 	bool wasKeyDown(unsigned int keyID);
@@ -107,6 +85,7 @@ private:
 	glm::vec2 m_joyAxeValue = glm::vec2(0);	
 	PlayWith m_playWith = PlayWith::KEYBOARD;
 	SDL_Joystick *m_joystick = nullptr;
-	int m_screenWidth, m_screenHeight;
+	int &m_screenWidth;
+	int &m_screenHeight;
 	float m_axisTimeLapse = 0.0f;
 };

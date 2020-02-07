@@ -10,7 +10,7 @@ void Sound::Play(int loops)
 	if ( Mix_PlayChannel(-1, m_chunk, loops) == -1 )
 	{
 		if ( Mix_PlayChannel(0, m_chunk, loops) == -1 )
-			Throw("Mix_PlayChannel error: " + std::string(Mix_GetError()));
+			ThrowSDLMixError("Mix_PlayChannel error: ");
 	}
 }
 //-----------------------------------------------------------------------------
@@ -21,7 +21,7 @@ void Sound::Play(int loops, uint8_t distance)
 		if ( (m_lastChannel = Mix_PlayChannel(m_lastChannel, m_chunk, loops)) == -1 )
 		{
 			if ( (m_lastChannel = Mix_PlayChannel(0, m_chunk, loops)) == -1 )
-				Throw("Mix_PlayChannel error: " + std::string(Mix_GetError()));
+				ThrowSDLMixError("Mix_PlayChannel error: ");
 		}
 	}
 	else
@@ -31,7 +31,7 @@ void Sound::Play(int loops, uint8_t distance)
 		if ( (m_lastChannel = Mix_PlayChannel(-1, m_chunk, loops)) == -1 )
 		{
 			if ( (m_lastChannel = Mix_PlayChannel(0, m_chunk, loops)) == -1 )
-				Throw("Mix_PlayChannel error: " + std::string(Mix_GetError()));
+				ThrowSDLMixError("Mix_PlayChannel error: ");
 		}
 	}
 
@@ -43,7 +43,7 @@ void Sound::Play(int loops, uint8_t distance)
 void Music::Play(int loops)
 {
 	if ( Mix_PlayMusic(m_music, loops) == -1 )
-		Throw("Mix_PlayMusic error: " + std::string(Mix_GetError()));
+		ThrowSDLMixError("Mix_PlayMusic error: ");
 }
 //-----------------------------------------------------------------------------
 int Music::Playing()
@@ -66,42 +66,30 @@ void Music::Stop()
 	Mix_HaltMusic();
 }
 //-----------------------------------------------------------------------------
-bool AudioEngine::Init()
+AudioEngine::AudioEngine(ApplicationConfig::Audio &config)
+	: m_config(config)
 {
-	if ( m_initialized )
-	{
-		SDL_Log("Tried to initialize Audio engine twice!");
-		return true;
-	}
-
 	if ( Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG) == 1 )
-		Throw("Mix_Init error: " + std::string(Mix_GetError()));
+		ThrowSDLMixError("Mix_Init error: ");
 
 	if ( Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) )
-		Throw("Mix_OpenAudio error: " + std::string(Mix_GetError()));
+		ThrowSDLMixError("Mix_OpenAudio error: ");
 
 	Mix_AllocateChannels(ALLOCATE_CHANNELS);
-	
-	m_initialized = true;
-	return m_initialized;
 }
 //-----------------------------------------------------------------------------
-void AudioEngine::Destroy()
+AudioEngine::~AudioEngine()
 {
-	if ( m_initialized )
-	{
-		for ( auto &it : m_soundMap )
-			Mix_FreeChunk(it.second);
+	for ( auto &it : m_soundMap )
+		Mix_FreeChunk(it.second);
 
-		for ( auto &it : m_musicMap )
-			Mix_FreeMusic(it.second);
+	for ( auto &it : m_musicMap )
+		Mix_FreeMusic(it.second);
 
-		m_initialized = false;
-		m_soundMap.clear();
-		m_musicMap.clear();
-		Mix_CloseAudio();
-		Mix_Quit();
-	}
+	m_soundMap.clear();
+	m_musicMap.clear();
+	Mix_CloseAudio();
+	Mix_Quit();
 }
 //-----------------------------------------------------------------------------
 Sound AudioEngine::LoadSound(std::string_view filePath)
@@ -111,10 +99,11 @@ Sound AudioEngine::LoadSound(std::string_view filePath)
 	auto it = m_soundMap.find(filePath.data());
 	if ( it == m_soundMap.end() )
 	{
-		Mix_Chunk *chunk = Mix_LoadWAV(filePath.data());
+		SDL_Log("Sound %s Load", filePath.data());
 
+		Mix_Chunk *chunk = Mix_LoadWAV(filePath.data());
 		if ( !chunk )
-			Throw("Mix_LoadWAV error: " + std::string(Mix_GetError()));
+			ThrowSDLMixError("Mix_LoadWAV error: ");
 
 		effect.m_chunk = chunk;
 		effect.m_filePath = filePath;
@@ -136,10 +125,11 @@ Music AudioEngine::LoadMusic(std::string_view filePath)
 	auto it = m_musicMap.find(filePath.data());
 	if ( it == m_musicMap.end() )
 	{
-		Mix_Music *mixMusic = Mix_LoadMUS(filePath.data());
+		SDL_Log("Music %s Load", filePath.data());
 
+		Mix_Music *mixMusic = Mix_LoadMUS(filePath.data());
 		if ( !mixMusic )
-			Throw("Mix_LoadMUS error: " + std::string(Mix_GetError()));
+			ThrowSDLMixError("Mix_LoadMUS error: ");
 
 		music.m_music = mixMusic;
 		music.m_filePath = filePath;

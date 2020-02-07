@@ -13,3 +13,8 @@ inline void ThrowSDLError(const char *str)
 {
 	Throw(str + std::string(SDL_GetError()));
 }
+
+inline void ThrowSDLMixError(const char *str)
+{
+	Throw(str + std::string(Mix_GetError()));
+}

@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Window.h"
-#pragma warning( push, 1 )
-#include <glad/glad.c>
-#pragma warning( pop )
 //-----------------------------------------------------------------------------
-Window::Window(ApplicationConfig &config)
+Window::Window(ApplicationConfig::Window &config)
 	: m_config(config)
 {
+	if ( SDL_Init(SDL_INIT_EVERYTHING) != 0 )
+		ThrowSDLError("Fail to Initialize SDL: ");
+
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 5);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 5);
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 5);
@@ -55,6 +55,7 @@ Window::Window(ApplicationConfig &config)
 Window::~Window()
 {
 	SDL_DestroyWindow(m_window);
+	SDL_Quit();
 }
 //-----------------------------------------------------------------------------
 void Window::SwapBuffer()

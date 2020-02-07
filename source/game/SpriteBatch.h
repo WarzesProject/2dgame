@@ -14,14 +14,13 @@ enum class GlyphSortType
 class Glyph
 {
 public:
-	Glyph(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle);
-	Glyph(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle);
+	Glyph(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color);
+	Glyph(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle);
 
-	Glyph(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color);
+	Glyph(const glm::vec4 &destRet, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle);
+	Glyph(const glm::vec4 &destRet, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color);
 
-	Glyph(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color);
-
-	Glyph(const std::vector<glm::vec2> &points, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color);
+	Glyph(const std::vector<glm::vec2> &points, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color);
 
 	GLuint textureID;
 	float depth;
@@ -31,7 +30,7 @@ public:
 	Vertex2D topRight;
 
 private:
-	glm::vec2 rotatePoint(glm::vec2 point, float angle);
+	glm::vec2 rotatePoint(const glm::vec2 &point, float angle);
 };
 
 class RenderBatch
@@ -52,21 +51,17 @@ class SpriteBatch
 {
 public:
 	void Init();
-
 	void Dispose();
 
 	void Begin(GlyphSortType sortType = GlyphSortType::TEXTURE);
 	void End();
 
-	void Draw(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color);
-	void Draw(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color);
-
-	void Draw(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint texture, float depth, const ColorRGBA8 &color, float angle);
-	void Draw(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4& uvRect, GLuint texture, float depth, const ColorRGBA8 &color, float angle);
-
-	void Draw(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint texture, float depth, const ColorRGBA8 &color, const glm::vec2 &direction);
-
-	void Draw(const std::vector<glm::vec2> &points, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color);
+	void Draw(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color);
+	void Draw(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle);	
+	void Draw(const glm::vec4 &destRet, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color);
+	void Draw(const glm::vec4 &destRet, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle);
+	void Draw(const glm::vec4 &destRet, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, const glm::vec2 &direction);
+	void Draw(const std::vector<glm::vec2> &points, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color);
 
 	void RenderBatch();
 
@@ -75,9 +70,9 @@ private:
 	void createVertexArray();
 	void sortGlyph();
 
-	static bool compareBackToFront(Glyph* a, Glyph* b);
-	static bool compareFrontToBack(Glyph* a, Glyph* b);
-	static bool compareTexture(Glyph* a, Glyph* b);
+	static bool compareBackToFront(Glyph *a, Glyph *b);
+	static bool compareFrontToBack(Glyph *a, Glyph *b);
+	static bool compareTexture(Glyph *a, Glyph *b);
 
 	GlyphSortType m_sortType;
 	GLuint m_vbo = 0;

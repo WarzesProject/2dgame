@@ -7,8 +7,10 @@ SpriteFont FontCache::GetFont(const std::string fontPath, int size)
 
 	if ( mit == m_fontMap.end() )
 	{
+		SDL_Log("Font %s Load", fontPath.data());
+
 		SpriteFont font;
-		font.Init(fontPath.c_str(), size);
+		font.Init(fontPath, size);
 		m_fontMap.insert(make_pair(fontPath + std::to_string(size), font));
 		return font;
 	}
@@ -18,7 +20,7 @@ SpriteFont FontCache::GetFont(const std::string fontPath, int size)
 //-----------------------------------------------------------------------------
 void FontCache::Destroy()
 {
-	for ( auto& p : m_fontMap )
+	for ( auto &p : m_fontMap )
 		p.second.Dispose();
 }
 //-----------------------------------------------------------------------------

@@ -3,22 +3,22 @@
 #include "TextureCache.h"
 #include "AudioEngine.h"
 #include "FontCache.h"
+#include "ApplicationConfig.h"
 
 class ResourceManager
 {
 public:
-	static bool Init(AudioEngine *audioEngine);
-	static void Destroy();
+	ResourceManager(ApplicationConfig::Resources &config, std::shared_ptr<AudioEngine> audioEngine);
+	~ResourceManager();
 
-	static Sound GetSound(const std::string soundPath);
-	static Music GetMusic(const std::string musicPath);
-
-	static Texture GetTexture(const std::string texturePath);
-
-	static SpriteFont GetFont(const std::string fontPath, int size = 32);
+	static Sound GetSound(const std::string_view soundPath);
+	static Music GetMusic(const std::string_view musicPath);
+	static Texture GetTexture(const std::string_view texturePath);
+	static SpriteFont GetFont(const std::string_view fontPath, int size = 32);
 
 private:
 	static TextureCache m_textureCache;
-	static AudioEngine *m_audioEngine;
+	static std::shared_ptr<AudioEngine> m_audioEngine;
 	static FontCache m_fontCache;
+	static ApplicationConfig::Resources *m_config;
 };

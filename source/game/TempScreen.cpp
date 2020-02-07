@@ -76,25 +76,25 @@ void TempScreen::Update()
 
 	auto eventHandler = m_app->GetEventHandler();
 
-	if ( eventHandler.IsKeyDown(SDLK_w) )
+	if ( eventHandler->IsKeyDown(SDLK_w) )
 		m_camera.SetPosition(m_camera.GetPosition() + glm::vec2(0.0f, CAMERA_SPEED));
 
-	if ( eventHandler.IsKeyDown(SDLK_s) )
+	if ( eventHandler->IsKeyDown(SDLK_s) )
 		m_camera.SetPosition(m_camera.GetPosition() + glm::vec2(0.0f, -CAMERA_SPEED));
 
-	if ( eventHandler.IsKeyDown(SDLK_a) )
+	if ( eventHandler->IsKeyDown(SDLK_a) )
 		m_camera.SetPosition(m_camera.GetPosition() + glm::vec2(-CAMERA_SPEED, 0.0f));
 
-	if ( eventHandler.IsKeyDown(SDLK_d) )
+	if ( eventHandler->IsKeyDown(SDLK_d) )
 		m_camera.SetPosition(m_camera.GetPosition() + glm::vec2(CAMERA_SPEED, 0.0f));
 
-	if ( eventHandler.IsKeyDown(SDLK_q) )
+	if ( eventHandler->IsKeyDown(SDLK_q) )
 		m_camera.SetScale(m_camera.GetScale() + SCALE_SPEED);
 
-	if ( eventHandler.IsKeyDown(SDLK_e) )
+	if ( eventHandler->IsKeyDown(SDLK_e) )
 		m_camera.SetScale(m_camera.GetScale() - SCALE_SPEED);
 
-	//if ( eventHandler.IsKeyDown(SDL_BUTTON_LEFT) )
+	//if ( eventHandler->IsKeyDown(SDL_BUTTON_LEFT) )
 	//{
 	//    glm::vec2 mouseCoords = eventHandler.GetMouseCoords();
 	//    mouseCoords = m_camera.ConvertScreenToWorld(mouseCoords);

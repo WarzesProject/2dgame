@@ -10,6 +10,86 @@ enum Corner
 	TL = 3		// Top left
 };
 //-----------------------------------------------------------------------------
+Glyph::Glyph(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
+{
+	this->textureID = textureID;
+	this->depth = depth;
+
+	this->topLeft.color = color;
+	this->topLeft.SetPosition(position.x, position.y + dimensions.y);
+	this->topLeft.SetUV(uvRect.x, uvRect.y + uvRect.w);
+
+	this->bottomLeft.color = color;
+	this->bottomLeft.SetPosition(position.x, position.y);
+	this->bottomLeft.SetUV(uvRect.x, uvRect.y);
+
+	this->bottomRight.color = color;
+	this->bottomRight.SetPosition(position.x + dimensions.x, position.y);
+	this->bottomRight.SetUV(uvRect.x + uvRect.z, uvRect.y);
+
+	this->topRight.color = color;
+	this->topRight.SetPosition(position.x + dimensions.x, position.y + dimensions.y);
+	this->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
+}
+//-----------------------------------------------------------------------------
+Glyph::Glyph(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle)
+{
+	this->textureID = textureID;
+	this->depth = depth;
+
+	glm::vec2 halfDims(dimensions.x / 2.0f, dimensions.y / 2.0f);
+
+	// Get points centered at origin
+	glm::vec2 tl(-halfDims.x, halfDims.y); // top left point
+	glm::vec2 bl(-halfDims.x, -halfDims.y); // bottom left point
+	glm::vec2 br(halfDims.x, -halfDims.y); // bottom right point
+	glm::vec2 tr(halfDims.x, halfDims.y); // top right point
+
+	// Rotate the points
+	tl = rotatePoint(tl, angle) + halfDims;
+	bl = rotatePoint(bl, angle) + halfDims;
+	br = rotatePoint(br, angle) + halfDims;
+	tr = rotatePoint(tr, angle) + halfDims;
+
+	this->topLeft.color = color;
+	this->topLeft.SetPosition(position.x + tl.x, position.y + tl.y);
+	this->topLeft.SetUV(uvRect.x, uvRect.y + uvRect.w);
+
+	this->bottomLeft.color = color;
+	this->bottomLeft.SetPosition(position.x + bl.x, position.y + bl.y);
+	this->bottomLeft.SetUV(uvRect.x, uvRect.y);
+
+	this->bottomRight.color = color;
+	this->bottomRight.SetPosition(position.x + br.x, position.y + br.y);
+	this->bottomRight.SetUV(uvRect.x + uvRect.z, uvRect.y);
+
+	this->topRight.color = color;
+	this->topRight.SetPosition(position.x + tr.x, position.y + tr.y);
+	this->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
+}
+//-----------------------------------------------------------------------------
+Glyph::Glyph(const glm::vec4 &destRet, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
+{
+	this->textureID = textureID;
+	this->depth = depth;
+
+	this->topLeft.color = color;
+	this->topLeft.SetPosition(destRet.x, destRet.y + destRet.w);
+	this->topLeft.SetUV(uvRect.x, uvRect.y + uvRect.w);
+
+	this->bottomLeft.color = color;
+	this->bottomLeft.SetPosition(destRet.x, destRet.y);
+	this->bottomLeft.SetUV(uvRect.x, uvRect.y);
+
+	this->bottomRight.color = color;
+	this->bottomRight.SetPosition(destRet.x + destRet.z, destRet.y);
+	this->bottomRight.SetUV(uvRect.x + uvRect.z, uvRect.y);
+
+	this->topRight.color = color;
+	this->topRight.SetPosition(destRet.x + destRet.z, destRet.y + destRet.w);
+	this->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
+}
+//-----------------------------------------------------------------------------
 Glyph::Glyph(const glm::vec4 &destRect, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle)
 {
 	this->textureID = textureID;
@@ -46,86 +126,7 @@ Glyph::Glyph(const glm::vec4 &destRect, const glm::vec4& uvRect, GLuint textureI
 	this->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
 }
 //-----------------------------------------------------------------------------
-Glyph::Glyph(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle)
-{
-	this->textureID = textureID;
-	this->depth = depth;
-
-	glm::vec2 halfDims(dimensions.x / 2.0f, dimensions.y / 2.0f);
-
-	// Get points centered at origin
-	glm::vec2 tl(-halfDims.x, halfDims.y); // top left point
-	glm::vec2 bl(-halfDims.x, -halfDims.y); // bottom left point
-	glm::vec2 br(halfDims.x, -halfDims.y); // bottom right point
-	glm::vec2 tr(halfDims.x, halfDims.y); // top right point
-
-	// Rotate the points
-	tl = rotatePoint(tl, angle) + halfDims;
-	bl = rotatePoint(bl, angle) + halfDims;
-	br = rotatePoint(br, angle) + halfDims;
-	tr = rotatePoint(tr, angle) + halfDims;
-
-	this->topLeft.color = color;
-	this->topLeft.SetPosition(position.x + tl.x, position.y + tl.y);
-	this->topLeft.SetUV(uvRect.x, uvRect.y + uvRect.w);
-
-	this->bottomLeft.color = color;
-	this->bottomLeft.SetPosition(position.x + bl.x, position.y + bl.y);
-	this->bottomLeft.SetUV(uvRect.x, uvRect.y);
-
-	this->bottomRight.color = color;
-	this->bottomRight.SetPosition(position.x + br.x, position.y + br.y);
-	this->bottomRight.SetUV(uvRect.x + uvRect.z, uvRect.y);
-
-	this->topRight.color = color;
-	this->topRight.SetPosition(position.x + tr.x, position.y + tr.y);
-	this->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
-}//-----------------------------------------------------------------------------
-Glyph::Glyph(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
-{
-	this->textureID = textureID;
-	this->depth = depth;
-
-	this->topLeft.color = color;
-	this->topLeft.SetPosition(destRet.x, destRet.y + destRet.w);
-	this->topLeft.SetUV(uvRect.x, uvRect.y + uvRect.w);
-
-	this->bottomLeft.color = color;
-	this->bottomLeft.SetPosition(destRet.x, destRet.y);
-	this->bottomLeft.SetUV(uvRect.x, uvRect.y);
-
-	this->bottomRight.color = color;
-	this->bottomRight.SetPosition(destRet.x + destRet.z, destRet.y);
-	this->bottomRight.SetUV(uvRect.x + uvRect.z, uvRect.y);
-
-	this->topRight.color = color;
-	this->topRight.SetPosition(destRet.x + destRet.z, destRet.y + destRet.w);
-	this->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
-}
-//-----------------------------------------------------------------------------
-Glyph::Glyph(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
-{
-	this->textureID = textureID;
-	this->depth = depth;
-
-	this->topLeft.color = color;
-	this->topLeft.SetPosition(position.x, position.y + dimensions.y);
-	this->topLeft.SetUV(uvRect.x, uvRect.y + uvRect.w);
-
-	this->bottomLeft.color = color;
-	this->bottomLeft.SetPosition(position.x, position.y);
-	this->bottomLeft.SetUV(uvRect.x, uvRect.y);
-
-	this->bottomRight.color = color;
-	this->bottomRight.SetPosition(position.x + dimensions.x, position.y);
-	this->bottomRight.SetUV(uvRect.x + uvRect.z, uvRect.y);
-
-	this->topRight.color = color;
-	this->topRight.SetPosition(position.x + dimensions.x, position.y + dimensions.y);
-	this->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
-}
-//-----------------------------------------------------------------------------
-Glyph::Glyph(const std::vector<glm::vec2> &points, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
+Glyph::Glyph(const std::vector<glm::vec2> &points, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
 {
 	this->textureID = textureID;
 	this->depth = depth;
@@ -147,10 +148,9 @@ Glyph::Glyph(const std::vector<glm::vec2> &points, const glm::vec4& uvRect, GLui
 	this->topRight.SetUV(uvRect.x + uvRect.z, uvRect.y + uvRect.w);
 }
 //-----------------------------------------------------------------------------
-glm::vec2 Glyph::rotatePoint(glm::vec2 position, float angle)
+glm::vec2 Glyph::rotatePoint(const glm::vec2 &position, float angle)
 {
 	glm::vec2 newPoint;
-
 	newPoint.x = position.x * cos(angle) - position.y * sin(angle);
 	newPoint.y = position.x * sin(angle) + position.y * cos(angle);
 	return newPoint;
@@ -187,54 +187,49 @@ void SpriteBatch::End()
 	m_glyphsPointers.resize(m_glyphs.size());
 
 	for ( size_t i = 0; i < m_glyphs.size(); i++ )
-	{
 		m_glyphsPointers[i] = &m_glyphs[i];
-	}
 
 	sortGlyph();
 	createRenderBatches();
 }
 //-----------------------------------------------------------------------------
-void SpriteBatch::Draw(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
-{
-	m_glyphs.emplace_back(destRet, uvRect, textureID, depth, color);
-}
-//-----------------------------------------------------------------------------
-void SpriteBatch::Draw(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
+void SpriteBatch::Draw(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
 {
 	m_glyphs.emplace_back(position, dimensions, uvRect, textureID, depth, color);
 }
 //-----------------------------------------------------------------------------
-void SpriteBatch::Draw(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle)
-{
-	m_glyphs.emplace_back(destRet, uvRect, textureID, depth, color, angle);
-}
-//-----------------------------------------------------------------------------
-void SpriteBatch::Draw(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle)
+void SpriteBatch::Draw(const glm::vec2 &position, const glm::vec2 &dimensions, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle)
 {
 	m_glyphs.emplace_back(position, dimensions, uvRect, textureID, depth, color, angle);
 }
 //-----------------------------------------------------------------------------
-void SpriteBatch::Draw(const std::vector<glm::vec2> &points, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
+void SpriteBatch::Draw(const glm::vec4 &destRet, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
 {
-	m_glyphs.emplace_back(points, uvRect, textureID, depth, color);
+	m_glyphs.emplace_back(destRet, uvRect, textureID, depth, color);
 }
 //-----------------------------------------------------------------------------
-void SpriteBatch::Draw(const glm::vec4& destRet, const glm::vec4& uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, const glm::vec2 &direction)
+void SpriteBatch::Draw(const glm::vec4 &destRet, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, float angle)
 {
-	// Here, we use dot product to compute the angle between 
-	// the origine direction and current direction.
-	// we now that right and direction vector are normalized
+	m_glyphs.emplace_back(destRet, uvRect, textureID, depth, color, angle);
+}
+//-----------------------------------------------------------------------------
+void SpriteBatch::Draw(const glm::vec4 &destRet, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color, const glm::vec2 &direction)
+{
+	// Here, we use dot product to compute the angle between the origine direction and current direction. we now that right and direction vector are normalized
 	// formula : a . b = ||a|| ||b|| cos teta, ||a|| = 1 and ||b|| = 1, so ||a|| * ||b|| = 1
 
 	const glm::vec2 right(1.0f, 0.0f);  // Origine direction
 	float angle = acos(glm::dot(right, direction));
-	// acos return result in [0, pi]. So, for the angles great than 180 in degree or pi in radiant,
-	// we keep the negative of angle
+	// acos return result in [0, pi]. So, for the angles great than 180 in degree or pi in radiant, we keep the negative of angle
 	if ( direction.y < 0.0f )
 		angle = -angle;
 
 	m_glyphs.emplace_back(destRet, uvRect, textureID, depth, color, angle);
+}
+//-----------------------------------------------------------------------------
+void SpriteBatch::Draw(const std::vector<glm::vec2> &points, const glm::vec4 &uvRect, GLuint textureID, float depth, const ColorRGBA8 &color)
+{
+	m_glyphs.emplace_back(points, uvRect, textureID, depth, color);
 }
 //-----------------------------------------------------------------------------
 void SpriteBatch::RenderBatch()
@@ -253,16 +248,11 @@ void SpriteBatch::RenderBatch()
 void SpriteBatch::createVertexArray()
 {
 	if ( m_vao == 0 )
-	{
-		glGenVertexArrays(1, &m_vao); // generate vertex arrays
-	}
+		glGenVertexArrays(1, &m_vao); 
 	glBindVertexArray(m_vao);
 
-
 	if ( m_vbo == 0 )
-	{
-		glGenBuffers(1, &m_vbo); // generate buffer object
-	}
+		glGenBuffers(1, &m_vbo); 
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 
 	glEnableVertexAttribArray(0);
@@ -282,9 +272,7 @@ void SpriteBatch::createVertexArray()
 void SpriteBatch::createRenderBatches()
 {
 	if ( m_glyphsPointers.empty() )
-	{
 		return;
-	}
 
 	std::vector<Vertex2D> vertices(m_glyphsPointers.size() * 6);
 	int offset = 0;
@@ -302,13 +290,9 @@ void SpriteBatch::createRenderBatches()
 	for ( size_t i = 1; i < m_glyphsPointers.size(); i++ )
 	{
 		if ( m_glyphsPointers[i]->textureID != m_glyphsPointers[i - 1]->textureID )
-		{
 			m_renderBatches.emplace_back(offset, 6, m_glyphsPointers[i]->textureID);
-		}
 		else
-		{
 			m_renderBatches.back().numVertices += 6;
-		}
 
 		vertices[cv++] = m_glyphsPointers[i]->topLeft;
 		vertices[cv++] = m_glyphsPointers[i]->bottomLeft;
@@ -342,17 +326,17 @@ void SpriteBatch::sortGlyph()
 	}
 }
 //-----------------------------------------------------------------------------
-bool SpriteBatch::compareBackToFront(Glyph* a, Glyph* b)
+bool SpriteBatch::compareBackToFront(Glyph *a, Glyph *b)
 {
 	return (a->textureID < b->textureID);
 }
 //-----------------------------------------------------------------------------
-bool SpriteBatch::compareFrontToBack(Glyph* a, Glyph* b)
+bool SpriteBatch::compareFrontToBack(Glyph *a, Glyph *b)
 {
 	return (a->textureID > b->textureID);
 }
 //-----------------------------------------------------------------------------
-bool SpriteBatch::compareTexture(Glyph* a, Glyph* b)
+bool SpriteBatch::compareTexture(Glyph *a, Glyph *b)
 {
 	return (a->depth < b->depth);
 }

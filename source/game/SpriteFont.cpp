@@ -16,32 +16,27 @@ int closestPow2(int i)
 //-----------------------------------------------------------------------------
 constexpr auto MAX_TEXTURE_RES = 4096; // must be always a power of two
 //-----------------------------------------------------------------------------
-void SpriteFont::Init(const char* font, int size)
+void SpriteFont::Init(std::string_view font, int size)
 {
 	Init(font, size, FIRST_PRINTABLE_CHAR, LAST_PRINTABLE_CHAR);
 }
 //-----------------------------------------------------------------------------
-void SpriteFont::Init(const char* font, int size, char cs, char ce)
+void SpriteFont::Init(std::string_view font, int size, char cs, char ce)
 {
-	// Initialize SDL_ttf
 	if ( !TTF_WasInit() )
-	{
 		TTF_Init();
-	}
-	TTF_Font* f = TTF_OpenFont(font, size);
-	if ( f == nullptr )
-	{
-		fprintf(stderr, "Failed to open TTF font %s\n", font);
-		fflush(stderr);
-		throw 281;
-	}
+
+	TTF_Font *f = TTF_OpenFont(font.data(), size);
+	if ( !f )
+		Throw("Failed to open TTF font: " + std::string(font));
+
 	m_fontHeight = TTF_FontHeight(f);
 	m_regStart = cs;
 	m_regLength = ce - cs + 1;
 	int padding = size / 8;
 
 	// First neasure all the regions
-	glm::ivec4* glyphRects = new glm::ivec4[m_regLength];
+	glm::ivec4 *glyphRects = new glm::ivec4[m_regLength];
 	int i = 0, advance;
 	for ( char c = cs; c <= ce; c++ )
 	{
@@ -55,7 +50,7 @@ void SpriteFont::Init(const char* font, int size, char cs, char ce)
 
 	// Find best partitioning of glyphs
 	int rows = 1, w, h, bestWidth = 0, bestHeight = 0, area = MAX_TEXTURE_RES * MAX_TEXTURE_RES, bestRows = 0;
-	std::vector<int>* bestPartition = nullptr;
+	std::vector<int> *bestPartition = nullptr;
 	while ( rows <= m_regLength )
 	{
 		h = rows * (padding + m_fontHeight) + padding;
@@ -93,11 +88,8 @@ void SpriteFont::Init(const char* font, int size, char cs, char ce)
 
 	// Can a bitmap font be made?
 	if ( !bestPartition )
-	{
-		fprintf(stderr, "Failed to Map TTF font %s to texture. Try lowering resolution.\n", font);
-		fflush(stderr);
-		throw 282;
-	}
+		Throw("Failed to Map TTF font " + std::string(font) + " to texture. Try lowering resolution.");
+
 	// Create the texture
 	glGenTextures(1, &m_texID);
 	glBindTexture(GL_TEXTURE_2D, m_texID);
@@ -113,10 +105,10 @@ void SpriteFont::Init(const char* font, int size, char cs, char ce)
 		{
 			int gi = bestPartition[ri][ci];
 
-			SDL_Surface* glyphSurface = TTF_RenderGlyph_Blended(f, (char)(cs + gi), fg);
+			SDL_Surface *glyphSurface = TTF_RenderGlyph_Blended(f, (char)(cs + gi), fg);
 
 			// Pre-multiplication occurs here
-			unsigned char* sp = (unsigned char*)glyphSurface->pixels;
+			unsigned char *sp = (unsigned char*)glyphSurface->pixels;
 			int cp = glyphSurface->w * glyphSurface->h * 4;
 			for ( int i = 0; i < cp; i += 4 )
 			{
@@ -143,7 +135,7 @@ void SpriteFont::Init(const char* font, int size, char cs, char ce)
 
 	// Draw the unsupported glyph
 	int rs = padding - 1;
-	int* pureWhiteSquare = new int[rs * rs];
+	int *pureWhiteSquare = new int[rs * rs];
 	memset(pureWhiteSquare, 0xffffffff, rs * rs * sizeof(int));
 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, rs, rs, GL_RGBA, GL_UNSIGNED_BYTE, pureWhiteSquare);
 	delete[] pureWhiteSquare;
@@ -192,15 +184,13 @@ void SpriteFont::Dispose()
 	}
 }
 //-----------------------------------------------------------------------------
-std::vector<int>* SpriteFont::createRows(glm::ivec4* rects, int rectsLength, int r, int padding, int& w)
+std::vector<int>* SpriteFont::createRows(glm::ivec4 *rects, int rectsLength, int r, int padding, int& w)
 {
 	// Blank initialize
 	std::vector<int>* l = new std::vector<int>[r]();
 	int* cw = new int[r]();
 	for ( int i = 0; i < r; i++ )
-	{
 		cw[i] = padding;
-	}
 
 	// Loop through all glyphs
 	for ( int i = 0; i < rectsLength; i++ )
@@ -227,7 +217,7 @@ std::vector<int>* SpriteFont::createRows(glm::ivec4* rects, int rectsLength, int
 	return l;
 }
 //-----------------------------------------------------------------------------
-glm::vec2 SpriteFont::Measure(const char* s)
+glm::vec2 SpriteFont::Measure(const char *s)
 {
 	glm::vec2 size(0, m_fontHeight);
 	float cw = 0;
@@ -255,7 +245,7 @@ glm::vec2 SpriteFont::Measure(const char* s)
 	return size;
 }
 //-----------------------------------------------------------------------------
-void SpriteFont::Justify(const char* s, glm::vec2& position, const glm::vec2& scaling, Justification just)
+void SpriteFont::Justify(const char *s, glm::vec2 &position, const glm::vec2 &scaling, Justification just)
 {
 	if ( just == Justification::MIDDLE )
 	{
@@ -287,7 +277,7 @@ void SpriteFont::Justify(const char* s, glm::vec2& position, const glm::vec2& sc
 	}
 }
 //-----------------------------------------------------------------------------
-void SpriteFont::Justify(const char* s, glm::vec4& destRect, Justification just)
+void SpriteFont::Justify(const char *s, glm::vec4 &destRect, Justification just)
 {
 	if ( just == Justification::MIDDLE )
 	{
@@ -319,7 +309,7 @@ void SpriteFont::Justify(const char* s, glm::vec4& destRect, Justification just)
 	}
 }
 //-----------------------------------------------------------------------------
-void SpriteFont::Draw(SpriteBatch& batch, const char* s, const glm::vec2 &position, const glm::vec2& scaling,
+void SpriteFont::Draw(SpriteBatch &batch, const char *s, const glm::vec2 &position, const glm::vec2 &scaling,
 	float depth, ColorRGBA8 tint, Justification just /* = Justification::LEFT */)
 {
 	glm::vec2 tp = position;
@@ -347,8 +337,7 @@ void SpriteFont::Draw(SpriteBatch& batch, const char* s, const glm::vec2 &positi
 	}
 }
 //-----------------------------------------------------------------------------
-void SpriteFont::Draw(SpriteBatch& batch, const char* s, const glm::vec4 &destRect,
-	float depth, ColorRGBA8 tint, Justification just /* = Justification::LEFT */)
+void SpriteFont::Draw(SpriteBatch &batch, const char *s, const glm::vec4 &destRect, float depth, ColorRGBA8 tint, Justification just /* = Justification::LEFT */)
 {
 	glm::vec4 tp(destRect);
 
