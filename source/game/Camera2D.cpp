@@ -6,14 +6,14 @@ void Camera2D::Init(float screenWidth, float screenHeight)
 	m_screenWidth = screenWidth;
 	m_screenHeight = screenHeight;
 	m_orthoMatrix = glm::ortho(0.0f, m_screenWidth, m_screenHeight, 0.0f);
-
+	//m_orthoMatrix = glm::ortho(0.0f, m_screenWidth, 0.0f, m_screenHeight);
 	//m_orthoMatrix = glm::ortho(-(m_screenWidth / 2.0f), m_screenWidth / 2.0f,
 	//	m_screenHeight / 2.0f, -(m_screenHeight / 2.0f));
 }
 //-----------------------------------------------------------------------------
 void Camera2D::Update()
 {
-	if ( m_needsMatrixUpdate )
+	if( m_needsMatrixUpdate )
 	{
 		// camera translation
 		glm::vec3 translate(-m_position.x + m_screenWidth / 2, -m_position.y + m_screenHeight / 2, 0.0f);
@@ -25,11 +25,6 @@ void Camera2D::Update()
 
 		m_needsMatrixUpdate = false;
 	}
-}
-//-----------------------------------------------------------------------------
-double Camera2D::GetScreenLenght() const
-{
-	return sqrt((m_screenWidth * m_screenWidth) + (m_screenHeight * m_screenHeight));
 }
 //-----------------------------------------------------------------------------
 glm::vec2 Camera2D::ConvertScreenToWorld(glm::vec2 screenCoords)
@@ -46,14 +41,6 @@ glm::vec2 Camera2D::ConvertScreenToWorld(glm::vec2 screenCoords)
 	screenCoords += m_position;
 
 	return screenCoords;
-}
-//-----------------------------------------------------------------------------
-void Camera2D::SetScreenBox(glm::vec4 &box)
-{
-	box.x = m_position.x - (m_screenWidth / (2 * m_scale));
-	box.y = m_position.y - (m_screenHeight / (2 * m_scale));
-	box.z = m_screenWidth;
-	box.w = m_screenHeight;
 }
 //-----------------------------------------------------------------------------
 bool Camera2D::IsBoxInView(const glm::vec2 &position, const glm::vec2 &dimension)
@@ -102,5 +89,18 @@ bool Camera2D::IsBoxInView(const glm::vec4 &destRect)
 	float yDepth = MIN_DISTANCE_Y - abs(m_position.y - (destRect.y + (destRect.w / 2.0f)));
 
 	return (xDepth > 0 && yDepth > 0);
+}
+//-----------------------------------------------------------------------------
+void Camera2D::SetScreenBox(glm::vec4 &box)
+{
+	box.x = m_position.x - (m_screenWidth / (2 * m_scale));
+	box.y = m_position.y - (m_screenHeight / (2 * m_scale));
+	box.z = m_screenWidth;
+	box.w = m_screenHeight;
+}
+//-----------------------------------------------------------------------------
+double Camera2D::GetScreenLenght() const
+{
+	return sqrt((m_screenWidth * m_screenWidth) + (m_screenHeight * m_screenHeight));
 }
 //-----------------------------------------------------------------------------

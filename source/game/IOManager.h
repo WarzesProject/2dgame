@@ -13,6 +13,4 @@ public:
 	static bool ReadFileToBuffer(std::string_view filePath, std::string &buffer);
 
 	static bool GetDirectoryEntries(const char *path, std::vector<DirEntry> &rvEntries);
-
-	static bool MakeDirectory(const char *path);
 };

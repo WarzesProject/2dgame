@@ -80,8 +80,3 @@ bool IOManager::GetDirectoryEntries(const char* path, std::vector<DirEntry> &rvE
 	return true;
 }
 //-----------------------------------------------------------------------------
-bool IOManager::MakeDirectory(const char *path)
-{
-	return fs::create_directory(fs::path(path));
-}
-//-----------------------------------------------------------------------------

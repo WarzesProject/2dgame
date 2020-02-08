@@ -32,6 +32,7 @@ Window::Window(ApplicationConfig::Window &config)
 	m_window = SDL_CreateWindow(m_config.title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_config.width, m_config.height, windowFlags);
 	if ( !m_window )
 		ThrowSDLError("Fail to Create Window with SDL: ");
+	SDL_GetWindowSize(m_window, &m_config.width, &m_config.height);
 
 	SDL_GLContext glContext = SDL_GL_CreateContext(m_window);
 	if ( !glContext )
@@ -49,7 +50,7 @@ Window::Window(ApplicationConfig::Window &config)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	SDL_GetWindowSize(m_window, &m_config.width, &m_config.height);
+	glViewport(0, 0, m_config.width, m_config.height);
 }
 //-----------------------------------------------------------------------------
 Window::~Window()

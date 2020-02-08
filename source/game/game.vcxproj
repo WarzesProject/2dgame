@@ -97,8 +97,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -115,8 +114,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -133,10 +131,9 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -154,10 +151,9 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -180,55 +176,57 @@
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DebugRenderer.h" />
-    <ClInclude Include="EventConfig.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="FontCache.h" />
+    <ClInclude Include="FontParticleBatch2D.h" />
     <ClInclude Include="FPSLimiter.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="GameView.h" />
+    <ClInclude Include="GameViewManager.h" />
     <ClInclude Include="GLSLProgram.h" />
-    <ClInclude Include="IGameScreen.h" />
+    <ClInclude Include="IGameApp.h" />
+    <ClInclude Include="IGameView.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IOManager.h" />
-    <ClInclude Include="MainMenuScreen.h" />
+    <ClInclude Include="IParticleBatch2D.h" />
+    <ClInclude Include="Particle2DEngine.h" />
+    <ClInclude Include="ParticleBatch2D.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="ScreenManager.h" />
-    <ClInclude Include="Shape.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="SpriteFont.h" />
-    <ClInclude Include="TempScreen.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="IGame.h" />
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextureCache.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSheet.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Vertex.h" />
-    <ClInclude Include="VKRenderer.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="AudioEngine.cpp" />
     <ClCompile Include="Camera2D.cpp" />
-    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DebugRenderer.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="FontCache.cpp" />
+    <ClCompile Include="FontParticleBatch2D.cpp" />
     <ClCompile Include="FPSLimiter.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="GameView.cpp" />
+    <ClCompile Include="GameViewManager.cpp" />
+    <ClCompile Include="glad.cpp" />
     <ClCompile Include="GLSLProgram.cpp" />
+    <ClCompile Include="IGameApp.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="IOManager.cpp" />
+    <ClCompile Include="IParticleBatch2D.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainMenuScreen.cpp" />
+    <ClCompile Include="Particle2DEngine.cpp" />
+    <ClCompile Include="ParticleBatch2D.cpp" />
+    <ClCompile Include="pugixml.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="ScreenManager.cpp" />
-    <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="SpriteFont.cpp" />
@@ -238,16 +236,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TempScreen.cpp" />
     <ClCompile Include="TextureCache.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="VKRenderer.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

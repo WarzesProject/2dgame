@@ -1,14 +1,11 @@
 #pragma once
 
-#include "oldIGame.h"
 #include "IGameApp.h"
 #include "ApplicationConfig.h"
-#include "Renderer.h"
 #include "Window.h"
 #include "AudioEngine.h"
 #include "ResourceManager.h"
 #include "EventHandler.h"
-#include "oldScreenManager.h"
 #include "FPSLimiter.h"
 
 class Application
@@ -34,7 +31,10 @@ private:
 	void redirectIOToConsole();
 	void draw();
 	void update();	
-	void onSDLEvent(SDL_Event &ev);
+	void onSDLEvent(const SDL_Event &ev);
+	bool onSDLEventQuit(const SDL_Event &ev);
+	void onSDLEventKeyboard(const SDL_Event &ev);
+	void onSDLEventGamepad(const SDL_Event &ev);
 
 	ApplicationConfig m_config;
 	FPSLimiter m_limiter;
@@ -45,10 +45,4 @@ private:
 	std::unique_ptr<IGameApp> m_gameApp = nullptr;
 
 	bool m_isRunning = false;
-
-
-
-
-	oldScreenManager m_screenManager;
-	oldIGameScreen *m_currentScreen = nullptr;	
 };

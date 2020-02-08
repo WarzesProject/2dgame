@@ -1,12 +1,13 @@
 #pragma once
 
-#include "oldIGameScreen.h"
+#include "IGameView.h"
+#include "Camera2D.h"
 
-class MainMenuScreen : public oldIGameScreen
+class GameView : public IGameView
 {
 public:
-	MainMenuScreen();
-	~MainMenuScreen();
+	GameView();
+	~GameView();
 
 	virtual void Build() override;
 	virtual void Destroy() override;
@@ -17,7 +18,9 @@ public:
 	virtual void Update() override;
 	virtual void Draw() override;
 
-	virtual int GetNextScreenIndex() const override;
-	virtual int GetPreviousScreenIndex() const override;
+	virtual int GetNextViewIndex() const override;
+	virtual int GetPreviousViewIndex() const override;
+
 private:
+	Camera2D m_camera;
 };

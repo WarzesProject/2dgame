@@ -11,65 +11,64 @@ class Tile
 {
 public:
 	Tile();
-	void init(const Texture& texture, int x, int y, bool crossable);
-	void init(Tile& tile, int x, int y);
-	void reset();
-	virtual void draw(SpriteBatch& spriteBatch);
-	virtual void draw(DebugRenderer& debugRender, ColorRGBA8& color);
-	virtual bool isCrossable() const
-	{
-		return m_crossable;
-	}
+	virtual ~Tile() = default;
+
+	void Init(const Tile &tile, int x, int y);
+	void Init(const Texture &texture, int x, int y, bool crossable);	
+	void Reset();
+	virtual void Draw(SpriteBatch &spriteBatch);
+	virtual void Draw(DebugRenderer &debugRender, const ColorRGBA8 &color);
+	
+	virtual bool IsCrossable() const { return m_crossable; }
 		
-	void setColor(ColorRGBA8& color)
+	void SetColor(ColorRGBA8& color)
 	{
 		m_color = color;
 	}
-	void setCrossable(bool crossable)
+	void SetCrossable(bool crossable)
 	{
 		m_crossable = crossable;
 	}
-	void setTexture(Texture& texture)
+	void SetTexture(Texture& texture)
 	{
 		m_texture = texture;
 	}
-	void setPosition(int x, int y);
-	void updatePosition(glm::vec2& pos)
+	void SetPosition(int x, int y);
+	void UpdatePosition(glm::vec2& pos)
 	{
 		m_destRect.x = pos.x; m_destRect.y = pos.y;
 	}
-	void setCenter(glm::vec2& center)
+	void SetCenter(glm::vec2& center)
 	{
-		center.x = m_destRect.x +
-			(TILESIZE / 2.0f); center.y = m_destRect.y + (TILESIZE / 2.0f);
+		center.x = m_destRect.x + (TILESIZE / 2.0f); center.y = m_destRect.y + (TILESIZE / 2.0f);
 	}
 		
-	int getX()
+	int GetX()
 	{
 		return m_position.x;
 	}
-	int getY()
+	int GetY()
 	{
 		return m_position.y;
 	}
-	glm::vec2 getCenter()
+	glm::vec2 GetCenter()
 	{
 		return glm::vec2(m_destRect.x + (TILESIZE / 2.0f),
 			m_destRect.y + (TILESIZE / 2.0f));
 	}
-	const glm::ivec2& getPosition() const
+	const glm::ivec2& GetPosition() const
 	{
 		return m_position;
 	}
-	const glm::vec4& getDestRect() const
+	const glm::vec4& GetDestRect() const
 	{
 		return m_destRect;
 	}
-	ColorRGBA8& getColor()
+	ColorRGBA8& GetColor()
 	{
 		return m_color;
 	}
-	Texture& getTexture()
+	Texture& GetTexture()
 	{
 		return m_texture;
 	}
@@ -78,7 +77,6 @@ protected:
 	bool m_crossable;
 	glm::vec4 m_destRect;
 	glm::ivec2 m_position;
-	static const glm::vec4 m_uvRect;
 	ColorRGBA8 m_color;
 	Texture m_texture;
 };

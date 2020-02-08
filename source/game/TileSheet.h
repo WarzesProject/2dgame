@@ -5,7 +5,7 @@
 class TileSheet
 {
 public:
-	void Init(const Texture& texture, const glm::ivec2& dims, bool invX = false, bool invY = false)
+	void Init(const Texture &texture, const glm::ivec2 &dims, bool invX = false, bool invY = false)
 	{
 		this->texture = texture;
 		this->dims = dims;
@@ -33,8 +33,8 @@ public:
 
 	glm::vec4& GetUV(int index)
 	{
-		int xTile = index % dims.x;
-		int yTile = index / dims.x;
+		const int xTile = index % dims.x;
+		const int yTile = index / dims.x;
 
 		uvs.x = (xTile + invX) / (float)dims.x;
 		uvs.y = (yTile + invY) / (float)dims.y;

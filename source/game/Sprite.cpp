@@ -8,7 +8,7 @@ Sprite::~Sprite()
 		glDeleteBuffers(1, &m_vboID);
 }
 //-----------------------------------------------------------------------------
-void Sprite::Init(float x, float y, float width, float height, const std::string texturePath)
+void Sprite::Init(float x, float y, float width, float height, std::string_view texturePath)
 {
 	m_x = x;
 	m_y = y;

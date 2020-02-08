@@ -1,42 +1,41 @@
 #include "stdafx.h"
-#include "TempScreen.h"
+#include "GameView.h"
 #include "Application.h"
 #include "TileSheet.h"
 #include "GLSLProgram.h"
 #include "SpriteBatch.h"
-
-GLSLProgram m_colorProgram;
-SpriteBatch m_spriteBatch;
-Texture texture;
-ColorRGBA8 color;
-SpriteFont spriteFont;
-
-Texture texture2;
-TileSheet tiletexture;
-
 //-----------------------------------------------------------------------------
-TempScreen::TempScreen()
+namespace
 {
-	m_screenIndex = 0;
+	GLSLProgram m_colorProgram;
+	SpriteBatch m_spriteBatch;
+	Texture texture;
+	ColorRGBA8 color;
+	SpriteFont spriteFont;
+	Texture texture2;
+	TileSheet tiletexture;
 }
 //-----------------------------------------------------------------------------
-TempScreen::~TempScreen()
+GameView::GameView()
 {
 }
 //-----------------------------------------------------------------------------
-void TempScreen::Build()
+GameView::~GameView()
 {
-
 }
 //-----------------------------------------------------------------------------
-void TempScreen::Destroy()
+void GameView::Build()
 {
-
+	
 }
 //-----------------------------------------------------------------------------
-void TempScreen::OnEntry()
+void GameView::Destroy()
 {
-	ResourceManager::GetMusic("../data/musics/XYZ.ogg").Play();
+}
+//-----------------------------------------------------------------------------
+void GameView::OnEntry()
+{
+	ResourceManager::GetMusic("data/musics/XYZ.ogg").Play();
 
 	const int screenWidth = m_app->GetScreenWidth();
 	const int screenHeight = m_app->GetScreenHeight();
@@ -51,12 +50,12 @@ void TempScreen::OnEntry()
 
 	m_spriteBatch.Init();
 
-	texture = ResourceManager::GetTexture("../data/sprite/logo1.png");
-	texture2 = ResourceManager::GetTexture("../data/sprite/stickmantest.png");
+	texture = ResourceManager::GetTexture("data/sprite/logo1.png");
+	texture2 = ResourceManager::GetTexture("data/sprite/stickmantest.png");
 
 	tiletexture.Init(texture2, glm::ivec2(8, 2));
 
-	spriteFont = ResourceManager::GetFont("../data/fonts/chintzy.ttf", 40);
+	spriteFont = ResourceManager::GetFont("data/fonts/chintzy.ttf", 40);
 
 	color.r = 255;
 	color.g = 255;
@@ -64,34 +63,34 @@ void TempScreen::OnEntry()
 	color.a = 255;
 }
 //-----------------------------------------------------------------------------
-void TempScreen::OnExit()
+void GameView::OnExit()
 {
-	ResourceManager::GetMusic("../data/musics/XYZ.ogg").Stop();
+	ResourceManager::GetMusic("data/musics/XYZ.ogg").Stop();
 }
 //-----------------------------------------------------------------------------
-void TempScreen::Update()
+void GameView::Update()
 {
 	const float CAMERA_SPEED = 2.0f;
 	const float SCALE_SPEED = 0.1f;
 
 	auto eventHandler = m_app->GetEventHandler();
 
-	if ( eventHandler->IsKeyDown(SDLK_w) )
+	if( eventHandler->IsKeyDown(SDLK_w) )
 		m_camera.SetPosition(m_camera.GetPosition() + glm::vec2(0.0f, CAMERA_SPEED));
 
-	if ( eventHandler->IsKeyDown(SDLK_s) )
+	if( eventHandler->IsKeyDown(SDLK_s) )
 		m_camera.SetPosition(m_camera.GetPosition() + glm::vec2(0.0f, -CAMERA_SPEED));
 
-	if ( eventHandler->IsKeyDown(SDLK_a) )
+	if( eventHandler->IsKeyDown(SDLK_a) )
 		m_camera.SetPosition(m_camera.GetPosition() + glm::vec2(-CAMERA_SPEED, 0.0f));
 
-	if ( eventHandler->IsKeyDown(SDLK_d) )
+	if( eventHandler->IsKeyDown(SDLK_d) )
 		m_camera.SetPosition(m_camera.GetPosition() + glm::vec2(CAMERA_SPEED, 0.0f));
 
-	if ( eventHandler->IsKeyDown(SDLK_q) )
+	if( eventHandler->IsKeyDown(SDLK_q) )
 		m_camera.SetScale(m_camera.GetScale() + SCALE_SPEED);
 
-	if ( eventHandler->IsKeyDown(SDLK_e) )
+	if( eventHandler->IsKeyDown(SDLK_e) )
 		m_camera.SetScale(m_camera.GetScale() - SCALE_SPEED);
 
 	//if ( eventHandler->IsKeyDown(SDL_BUTTON_LEFT) )
@@ -109,7 +108,7 @@ void TempScreen::Update()
 	m_camera.Update();
 }
 //-----------------------------------------------------------------------------
-void TempScreen::Draw()
+void GameView::Draw()
 {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -156,12 +155,12 @@ void TempScreen::Draw()
 	m_colorProgram.Unuse();
 }
 //-----------------------------------------------------------------------------
-int TempScreen::GetNextScreenIndex() const
+int GameView::GetNextViewIndex() const
 {
 	return -1;
 }
 //-----------------------------------------------------------------------------
-int TempScreen::GetPreviousScreenIndex() const
+int GameView::GetPreviousViewIndex() const
 {
 	return -1;
 }

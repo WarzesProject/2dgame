@@ -7,8 +7,7 @@ class Sprite
 public:
 	~Sprite();
 
-	void Init(float x, float y, float width, float height, const std::string texturePath);
-
+	void Init(float x, float y, float width, float height, std::string_view texturePath);
 	void Draw();
 
 private:
