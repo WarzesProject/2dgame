@@ -5,11 +5,9 @@ Thumbs.db
 /_obj/
 /_lib/
 /sourceTemp/
-/bin/test/
 
 /*/.vs/
 /*/ipch/
-
 
 #Ignore bin
 /bin/*/game_*.exe
