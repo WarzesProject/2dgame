@@ -46,6 +46,11 @@ void Music::Play(int loops)
 		ThrowSDLMixError("Mix_PlayMusic error: ");
 }
 //-----------------------------------------------------------------------------
+void Music::SetVolume(int volume)
+{
+	Mix_VolumeMusic(volume);
+}
+//-----------------------------------------------------------------------------
 int Music::Playing()
 {
 	return Mix_PlayingMusic();

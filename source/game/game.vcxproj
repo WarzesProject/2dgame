@@ -189,6 +189,7 @@
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IOManager.h" />
     <ClInclude Include="IParticleBatch2D.h" />
+    <ClInclude Include="TestLogic.h" />
     <ClInclude Include="Particle2DEngine.h" />
     <ClInclude Include="ParticleBatch2D.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="IParticleBatch2D.cpp" />
+    <ClCompile Include="TestLogic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle2DEngine.cpp" />
     <ClCompile Include="ParticleBatch2D.cpp" />

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Object.h"
 #include "SpriteBatch.h"
 #include "Texture.h"
 #include "DebugRenderer.h"

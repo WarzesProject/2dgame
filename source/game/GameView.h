@@ -2,6 +2,15 @@
 
 #include "IGameView.h"
 #include "Camera2D.h"
+#include "TestLogic.h"
+#include "SpriteBatch.h"
+#include "GLSLProgram.h"
+#include "DebugRenderer.h"
+#include "SpriteFont.h"
+#include "AudioEngine.h"
+#include "Texture.h"
+
+#define FIRST_TEST 0
 
 class GameView : public IGameView
 {
@@ -22,5 +31,7 @@ public:
 	virtual int GetPreviousViewIndex() const override;
 
 private:
-	Camera2D m_camera;
+#if !FIRST_TEST
+
+#endif
 };

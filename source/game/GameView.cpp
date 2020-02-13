@@ -5,6 +5,7 @@
 #include "GLSLProgram.h"
 #include "SpriteBatch.h"
 //-----------------------------------------------------------------------------
+#if FIRST_TEST
 namespace
 {
 	GLSLProgram m_colorProgram;
@@ -15,6 +16,7 @@ namespace
 	Texture texture2;
 	TileSheet tiletexture;
 }
+#endif
 //-----------------------------------------------------------------------------
 GameView::GameView()
 {
@@ -35,6 +37,7 @@ void GameView::Destroy()
 //-----------------------------------------------------------------------------
 void GameView::OnEntry()
 {
+#if FIRST_TEST
 	ResourceManager::GetMusic("data/musics/XYZ.ogg").Play();
 
 	const int screenWidth = m_app->GetScreenWidth();
@@ -61,15 +64,23 @@ void GameView::OnEntry()
 	color.g = 255;
 	color.b = 255;
 	color.a = 255;
+#else
+
+#endif
 }
 //-----------------------------------------------------------------------------
 void GameView::OnExit()
 {
+#if FIRST_TEST
 	ResourceManager::GetMusic("data/musics/XYZ.ogg").Stop();
+#else
+
+#endif
 }
 //-----------------------------------------------------------------------------
 void GameView::Update()
 {
+#if FIRST_TEST
 	const float CAMERA_SPEED = 2.0f;
 	const float SCALE_SPEED = 0.1f;
 
@@ -106,10 +117,12 @@ void GameView::Update()
 	//}
 
 	m_camera.Update();
+#endif
 }
 //-----------------------------------------------------------------------------
 void GameView::Draw()
 {
+#if FIRST_TEST
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.2f, 0.6f, 1.0f, 1.0f);
@@ -153,6 +166,7 @@ void GameView::Draw()
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 	m_colorProgram.Unuse();
+#endif
 }
 //-----------------------------------------------------------------------------
 int GameView::GetNextViewIndex() const
