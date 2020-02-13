@@ -5,8 +5,8 @@ void Camera2D::Init(float screenWidth, float screenHeight)
 {
 	m_screenWidth = screenWidth;
 	m_screenHeight = screenHeight;
-	m_orthoMatrix = glm::ortho(0.0f, m_screenWidth, m_screenHeight, 0.0f);
-	//m_orthoMatrix = glm::ortho(0.0f, m_screenWidth, 0.0f, m_screenHeight);
+	//m_orthoMatrix = glm::ortho(0.0f, m_screenWidth, m_screenHeight, 0.0f);
+	m_orthoMatrix = glm::ortho(0.0f, m_screenWidth, 0.0f, m_screenHeight);
 	//m_orthoMatrix = glm::ortho(-(m_screenWidth / 2.0f), m_screenWidth / 2.0f,
 	//	m_screenHeight / 2.0f, -(m_screenHeight / 2.0f));
 }

@@ -87,7 +87,19 @@
       <Filter>Engine\Graphics\old</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="TestLogic.cpp">
+    <ClCompile Include="TestView.cpp">
+      <Filter>GameApp\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Items.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
   </ItemGroup>
@@ -192,7 +204,22 @@
       <Filter>Engine\Graphics\old</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="TestLogic.h">
+    <ClInclude Include="TestView.h">
+      <Filter>GameApp\View</Filter>
+    </ClInclude>
+    <ClInclude Include="DefineLogic.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Items.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
   </ItemGroup>

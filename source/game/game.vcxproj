@@ -176,6 +176,7 @@
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DebugRenderer.h" />
+    <ClInclude Include="DefineLogic.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="FontCache.h" />
     <ClInclude Include="FontParticleBatch2D.h" />
@@ -189,13 +190,17 @@
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IOManager.h" />
     <ClInclude Include="IParticleBatch2D.h" />
-    <ClInclude Include="TestLogic.h" />
+    <ClInclude Include="Items.h" />
+    <ClInclude Include="Monster.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Particle2DEngine.h" />
     <ClInclude Include="ParticleBatch2D.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="SpriteFont.h" />
+    <ClInclude Include="TestView.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextureCache.h" />
@@ -223,7 +228,10 @@
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="IParticleBatch2D.cpp" />
-    <ClCompile Include="TestLogic.cpp" />
+    <ClCompile Include="Items.cpp" />
+    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle2DEngine.cpp" />
     <ClCompile Include="ParticleBatch2D.cpp" />
@@ -238,6 +246,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TestView.cpp" />
     <ClCompile Include="TextureCache.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Timer.cpp" />

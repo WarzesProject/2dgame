@@ -2,24 +2,23 @@
 
 #include "IGameView.h"
 #include "Camera2D.h"
-#include "TestLogic.h"
+#include "LevelManager.h"
 #include "SpriteBatch.h"
 #include "GLSLProgram.h"
 #include "DebugRenderer.h"
 #include "SpriteFont.h"
 #include "AudioEngine.h"
 #include "Texture.h"
-
-#define FIRST_TEST 0
+#include "DefineLogic.h"
+#include "Items.h"
+#include "Monster.h"
+#include "Player.h"
 
 class GameView : public IGameView
 {
 public:
-	GameView();
-	~GameView();
-
-	virtual void Build() override;
-	virtual void Destroy() override;
+	virtual void Build() override {}
+	virtual void Destroy() override {}
 
 	virtual void OnEntry() override;
 	virtual void OnExit() override;
@@ -31,7 +30,22 @@ public:
 	virtual int GetPreviousViewIndex() const override;
 
 private:
-#if !FIRST_TEST
+	void initLevel();
+	void drawDebug(const glm::mat4 &projectionMatrix);
+	void updateObject();
 
-#endif
+	SpriteBatch m_spriteBatch;
+	Camera2D m_camera;
+	Texture m_texture;
+	GLSLProgram m_textureProgram;
+	Music m_bgm;
+	DebugRenderer m_debuger;
+
+	std::unique_ptr<LevelManager> m_level;
+	Player *m_player = nullptr;
+	std::vector<Monster*> m_monsters;
+	std::vector<Item*> m_items;
+
+	glm::vec2 m_screenSize;
+	bool m_isDebugMode = false;
 };

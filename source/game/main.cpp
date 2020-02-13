@@ -16,7 +16,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **args)
 		config.window.height = 768;
 		config.window.title = "Game";
 		config.graphics.maxFPS = 60;
-		config.resources.coreFolder = "../";
+		config.resources.coreFolder = "";
 
 		Application app(config);
 		app.Run(std::make_unique<Game>());
