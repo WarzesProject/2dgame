@@ -93,13 +93,13 @@ const char LevelManager::GetSymbol(int x, int y) const
 //-----------------------------------------------------------------------------
 glm::vec2 LevelManager::GetCameraPos(const glm::vec2 &cameraPos, const glm::vec2 &screenSize, const float scale)
 {
-	glm::vec2 playerPos = cameraPos;
+	const glm::vec2 playerPos = cameraPos;
 	glm::vec2 returnPos = cameraPos;
 
-	glm::vec2 halfCameraDims = glm::vec2(screenSize.x / (2.0f * scale), screenSize.y / (2.0f * scale));
+	const glm::vec2 halfCameraDims = glm::vec2(screenSize.x / (2.0f * scale), screenSize.y / (2.0f * scale));
 
-	glm::vec2 LeftDownDistance = playerPos;
-	glm::vec2 RightUpDistance = glm::vec2(GetWidth() * (float)TILE_WIDTH, GetHeight() * (float)TILE_WIDTH) - playerPos;
+	const glm::vec2 LeftDownDistance = playerPos;
+	const glm::vec2 RightUpDistance = glm::vec2(GetWidth() * (float)TILE_WIDTH, GetHeight() * (float)TILE_WIDTH) - playerPos;
 
 	if ( (LeftDownDistance.x - halfCameraDims.x) < 0.0f )
 		returnPos.x = halfCameraDims.x;
