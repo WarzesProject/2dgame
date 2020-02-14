@@ -2,7 +2,7 @@
 
 #include "IGameView.h"
 #include "Camera2D.h"
-#include "LevelLoader.h"
+#include "Level.h"
 #include "SpriteBatch.h"
 #include "GLSLProgram.h"
 #include "DebugRenderer.h"
