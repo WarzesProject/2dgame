@@ -9,7 +9,7 @@ struct Position
 struct  ColorRGBA8
 {
 	ColorRGBA8() = default;
-	ColorRGBA8(GLubyte r, GLubyte g, GLubyte b, GLubyte a) : r(r), g(g), b(b), a(a)	{}
+	constexpr ColorRGBA8(const GLubyte r, const GLubyte g, const GLubyte b, const GLubyte a) : r(r), g(g), b(b), a(a)	{}
 	
 	void SetColor(GLubyte rr, GLubyte gg, GLubyte bb, GLubyte aa)
 	{

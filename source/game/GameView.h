@@ -31,7 +31,7 @@ public:
 
 private:
 	void initLevel();
-	void drawDebug(const glm::mat4 &projectionMatrix);
+	void DrawDebug(const glm::mat4 &projectionMatrix);
 	void updateObject();
 
 	SpriteBatch m_spriteBatch;

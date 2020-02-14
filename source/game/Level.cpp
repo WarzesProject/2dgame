@@ -5,9 +5,6 @@
 //-----------------------------------------------------------------------------
 Level::Level(std::string_view fileName)
 {
-	const glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
-	const ColorRGBA8 whiteColor = { 255,255,255,255 };
-
 	std::ifstream file;
 	file.open(fileName.data());
 	if ( file.fail() )
@@ -34,22 +31,22 @@ Level::Level(std::string_view fileName)
 			switch ( tile )
 			{
 			case 'R':
-				m_spriteBatch.Draw(destRect, uvRect, ResourceManager::GetTexture("../test/Assets/Floor/red_bricks.png").id, 0.0f, whiteColor);
+				m_spriteBatch.Draw(destRect, UVRect, ResourceManager::GetTexture("../test/Assets/Floor/red_bricks.png").id, 0.0f, WhiteColor);
 				break;
 			case 'G':
-				m_spriteBatch.Draw(destRect, uvRect, ResourceManager::GetTexture("../test/Assets/Floor/glass.png").id, 0.0f, whiteColor);
+				m_spriteBatch.Draw(destRect, UVRect, ResourceManager::GetTexture("../test/Assets/Floor/glass.png").id, 0.0f, WhiteColor);
 				break;
 			case 'L':
-				m_spriteBatch.Draw(destRect, uvRect, ResourceManager::GetTexture("../test/Assets/Floor/light_bricks.png").id, 0.0f, whiteColor);
+				m_spriteBatch.Draw(destRect, UVRect, ResourceManager::GetTexture("../test/Assets/Floor/light_bricks.png").id, 0.0f, WhiteColor);
 				break;
 			case '@':
 				m_startPlayerPosition.x = (float)(x * TILE_WIDTH);
 				m_startPlayerPosition.y = (float)(y * TILE_WIDTH);
 				m_levelData[y][x] = '.';
-				m_spriteBatch.Draw(destRect, uvRect, ResourceManager::GetTexture("../test/Assets/Floor/groundTile.png").id, 0.0f, whiteColor);
+				m_spriteBatch.Draw(destRect, UVRect, ResourceManager::GetTexture("../test/Assets/Floor/groundTile.png").id, 0.0f, WhiteColor);
 				break;
 			case '.':
-				m_spriteBatch.Draw(destRect, uvRect, ResourceManager::GetTexture("../test/Assets/Floor/groundTile.png").id, 0.0f, whiteColor);
+				m_spriteBatch.Draw(destRect, UVRect, ResourceManager::GetTexture("../test/Assets/Floor/groundTile.png").id, 0.0f, WhiteColor);
 				break;
 			default:
 				SDL_Log(("Unexpected symbol " + std::to_string(tile) + std::string(" at (") + std::to_string(x) + " , " + std::to_string(y) + ")").c_str());
