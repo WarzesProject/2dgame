@@ -5,168 +5,99 @@
 #include "GLSLProgram.h"
 #include "SpriteBatch.h"
 //-----------------------------------------------------------------------------
-#if FIRST_TEST
-namespace
-{
-	GLSLProgram m_colorProgram;
-	SpriteBatch m_spriteBatch;
-	Texture texture;
-	ColorRGBA8 color;
-	SpriteFont spriteFont;
-	Texture texture2;
-	TileSheet tiletexture;
-}
-#endif
-//-----------------------------------------------------------------------------
-GameView::GameView()
-{
-}
-//-----------------------------------------------------------------------------
-GameView::~GameView()
-{
-}
-//-----------------------------------------------------------------------------
-void GameView::Build()
-{
-	
-}
-//-----------------------------------------------------------------------------
-void GameView::Destroy()
-{
-}
-//-----------------------------------------------------------------------------
 void GameView::OnEntry()
 {
-#if FIRST_TEST
-	ResourceManager::GetMusic("data/musics/XYZ.ogg").Play();
-
 	const int screenWidth = m_app->GetScreenWidth();
 	const int screenHeight = m_app->GetScreenHeight();
+	m_screenSize = glm::vec2(screenWidth, screenHeight);
 	m_camera.Init(screenWidth, screenHeight);
-	m_camera.SetPosition(glm::vec2(screenWidth / 2.0f, screenHeight / 2.0f));
+	m_camera.SetScale(0.9);	
 
-	m_colorProgram.CompileShadersFromFile("../data/shaders/colorShading.vert", "../data/shaders/colorShading.frag");
-	m_colorProgram.AddAttribute("vertexPosition");
-	m_colorProgram.AddAttribute("vertexColor");
-	m_colorProgram.AddAttribute("vertexUV");
-	m_colorProgram.LinkShaders();
+	m_debuger.Init();
 
 	m_spriteBatch.Init();
 
-	texture = ResourceManager::GetTexture("data/sprite/logo1.png");
-	texture2 = ResourceManager::GetTexture("data/sprite/stickmantest.png");
+	m_textureProgram.CompileShadersFromFile("../test/Shaders/color.vert", "../test/Shaders/color.frag");
+	m_textureProgram.AddAttribute("vertexPosition");
+	m_textureProgram.AddAttribute("vertexColor");
+	m_textureProgram.AddAttribute("vertexUV");
+	m_textureProgram.LinkShaders();
 
-	tiletexture.Init(texture2, glm::ivec2(8, 2));
+	m_bgm = ResourceManager::GetMusic("../test/Sound/Battleship.ogg");
+	m_bgm.SetVolume(50);
+	m_bgm.Play();
 
-	spriteFont = ResourceManager::GetFont("data/fonts/chintzy.ttf", 40);
-
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
-	color.a = 255;
-#else
-
-#endif
+	initLevel();	
 }
 //-----------------------------------------------------------------------------
 void GameView::OnExit()
 {
-#if FIRST_TEST
-	ResourceManager::GetMusic("data/musics/XYZ.ogg").Stop();
-#else
-
-#endif
+	for ( auto &it : m_monsters )
+		delete it;
+	m_monsters.clear();
+	for ( auto &it :m_items )
+		delete it;
+	m_items.clear();
+	m_level.release();
+	m_textureProgram.Dispose();	
+	m_spriteBatch.Dispose();
+	m_debuger.Dispose();
+	if ( m_player )
+		m_player->SetReachedState(false);
 }
 //-----------------------------------------------------------------------------
 void GameView::Update()
 {
-#if FIRST_TEST
-	const float CAMERA_SPEED = 2.0f;
-	const float SCALE_SPEED = 0.1f;
-
-	auto eventHandler = m_app->GetEventHandler();
-
-	if( eventHandler->IsKeyDown(SDLK_w) )
-		m_camera.SetPosition(m_camera.GetPosition() + glm::vec2(0.0f, CAMERA_SPEED));
-
-	if( eventHandler->IsKeyDown(SDLK_s) )
-		m_camera.SetPosition(m_camera.GetPosition() + glm::vec2(0.0f, -CAMERA_SPEED));
-
-	if( eventHandler->IsKeyDown(SDLK_a) )
-		m_camera.SetPosition(m_camera.GetPosition() + glm::vec2(-CAMERA_SPEED, 0.0f));
-
-	if( eventHandler->IsKeyDown(SDLK_d) )
-		m_camera.SetPosition(m_camera.GetPosition() + glm::vec2(CAMERA_SPEED, 0.0f));
-
-	if( eventHandler->IsKeyDown(SDLK_q) )
-		m_camera.SetScale(m_camera.GetScale() + SCALE_SPEED);
-
-	if( eventHandler->IsKeyDown(SDLK_e) )
-		m_camera.SetScale(m_camera.GetScale() - SCALE_SPEED);
-
-	//if ( eventHandler->IsKeyDown(SDL_BUTTON_LEFT) )
-	//{
-	//    glm::vec2 mouseCoords = eventHandler.GetMouseCoords();
-	//    mouseCoords = m_camera.ConvertScreenToWorld(mouseCoords);
-
-	//    glm::vec2 playerPosition(0.0f);
-	//    glm::vec2 direction = mouseCoords - playerPosition;
-	//    direction = glm::normalize(direction);
-
-	//    _sprite.emplace_back(playerPosition, direction, 5.00f, 1000);
-	//}
-
+	m_camera.SetPosition(m_level->GetCameraPos(m_player->GetPosition(), m_screenSize, m_camera.GetScale()));
 	m_camera.Update();
-#endif
+
+	if ( m_app->GetEventHandler()->IsKeyPressed(SDLK_d) )
+		m_isDebugMode = !m_isDebugMode;
+
+	updateObject();
 }
 //-----------------------------------------------------------------------------
 void GameView::Draw()
 {
-#if FIRST_TEST
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.2f, 0.6f, 1.0f, 1.0f);
+	glClearColor(195.0 / 255.0, 195.0 / 255.0, 195.0 / 255.0, 1.0);
 
-	m_colorProgram.Use();
+	m_textureProgram.Use();
 
+	const GLint textureUniform = m_textureProgram.GetUniformLocation("samplerUniform");
+	glUniform1i(textureUniform, 0);
 	glActiveTexture(GL_TEXTURE0);
-	GLint textureLocation = m_colorProgram.GetUniformLocation("mySampler");
-	glUniform1i(textureLocation, 0);
 
-	//Set the camera matrix
-	GLint pLocation = m_colorProgram.GetUniformLocation("P");
-	glm::mat4 cameraMatrix = m_camera.GetCameraMatrix();
+	const glm::mat4 projectionMatrix = m_camera.GetCameraMatrix();
+	const GLint pUniform = m_textureProgram.GetUniformLocation("projectionMatrix");
+	glUniformMatrix4fv(pUniform, 1, GL_FALSE, &(projectionMatrix[0][0]));
 
-	glUniformMatrix4fv(pLocation, 1, GL_FALSE, &(cameraMatrix[0][0]));
+	m_level->Draw();
 
 	m_spriteBatch.Begin();
 	{
-		// позиция спрайта
-		glm::vec4 dest(0.0f, 0.0f, 200.0f, 200.0f);
-		glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
-		m_spriteBatch.Draw(dest, uv, texture.id, 0.0f, color);
+		for ( auto &it : m_items )
+		{
+			if ( m_camera.IsBoxInView(it->GetPosition(), it->GetSize()) )
+				it->Draw(m_spriteBatch);
+		}
+
+		m_player->Draw(m_spriteBatch);
+
+		for ( auto &it : m_monsters )
+		{
+			if ( m_camera.IsBoxInView(it->GetPosition(), it->GetSize()) )
+				it->Draw(m_spriteBatch);
+		}
 	}
 	m_spriteBatch.End();
 	m_spriteBatch.RenderBatch();
 
-	const ColorRGBA8 fontColor(255, 0, 0, 255);
-	m_spriteBatch.Begin();
-	spriteFont.Draw(m_spriteBatch, "Hell", glm::vec2(100.0f, 480 - 32.0f), glm::vec2(1.0f), 0.0f, fontColor);
-	m_spriteBatch.End();
-	m_spriteBatch.RenderBatch();
+	m_textureProgram.Unuse();
 
-	m_spriteBatch.Begin();
-	{
-		glm::vec4 dest(300.0f, 0.0f, 32.0f, 64.0f);
-		glm::vec4 uvRect = tiletexture.GetUV(0, 0);
-		m_spriteBatch.Draw(dest, uvRect, tiletexture.texture.id, 0.0f, color);
-	}
-	m_spriteBatch.End();
-	m_spriteBatch.RenderBatch();
-
-	glBindTexture(GL_TEXTURE_2D, 0);
-	m_colorProgram.Unuse();
-#endif
+	if ( m_isDebugMode )
+		DrawDebug(projectionMatrix);
 }
 //-----------------------------------------------------------------------------
 int GameView::GetNextViewIndex() const
@@ -177,5 +108,134 @@ int GameView::GetNextViewIndex() const
 int GameView::GetPreviousViewIndex() const
 {
 	return -1;
+}
+//-----------------------------------------------------------------------------
+void GameView::initLevel()
+{
+	m_level = std::make_unique<Level>("../test/Levels/testLevel.txt");
+
+	std::mt19937 randomEngine((unsigned int)time(nullptr));
+
+	const std::uniform_int_distribution<int> randomMonsterNum(10, 10);
+	const std::uniform_int_distribution<int> randomMovement(0, 1000);
+	const std::uniform_int_distribution<int> yPos(3, m_level->GetHeight() - 3);
+	const std::uniform_int_distribution<int> xPos(3, m_level->GetWidth() - 3);
+	const std::uniform_int_distribution<int> randomItemNum(1, 10);
+	const std::uniform_int_distribution<int> randomItemKind(0, 3);	
+
+	int i = 0;
+	int count = 2;
+	const int numMonster = randomMonsterNum(randomEngine);
+	m_monsters.reserve(numMonster);
+	while ( i < numMonster )
+	{
+		const int x = xPos(randomEngine);
+		const int y = yPos(randomEngine);
+		const int movement = ((randomMovement(randomEngine) * count) % MAX_MOVEMENT + count / 2);
+		if ( m_level->GetSymbol(x, y) == '.' )
+		{
+			glm::vec2 pos = glm::vec2(x * TILE_WIDTH, y * TILE_WIDTH);
+			m_monsters.push_back(new Skeleton);
+			m_monsters.back()->Init(2, 3, pos, 20);
+			i++;
+		}
+		count++;
+	}
+
+	const int numItem = randomItemNum(randomEngine);
+	int j = 0;
+	while ( j < numItem )
+	{
+		const int typeItem = randomItemKind(randomEngine);
+		const int x = xPos(randomEngine);
+		const int y = yPos(randomEngine);
+		if ( m_level->GetSymbol(x, y) == '.' )
+		{
+			glm::vec2 pos = glm::vec2(x * TILE_WIDTH, y * TILE_WIDTH);
+
+			switch ( typeItem )
+			{
+			case 0:
+				m_items.push_back(new BigPotion);
+				break;
+			case 1:
+				m_items.push_back(new SmallPotion);
+				break;
+			case 2:
+				m_items.push_back(new AttPotion);
+				break;
+			case 3:
+				m_items.push_back(new SpeedPotion);
+				break;
+			default:
+				Throw("Not ID item");
+				break;
+			}
+
+			m_items.back()->Init(pos);
+			j++;
+		}
+	}
+
+	m_player = Player::GetInstance();
+	m_player->Init(m_level->GetStartPlayerPosition(), PLAYER_SPEED);
+}
+//-----------------------------------------------------------------------------
+void GameView::DrawDebug(const glm::mat4 &projectionMatrix)
+{
+	glm::vec4 destRect;
+	for ( auto &it : m_monsters )
+		it->DrawDebug(m_debuger);
+
+	for ( auto &it : m_items )
+		it->DrawDebug(m_debuger);
+
+	m_player->DrawDebug(m_debuger);
+
+	m_debuger.End();
+	m_debuger.Render(projectionMatrix, 2.0);
+}
+//-----------------------------------------------------------------------------
+void GameView::updateObject()
+{
+	auto eventHandler = m_app->GetEventHandler();
+
+	m_player->Update(*eventHandler, m_level->GetLevelData());
+	if ( m_player->IsPlayerDead() )
+		m_player->Recreate(m_level->GetStartPlayerPosition());
+
+	for ( size_t i = 0; i < m_monsters.size(); i++ )
+	{
+		if ( m_monsters[i]->IsDead() )
+		{
+			delete m_monsters[i];
+			m_monsters[i] = m_monsters.back();
+			m_monsters.pop_back();
+			i--;
+		}
+	}
+
+	for ( size_t i = 0; i < m_items.size(); i++ )
+	{
+		if ( m_items[i]->IsDisappeared() )
+		{
+			delete m_items[i];
+			m_items[i] = m_items.back();
+			m_items.pop_back();
+			i--;
+		}
+	}
+
+	m_player->CollideWithMonsters(m_monsters);
+	m_player->CollideWithItems(m_items);
+
+	for ( auto &it : m_monsters )
+		it->Update(m_level->GetLevelData(), m_player->GetPosition());
+
+	for ( size_t i = 0; i < m_monsters.size(); i++ )
+	{
+		m_monsters[i]->CollideWithMonsters(m_monsters, i);
+		m_monsters[i]->CollideWithItems(m_items);
+	}
 }
 //-----------------------------------------------------------------------------

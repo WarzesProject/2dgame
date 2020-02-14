@@ -78,21 +78,3 @@ void SmallPotion::Destroy()
 	m_startDisappear = true;
 }
 //-----------------------------------------------------------------------------
-void Mace::Init(const glm::vec2 &position)
-{
-	m_texture = ResourceManager::GetTexture("../test/Assets/Items/weapon/mace.png");
-	m_position = position;
-	m_attack = 30;
-	m_attackTexturePath = "../test/Assets/Player/player_mace.png";
-	m_soundPath = "../test/Sound/mace.mp3";
-	m_size = glm::vec2(ITEM_SIZE, 40);
-	m_attackingArea = glm::vec2(85, 85);
-
-	m_info = ItemInfo::WEAPON;
-}
-//-----------------------------------------------------------------------------
-void Mace::Destroy()
-{
-	m_startDisappear = true;
-}
-//-----------------------------------------------------------------------------

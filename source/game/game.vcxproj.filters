@@ -87,9 +87,6 @@
     <ClCompile Include="Items.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>GameLogic</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
@@ -100,6 +97,9 @@
       <Filter>Engine\App</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
+      <Filter>GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
   </ItemGroup>
@@ -207,9 +207,6 @@
     <ClInclude Include="Items.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>GameLogic</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
@@ -220,6 +217,9 @@
       <Filter>Engine\App</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
+      <Filter>GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
   </ItemGroup>

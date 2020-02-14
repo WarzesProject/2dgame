@@ -128,10 +128,3 @@ public:
 	virtual void Init(const glm::vec2 &position) override;
 	virtual void Destroy() override;
 };
-
-class Mace : public Item
-{
-public:
-	virtual void Init(const glm::vec2 &position) override;
-	virtual void Destroy() override;
-};

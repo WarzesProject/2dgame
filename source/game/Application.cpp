@@ -42,7 +42,7 @@ void Application::Run(std::unique_ptr<IGameApp> game)
 	while( m_isRunning )
 	{
 		m_limiter.Begin();
-		update();
+		Update();
 		draw();
 		m_limiter.End();
 		m_window->SwapBuffer();
@@ -99,7 +99,7 @@ void Application::draw()
 	m_gameApp->privateDraw();
 }
 //-----------------------------------------------------------------------------
-void Application::update()
+void Application::Update()
 {
 	m_eventHandler->Update(m_limiter.GetFPS());
 

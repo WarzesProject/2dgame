@@ -29,7 +29,7 @@ private:
 
 	void redirectIOToConsole();
 	void draw();
-	void update();	
+	void Update();	
 	void onSDLEvent(const SDL_Event &ev);
 	bool onSDLEventQuit(const SDL_Event &ev);
 	void onSDLEventKeyboard(const SDL_Event &ev);
