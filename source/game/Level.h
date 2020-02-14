@@ -3,10 +3,10 @@
 #include "SpriteBatch.h"
 #include "TileSheet.h"
 
-class LevelManager
+class Level
 {
 public:
-	LevelManager(std::string_view fileName);
+	Level(std::string_view fileName);
 
 	void Draw();
 

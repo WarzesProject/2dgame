@@ -193,7 +193,7 @@
     <ClInclude Include="Items.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Particle2DEngine.h" />
     <ClInclude Include="ParticleBatch2D.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -231,7 +231,7 @@
     <ClCompile Include="Items.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle2DEngine.cpp" />
     <ClCompile Include="ParticleBatch2D.cpp" />

@@ -2,7 +2,7 @@
 
 #include "IGameView.h"
 #include "Camera2D.h"
-#include "LevelManager.h"
+#include "Level.h"
 #include "SpriteBatch.h"
 #include "GLSLProgram.h"
 #include "DebugRenderer.h"
@@ -41,7 +41,7 @@ private:
 	Music m_bgm;
 	DebugRenderer m_debuger;
 
-	std::unique_ptr<LevelManager> m_level;
+	std::unique_ptr<Level> m_level;
 	Player *m_player = nullptr;
 	std::vector<Monster*> m_monsters;
 	std::vector<Item*> m_items;

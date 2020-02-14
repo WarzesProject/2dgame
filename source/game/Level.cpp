@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "LevelManager.h"
+#include "Level.h"
 #include "ResourceManager.h"
 #include "DefineLogic.h"
 //-----------------------------------------------------------------------------
-LevelManager::LevelManager(std::string_view fileName)
+Level::Level(std::string_view fileName)
 {
 	const glm::vec4 uvRect(0.0f, 0.0f, 1.0f, 1.0f);
 	const ColorRGBA8 whiteColor = { 255,255,255,255 };
@@ -61,37 +61,37 @@ LevelManager::LevelManager(std::string_view fileName)
 	m_spriteBatch.End();
 }
 //-----------------------------------------------------------------------------
-void LevelManager::Draw()
+void Level::Draw()
 {
 	m_spriteBatch.RenderBatch();
 }
 //-----------------------------------------------------------------------------
-int LevelManager::GetWidth() const
+int Level::GetWidth() const
 {
 	return (int)m_levelData[0].length();
 }
 //-----------------------------------------------------------------------------
-int LevelManager::GetHeight() const
+int Level::GetHeight() const
 {
 	return m_levelData.size();
 }
 //-----------------------------------------------------------------------------
-glm::vec2 LevelManager::GetStartPlayerPosition() const
+glm::vec2 Level::GetStartPlayerPosition() const
 {
 	return m_startPlayerPosition;
 }
 //-----------------------------------------------------------------------------
-const std::vector<std::string>& LevelManager::GetLevelData() const
+const std::vector<std::string>& Level::GetLevelData() const
 {
 	return m_levelData;
 }
 //-----------------------------------------------------------------------------
-const char LevelManager::GetSymbol(int x, int y) const
+const char Level::GetSymbol(int x, int y) const
 {
 	return m_levelData[y][x];
 }
 //-----------------------------------------------------------------------------
-glm::vec2 LevelManager::GetCameraPos(const glm::vec2 &cameraPos, const glm::vec2 &screenSize, const float scale)
+glm::vec2 Level::GetCameraPos(const glm::vec2 &cameraPos, const glm::vec2 &screenSize, const float scale)
 {
 	const glm::vec2 playerPos = cameraPos;
 	glm::vec2 returnPos = cameraPos;

@@ -93,14 +93,14 @@
     <ClCompile Include="Player.cpp">
       <Filter>GameLogic</Filter>
     </ClCompile>
-    <ClCompile Include="LevelManager.cpp">
-      <Filter>GameLogic</Filter>
-    </ClCompile>
     <ClCompile Include="AudioSystem.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
       <Filter>Engine\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>GameLogic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -213,14 +213,14 @@
     <ClInclude Include="Player.h">
       <Filter>GameLogic</Filter>
     </ClInclude>
-    <ClInclude Include="LevelManager.h">
-      <Filter>GameLogic</Filter>
-    </ClInclude>
     <ClInclude Include="AudioSystem.h">
       <Filter>Engine\Audio</Filter>
     </ClInclude>
     <ClInclude Include="InputSystem.h">
       <Filter>Engine\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>GameLogic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
