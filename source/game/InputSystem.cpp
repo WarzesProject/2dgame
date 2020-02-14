@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "EventHandler.h"
+#include "InputSystem.h"
 //-----------------------------------------------------------------------------
 constexpr auto FILENAME = "padconfig.conf";
 constexpr auto JOY_AXE_DEFAULT_SPEED = 30;
 constexpr auto AXIS_TIMELAPSE = 50.0f;
 //-----------------------------------------------------------------------------
-EventHandler::EventHandler(int &screenWidth, int &screenHeight)
+InputSystem::InputSystem(int &screenWidth, int &screenHeight)
 	: m_screenWidth(screenWidth)
 	, m_screenHeight(screenHeight)
 {
@@ -16,15 +16,14 @@ EventHandler::EventHandler(int &screenWidth, int &screenHeight)
 	}
 }
 //-----------------------------------------------------------------------------
-EventHandler::~EventHandler()
+InputSystem::~InputSystem()
 {
 	if ( m_joystick != nullptr )
 		SDL_JoystickClose(m_joystick);
-
 	SDL_JoystickEventState(SDL_DISABLE);
 }
 //-----------------------------------------------------------------------------
-void EventHandler::Update(float deltaTime)
+void InputSystem::Update(float deltaTime)
 {
 	if ( SDL_NumJoysticks() > 0 && m_joystick == nullptr )
 	{
@@ -44,17 +43,17 @@ void EventHandler::Update(float deltaTime)
 	m_axisTimeLapse += deltaTime;
 }
 //-----------------------------------------------------------------------------
-void EventHandler::PressKey(unsigned int keyID)
+void InputSystem::PressKey(unsigned int keyID)
 {
 	m_keyMap[keyID] = true;
 }
 //-----------------------------------------------------------------------------
-void EventHandler::ReleaseKey(unsigned int keyID)
+void InputSystem::ReleaseKey(unsigned int keyID)
 {
 	m_keyMap[keyID] = false;
 }
 //-----------------------------------------------------------------------------
-void EventHandler::ReleaseEvent(unsigned int eventID)
+void InputSystem::ReleaseEvent(unsigned int eventID)
 {
 	auto itEvent = m_eventConfig.find(eventID);
 	if ( itEvent != m_eventConfig.end() )
@@ -64,7 +63,7 @@ void EventHandler::ReleaseEvent(unsigned int eventID)
 	}
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::IsEventDown(unsigned int eventID)
+bool InputSystem::IsEventDown(unsigned int eventID)
 {
 	unsigned int keyID = eventID;
 	auto itEvent = m_eventConfig.find(eventID);
@@ -74,7 +73,7 @@ bool EventHandler::IsEventDown(unsigned int eventID)
 	return IsKeyDown(keyID);
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::IsKeyDown(unsigned int keyID)
+bool InputSystem::IsKeyDown(unsigned int keyID)
 {
 	auto it = m_keyMap.find(keyID);
 	if ( it != m_keyMap.end() )
@@ -83,7 +82,7 @@ bool EventHandler::IsKeyDown(unsigned int keyID)
 	return false;
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::wasKeyDown(unsigned int keyID)
+bool InputSystem::wasKeyDown(unsigned int keyID)
 {
 	auto it = m_previousKeyMap.find(keyID);
 	if ( it != m_previousKeyMap.end() )
@@ -92,7 +91,7 @@ bool EventHandler::wasKeyDown(unsigned int keyID)
 	return false;
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::IsEventPressed(unsigned int eventID)
+bool InputSystem::IsEventPressed(unsigned int eventID)
 {
 	unsigned int keyID = eventID;
 	auto itEvent = m_eventConfig.find(eventID);
@@ -102,18 +101,18 @@ bool EventHandler::IsEventPressed(unsigned int eventID)
 	return (IsKeyDown(keyID) && !wasKeyDown(keyID));
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::IsKeyPressed(unsigned int keyID)
+bool InputSystem::IsKeyPressed(unsigned int keyID)
 {
 	return (IsKeyDown(keyID) && !wasKeyDown(keyID));
 }
 //-----------------------------------------------------------------------------
-void EventHandler::SetMouseCoords(float x, float y)
+void InputSystem::SetMouseCoords(float x, float y)
 {
 	m_mouseCoords.x = x;
 	m_mouseCoords.y = y;
 }
 //-----------------------------------------------------------------------------
-void EventHandler::UpdateJoystickAxis(int axe, int value, SDL_Window* window)
+void InputSystem::UpdateJoystickAxis(int axe, int value, SDL_Window* window)
 {
 	if ( axe == 0 )
 	{
@@ -176,7 +175,7 @@ void EventHandler::UpdateJoystickAxis(int axe, int value, SDL_Window* window)
 	}
 }
 //-----------------------------------------------------------------------------
-void EventHandler::UpdateJoystickHats(int value)
+void InputSystem::UpdateJoystickHats(unsigned int value)
 {
 	ReleaseKey(Joystick::DPAD_LEFT);
 	ReleaseKey(Joystick::DPAD_RIGHT);
@@ -186,7 +185,7 @@ void EventHandler::UpdateJoystickHats(int value)
 	PressKey(value);
 }
 //-----------------------------------------------------------------------------
-void EventHandler::UpdateMapping(unsigned int eventID, PlayWith util)
+void InputSystem::UpdateMapping(unsigned int eventID, PlayWith util)
 {
 	for ( auto& it : m_keyMap )
 	{
@@ -200,20 +199,20 @@ void EventHandler::UpdateMapping(unsigned int eventID, PlayWith util)
 	}
 }
 //-----------------------------------------------------------------------------
-void EventHandler::UpdateConfig()
+void InputSystem::UpdateConfig()
 {
 	for ( auto &it : m_eventConfig )
 		m_eventConfigTemp[it.first] = it.second;
 }
 //-----------------------------------------------------------------------------
-void EventHandler::SaveConfig()
+void InputSystem::SaveConfig()
 {
 	for ( auto &it : m_eventConfigTemp )
 		m_eventConfig[it.first] = it.second;
 	SaveConfigFile();
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::LoadConfigFile()
+bool InputSystem::LoadConfigFile()
 {
 	std::ifstream file(FILENAME);
 	if ( file.fail() )
@@ -246,7 +245,7 @@ bool EventHandler::LoadConfigFile()
 	return true;
 }
 //-----------------------------------------------------------------------------
-bool EventHandler::SaveConfigFile()
+bool InputSystem::SaveConfigFile()
 {
 	std::ofstream file(FILENAME);
 	if ( file.fail() )
@@ -265,22 +264,22 @@ bool EventHandler::SaveConfigFile()
 	return true;
 }
 //-----------------------------------------------------------------------------
-void EventHandler::ClearConfig()
+void InputSystem::ClearConfig()
 {
 	m_eventConfigTemp.clear();
 }
 //-----------------------------------------------------------------------------
-std::string EventHandler::GetMapping(unsigned int eventID)
+std::string InputSystem::GetMapping(unsigned int eventID)
 {
 	return getMapping(eventID, m_playWith, m_eventConfig);
 }
 //-----------------------------------------------------------------------------
-std::string EventHandler::GetMapping(unsigned int eventID, PlayWith util)
+std::string InputSystem::GetMapping(unsigned int eventID, PlayWith util)
 {
 	return getMapping(eventID, util, m_eventConfigTemp);
 }
 //-----------------------------------------------------------------------------
-std::string EventHandler::getMapping(unsigned int eventID, PlayWith util, std::unordered_map<unsigned int, EventConfig> &map)
+std::string InputSystem::getMapping(unsigned int eventID, PlayWith util, std::unordered_map<unsigned int, EventConfig> &map)
 {
 	unsigned int keyID;
 
@@ -292,7 +291,7 @@ std::string EventHandler::getMapping(unsigned int eventID, PlayWith util, std::u
 		case SDL_BUTTON_LEFT: return "Mouse Left button";
 		case SDL_BUTTON_RIGHT: return "Mouse Right button";
 		default:
-			return SDL_GetKeyName(keyID);
+			return SDL_GetKeyName((SDL_Keycode)keyID);
 		}
 	}
 	else

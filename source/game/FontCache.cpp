@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "FontCache.h"
 //-----------------------------------------------------------------------------
-SpriteFont FontCache::GetFont(const std::string fontPath, int size)
+SpriteFont FontCache::GetFont(const std::string_view fontPath, int size)
 {
-	auto mit = m_fontMap.find(fontPath);
+	auto mit = m_fontMap.find(fontPath.data());
 
 	if ( mit == m_fontMap.end() )
 	{
@@ -11,7 +11,7 @@ SpriteFont FontCache::GetFont(const std::string fontPath, int size)
 
 		SpriteFont font;
 		font.Init(fontPath, size);
-		m_fontMap.insert(make_pair(fontPath + std::to_string(size), font));
+		m_fontMap.insert(make_pair(fontPath.data() + std::to_string(size), font));
 		return font;
 	}
 

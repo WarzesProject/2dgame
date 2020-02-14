@@ -5,7 +5,7 @@
 #include "Window.h"
 #include "AudioSystem.h"
 #include "ResourceManager.h"
-#include "EventHandler.h"
+#include "InputSystem.h"
 #include "FPSLimiter.h"
 
 class Application
@@ -16,10 +16,9 @@ public:
 
 	void Run(std::unique_ptr<IGameApp> game);
 
-	TODO("удалить GetScreenWidth/GetScreenHeight/GetEventHandler");
 	int GetScreenWidth() const { return m_config.window.width; }
 	int GetScreenHeight() const { return m_config.window.height; }
-	std::shared_ptr<EventHandler> GetEventHandler() { return m_eventHandler; }
+	std::shared_ptr<InputSystem> GetEventHandler() { return m_eventHandler; }
 
 private:
 	Application() = delete;
@@ -41,7 +40,7 @@ private:
 	std::unique_ptr<Window> m_window = nullptr;
 	std::shared_ptr<AudioSystem> m_audioSystem = nullptr;
 	std::unique_ptr<ResourceManager> m_resourceManager = nullptr;
-	std::shared_ptr<EventHandler> m_eventHandler = nullptr;
+	std::shared_ptr<InputSystem> m_eventHandler = nullptr;
 	std::unique_ptr<IGameApp> m_gameApp = nullptr;
 
 	bool m_isRunning = false;

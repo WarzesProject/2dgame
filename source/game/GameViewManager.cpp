@@ -36,7 +36,7 @@ void GameViewManager::AddGameView(IGameView *view)
 {
 	view->Build();
 	view->SetApplication(m_app);
-	view->SetViewIndex(m_views.size());
+	view->SetViewIndex((int)m_views.size());
 	m_views.push_back(view);
 }
 //-----------------------------------------------------------------------------
@@ -48,7 +48,7 @@ void GameViewManager::SetGameView(int screenIndex)
 IGameView* GameViewManager::GetCurrentGameView()
 {
 	if( m_currentViewIndex != VIEW_INDEX_NO_VIEW )
-		return m_views[m_currentViewIndex];
+		return m_views[(size_t)m_currentViewIndex];
 	else
 		return nullptr;
 }

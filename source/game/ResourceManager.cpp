@@ -4,32 +4,32 @@
 TODO("сделать очистку ресурсов по завершению");
 //-----------------------------------------------------------------------------
 TextureCache ResourceManager::m_textureCache;
-std::shared_ptr<AudioSystem> ResourceManager::m_audioEngine = nullptr;
+std::shared_ptr<AudioSystem> ResourceManager::m_audioSystem = nullptr;
 FontCache ResourceManager::m_fontCache;
 ApplicationConfig::Resources *ResourceManager::m_config = nullptr;
 //-----------------------------------------------------------------------------
-ResourceManager::ResourceManager(ApplicationConfig::Resources &config, std::shared_ptr<AudioSystem> audioEngine)
+ResourceManager::ResourceManager(ApplicationConfig::Resources &config, std::shared_ptr<AudioSystem> audioSystem)
 {
 	m_config = &config;
-	m_audioEngine = audioEngine;
+	m_audioSystem = audioSystem;
 }
 //-----------------------------------------------------------------------------
 ResourceManager::~ResourceManager()
 {
 	m_fontCache.Destroy();
-	m_audioEngine.reset();
+	m_audioSystem.reset();
 }
 //-----------------------------------------------------------------------------
 Sound ResourceManager::GetSound(const std::string_view soundPath)
 {
 	const std::string path = m_config->coreFolder + std::string(soundPath);
-	return m_audioEngine->LoadSound(path);
+	return m_audioSystem->LoadSound(path);
 }
 //-----------------------------------------------------------------------------
 Music ResourceManager::GetMusic(const std::string_view musicPath)
 {
 	const std::string path = m_config->coreFolder + std::string(musicPath);
-	return m_audioEngine->LoadMusic(path);
+	return m_audioSystem->LoadMusic(path);
 }
 //-----------------------------------------------------------------------------
 Texture ResourceManager::GetTexture(const std::string_view texturePath)

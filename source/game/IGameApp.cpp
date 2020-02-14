@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "IGameApp.h"
 //-----------------------------------------------------------------------------
 bool IGameApp::privateInit(Application *app)
@@ -51,6 +51,7 @@ bool IGameApp::privateUpdate()
 				m_currentView->SetGameState(GameViewState::Running);
 			}
 			break;
+		case GameViewState::None:
 		case GameViewState::ExitGame:
 			return false;
 		}
@@ -63,7 +64,7 @@ bool IGameApp::privateUpdate()
 //-----------------------------------------------------------------------------
 bool IGameApp::privateQuit()
 {
-	TODO("òóò ìîæíî ñïðàøèâàòü õî÷åò ëè èãðîê çàêðûòü");
+	TODO("Ñ‚ÑƒÑ‚ Ð¼Ð¾Ð¶Ð½Ð¾ ÑÐ¿Ñ€Ð°ÑˆÐ¸Ð²Ð°Ñ‚ÑŒ Ñ…Ð¾Ñ‡ÐµÑ‚ Ð»Ð¸ Ð¸Ð³Ñ€Ð¾Ðº Ð·Ð°ÐºÑ€Ñ‹Ñ‚ÑŒ");
 	m_currentView->SetGameState(GameViewState::ChangePrevious);
 	return true;
 }

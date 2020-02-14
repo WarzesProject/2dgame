@@ -41,9 +41,6 @@
     <ClCompile Include="SpriteFont.cpp">
       <Filter>Engine\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="EventHandler.cpp">
-      <Filter>Engine\App</Filter>
-    </ClCompile>
     <ClCompile Include="IGameApp.cpp">
       <Filter>Engine\App</Filter>
     </ClCompile>
@@ -102,6 +99,9 @@
     <ClCompile Include="AudioSystem.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Engine\App</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h">
@@ -151,9 +151,6 @@
     </ClInclude>
     <ClInclude Include="SpriteFont.h">
       <Filter>Engine\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="EventHandler.h">
-      <Filter>Engine\App</Filter>
     </ClInclude>
     <ClInclude Include="IGameView.h">
       <Filter>Engine\App\AppView</Filter>
@@ -221,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="AudioSystem.h">
       <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Engine\App</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

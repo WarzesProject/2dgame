@@ -177,7 +177,7 @@
     <ClInclude Include="Debug.h" />
     <ClInclude Include="DebugRenderer.h" />
     <ClInclude Include="DefineLogic.h" />
-    <ClInclude Include="EventHandler.h" />
+    <ClInclude Include="InputSystem.h" />
     <ClInclude Include="FontCache.h" />
     <ClInclude Include="FontParticleBatch2D.h" />
     <ClInclude Include="FPSLimiter.h" />
@@ -215,7 +215,7 @@
     <ClCompile Include="AudioSystem.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="DebugRenderer.cpp" />
-    <ClCompile Include="EventHandler.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="FontCache.cpp" />
     <ClCompile Include="FontParticleBatch2D.cpp" />
     <ClCompile Include="FPSLimiter.cpp" />

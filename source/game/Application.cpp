@@ -10,7 +10,6 @@ Application::Application(const ApplicationConfig &config)
 	m_config.app.enableConsole = true;	
 #endif
 	// установка макс fps
-	TODO("удалить");
 	m_limiter.SetMaxFPS(m_config.graphics.maxFPS);
 
 	// отображение консоли
@@ -20,7 +19,7 @@ Application::Application(const ApplicationConfig &config)
 	m_window = std::make_unique<Window>(m_config.window);
 	m_audioSystem = std::make_shared<AudioSystem>(m_config.audio);
 	m_resourceManager = std::make_unique<ResourceManager>(m_config.resources, m_audioSystem);
-	m_eventHandler = std::make_shared<EventHandler>(m_config.window.width, m_config.window.height);
+	m_eventHandler = std::make_shared<InputSystem>(m_config.window.width, m_config.window.height);
 
 	m_isRunning = true;
 }
@@ -142,10 +141,10 @@ void Application::onSDLEventKeyboard(const SDL_Event &ev)
 		m_eventHandler->SetMouseCoords((float)ev.motion.x, (float)ev.motion.y);
 		break;
 	case SDL_KEYDOWN:
-		m_eventHandler->PressKey(ev.key.keysym.sym);
+		m_eventHandler->PressKey((uint32_t)ev.key.keysym.sym);
 		break;
 	case SDL_KEYUP:
-		m_eventHandler->ReleaseKey(ev.key.keysym.sym);
+		m_eventHandler->ReleaseKey((uint32_t)ev.key.keysym.sym);
 		break;
 	case SDL_MOUSEBUTTONDOWN:
 		m_eventHandler->PressKey(ev.button.button);
@@ -161,16 +160,16 @@ void Application::onSDLEventGamepad(const SDL_Event &ev)
 	switch( ev.type )
 	{
 	case SDL_JOYBUTTONDOWN:
-		m_eventHandler->PressKey(ev.jbutton.button + MARGIN);
+		m_eventHandler->PressKey((uint32_t)ev.jbutton.button + MARGIN);
 		break;
 	case SDL_JOYBUTTONUP:
-		m_eventHandler->ReleaseKey(ev.jbutton.button + MARGIN);
+		m_eventHandler->ReleaseKey((uint32_t)ev.jbutton.button + MARGIN);
 		break;
 	case SDL_JOYAXISMOTION:
 		m_eventHandler->UpdateJoystickAxis(ev.jaxis.axis, ev.jaxis.value, m_window->GetSDLWindow());
 		break;
 	case SDL_JOYHATMOTION:
-		m_eventHandler->UpdateJoystickHats(ev.jhat.value + MARGIN);
+		m_eventHandler->UpdateJoystickHats((uint32_t)ev.jhat.value + MARGIN);
 		break;
 	}
 }

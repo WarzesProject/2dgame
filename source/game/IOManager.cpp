@@ -15,15 +15,15 @@ bool IOManager::ReadFileToBuffer(std::string_view filePath, std::vector<unsigned
 	file.seekg(0, std::ios::end);
 
 	//get the file size
-	size_t fileSize = (size_t)file.tellg();
+	auto fileSize = file.tellg();
 
 	//seek to the beginning
 	file.seekg(0, std::ios::beg);
 
 	//reduce the file size by any header bytes that might be present
-	fileSize -= (int)file.tellg();
+	fileSize -= file.tellg();
 
-	buffer.resize(fileSize);
+	buffer.resize(static_cast<size_t>(fileSize));
 	file.read((char*)&(buffer[0]), fileSize);
 	file.close();
 
@@ -43,15 +43,15 @@ bool IOManager::ReadFileToBuffer(std::string_view filePath, std::string &buffer)
 	file.seekg(0, std::ios::end);
 
 	//get the file size
-	int fileSize = (int)file.tellg();
+	auto fileSize = file.tellg();
 
 	//seek to the beginning
 	file.seekg(0, std::ios::beg);
 
 	//reduce the file size by any header bytes that might be present
-	fileSize -= (int)file.tellg();
+	fileSize -= file.tellg();
 
-	buffer.resize(fileSize);
+	buffer.resize(static_cast<size_t>(fileSize));
 	file.read((char*)&(buffer[0]), fileSize);
 	file.close();
 
@@ -69,13 +69,9 @@ bool IOManager::GetDirectoryEntries(const char* path, std::vector<DirEntry> &rvE
 		rvEntries.emplace_back();
 		rvEntries.back().path = it->path().string();
 		if ( is_directory(it->path()) )
-		{
 			rvEntries.back().isDirectory = true;
-		}
 		else
-		{
 			rvEntries.back().isDirectory = false;
-		}
 	}
 	return true;
 }

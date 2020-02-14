@@ -5,6 +5,6 @@
 class ImageLoader
 {
 public:
-	static Texture Create(GLsizei width, GLsizei height);
+	static Texture Create(int width, int height);
 	static Texture Load(std::string_view filePath);
 };
