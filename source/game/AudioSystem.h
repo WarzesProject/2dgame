@@ -4,7 +4,7 @@
 
 class Sound
 {
-	friend class AudioEngine;
+	friend class AudioSystem;
 public:
 	// если loops == -1, то проигрывать бесконечно
 	void Play(int loops = 0);
@@ -18,7 +18,7 @@ private:
 
 class Music
 {
-	friend class AudioEngine;
+	friend class AudioSystem;
 public:
 	// если loops == -1, то проигрывать бесконечно
 	void Play(int loops = -1);
@@ -33,16 +33,22 @@ private:
 	std::string m_filePath;
 };
 
-class AudioEngine
+class AudioSystem
 {
 public:
-	AudioEngine(ApplicationConfig::Audio &config);
-	~AudioEngine();
+	AudioSystem(ApplicationConfig::Audio &config);
+	~AudioSystem();
 
 	Sound LoadSound(std::string_view filePath);
 	Music LoadMusic(std::string_view filePath);
 
 private:
+	AudioSystem() = delete;
+	AudioSystem(const AudioSystem&) = delete;
+	AudioSystem(AudioSystem&&) = delete;
+	AudioSystem& operator=(const AudioSystem&) = delete;
+	AudioSystem& operator=(AudioSystem&&) = delete;
+
 	ApplicationConfig::Audio &m_config;
 	std::unordered_map<std::string, Mix_Chunk*> m_soundMap;
 	std::unordered_map<std::string, Mix_Music*> m_musicMap;

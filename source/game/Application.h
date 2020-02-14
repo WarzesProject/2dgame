@@ -3,7 +3,7 @@
 #include "IGameApp.h"
 #include "ApplicationConfig.h"
 #include "Window.h"
-#include "AudioEngine.h"
+#include "AudioSystem.h"
 #include "ResourceManager.h"
 #include "EventHandler.h"
 #include "FPSLimiter.h"
@@ -39,7 +39,7 @@ private:
 	ApplicationConfig m_config;
 	FPSLimiter m_limiter;
 	std::unique_ptr<Window> m_window = nullptr;
-	std::shared_ptr<AudioEngine> m_audioSystem = nullptr;
+	std::shared_ptr<AudioSystem> m_audioSystem = nullptr;
 	std::unique_ptr<ResourceManager> m_resourceManager = nullptr;
 	std::shared_ptr<EventHandler> m_eventHandler = nullptr;
 	std::unique_ptr<IGameApp> m_gameApp = nullptr;

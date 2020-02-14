@@ -1,5 +1,5 @@
 ﻿#include "stdafx.h"
-#include "AudioEngine.h"
+#include "AudioSystem.h"
 //-----------------------------------------------------------------------------
 constexpr auto ALLOCATE_CHANNELS = 16;
 //-----------------------------------------------------------------------------
@@ -71,7 +71,7 @@ void Music::Stop()
 	Mix_HaltMusic();
 }
 //-----------------------------------------------------------------------------
-AudioEngine::AudioEngine(ApplicationConfig::Audio &config)
+AudioSystem::AudioSystem(ApplicationConfig::Audio &config)
 	: m_config(config)
 {
 	if ( Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG) == 1 )
@@ -83,7 +83,7 @@ AudioEngine::AudioEngine(ApplicationConfig::Audio &config)
 	Mix_AllocateChannels(ALLOCATE_CHANNELS);
 }
 //-----------------------------------------------------------------------------
-AudioEngine::~AudioEngine()
+AudioSystem::~AudioSystem()
 {
 	for ( auto &it : m_soundMap )
 		Mix_FreeChunk(it.second);
@@ -97,7 +97,7 @@ AudioEngine::~AudioEngine()
 	Mix_Quit();
 }
 //-----------------------------------------------------------------------------
-Sound AudioEngine::LoadSound(std::string_view filePath)
+Sound AudioSystem::LoadSound(std::string_view filePath)
 {
 	Sound effect;
 
@@ -123,7 +123,7 @@ Sound AudioEngine::LoadSound(std::string_view filePath)
 	return effect;
 }
 //-----------------------------------------------------------------------------
-Music AudioEngine::LoadMusic(std::string_view filePath)
+Music AudioSystem::LoadMusic(std::string_view filePath)
 {
 	Music music;
 

@@ -21,10 +21,22 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **args)
 		Application app(config);
 		app.Run(std::make_unique<Game>());
 	}
-	catch( const Exception & exc )
+	catch ( const ExceptionSDL &exc )
 	{
 		std::cerr << exc.what() << std::endl;
 		system("PAUSE");
+	}
+	catch ( const ExceptionSDLAudio &exc )
+	{
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Fatal Error", exc.what(), nullptr);
+	}
+	catch ( const ExceptionApp &exc )
+	{
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Fatal Error", exc.what(), nullptr);
+	}
+	catch( const Exception &exc )
+	{
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Fatal Error", exc.what(), nullptr);		
 	}
 	return 0;
 }

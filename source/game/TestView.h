@@ -7,7 +7,7 @@
 #include "GLSLProgram.h"
 #include "DebugRenderer.h"
 #include "SpriteFont.h"
-#include "AudioEngine.h"
+#include "AudioSystem.h"
 #include "Texture.h"
 
 class TestView : public IGameView

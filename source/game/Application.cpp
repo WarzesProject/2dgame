@@ -18,7 +18,7 @@ Application::Application(const ApplicationConfig &config)
 		redirectIOToConsole();
 
 	m_window = std::make_unique<Window>(m_config.window);
-	m_audioSystem = std::make_shared<AudioEngine>(m_config.audio);
+	m_audioSystem = std::make_shared<AudioSystem>(m_config.audio);
 	m_resourceManager = std::make_unique<ResourceManager>(m_config.resources, m_audioSystem);
 	m_eventHandler = std::make_shared<EventHandler>(m_config.window.width, m_config.window.height);
 

@@ -1,14 +1,14 @@
 #pragma once
 
 #include "TextureCache.h"
-#include "AudioEngine.h"
+#include "AudioSystem.h"
 #include "FontCache.h"
 #include "ApplicationConfig.h"
 
 class ResourceManager
 {
 public:
-	ResourceManager(ApplicationConfig::Resources &config, std::shared_ptr<AudioEngine> audioEngine);
+	ResourceManager(ApplicationConfig::Resources &config, std::shared_ptr<AudioSystem> audioEngine);
 	~ResourceManager();
 
 	static Sound GetSound(const std::string_view soundPath);
@@ -18,7 +18,7 @@ public:
 
 private:
 	static TextureCache m_textureCache;
-	static std::shared_ptr<AudioEngine> m_audioEngine;
+	static std::shared_ptr<AudioSystem> m_audioEngine;
 	static FontCache m_fontCache;
 	static ApplicationConfig::Resources *m_config;
 };

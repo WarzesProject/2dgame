@@ -12,6 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TODO.MD = TODO.MD
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gameplay", "gameplay", "{DC876378-EE87-470C-8120-01D1B10C5287}"
+	ProjectSection(SolutionItems) = preProject
+		OtherGameIdea.md = OtherGameIdea.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +36,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC876378-EE87-470C-8120-01D1B10C5287} = {22A725EC-0633-4E84-91B0-5B9AB714554D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0EDED3DF-6F78-4BE6-B6E4-E3B2DBF4D6CD}
