@@ -15,7 +15,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **args)
 		config.window.width = 1024;
 		config.window.height = 768;
 		config.window.title = "Game";
-		config.graphics.maxFPS = 60;
+		config.graphics.maxFPS = 99999;
 		config.resources.coreFolder = "";
 
 		Application app(config);

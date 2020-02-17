@@ -7,25 +7,22 @@ namespace
 //-----------------------------------------------------------------------------
 void GameView::OnEntry()
 {
-
+	m_world.Init();
 }
 //-----------------------------------------------------------------------------
 void GameView::OnExit()
 {
+	m_world.Close();
 }
 //-----------------------------------------------------------------------------
 void GameView::Update()
 {
-
+	m_world.Update();
 }
 //-----------------------------------------------------------------------------
 void GameView::Draw()
 {
-	glClearDepth(1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.2f, 0.6f, 1.0f, 1.0f);
-
-	
+	m_world.Draw();
 }
 //-----------------------------------------------------------------------------
 int GameView::GetNextViewIndex() const

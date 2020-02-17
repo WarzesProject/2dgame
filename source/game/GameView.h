@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IGameView.h"
+#include "World.h"
 
 class GameView : public IGameView
 {
@@ -16,4 +17,7 @@ public:
 
 	virtual int GetNextViewIndex() const override;
 	virtual int GetPreviousViewIndex() const override;
+
+private:
+	World m_world;
 };

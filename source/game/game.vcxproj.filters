@@ -103,6 +103,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Engine\Resource</Filter>
     </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Game\CoreArhitect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h">
@@ -221,6 +224,9 @@
     <ClInclude Include="Texture.h">
       <Filter>Engine\Resource</Filter>
     </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Game\CoreArhitect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="3rdparty">
@@ -262,8 +268,11 @@
     <Filter Include="View">
       <UniqueIdentifier>{22580868-f7d6-4a6d-b891-f9e3dbcf834a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameLogic">
+    <Filter Include="Game">
       <UniqueIdentifier>{983bea30-5e3a-4d07-8c41-92bfd7845c48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\CoreArhitect">
+      <UniqueIdentifier>{3ee40a9c-0297-49f2-a5e0-92f41ec347e5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -45,8 +45,9 @@ Window::Window(ApplicationConfig::Window &config)
 
 	SDL_GL_SetSwapInterval(0);
 
-	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+	glClearColor(0.2f, 0.6f, 1.0f, 1.0f);
 	glClearDepth(1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glViewport(0, 0, m_config.width, m_config.height);
