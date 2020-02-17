@@ -50,9 +50,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>GameApp</Filter>
     </ClCompile>
-    <ClCompile Include="GameView.cpp">
-      <Filter>GameApp\View</Filter>
-    </ClCompile>
     <ClCompile Include="Camera2D.cpp">
       <Filter>Engine\Graphics</Filter>
     </ClCompile>
@@ -85,10 +82,10 @@
       <Filter>GameApp\View</Filter>
     </ClCompile>
     <ClCompile Include="Items.cpp">
-      <Filter>GameLogic</Filter>
+      <Filter>OLDGameLogic</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>GameLogic</Filter>
+      <Filter>OLDGameLogic</Filter>
     </ClCompile>
     <ClCompile Include="AudioSystem.cpp">
       <Filter>Engine\Audio</Filter>
@@ -97,10 +94,13 @@
       <Filter>Engine\App</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
-      <Filter>GameLogic</Filter>
+      <Filter>OLDGameLogic</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>GameLogic</Filter>
+      <Filter>OLDGameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="OLDGameView.cpp">
+      <Filter>GameApp\View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +164,6 @@
     <ClInclude Include="Game.h">
       <Filter>GameApp</Filter>
     </ClInclude>
-    <ClInclude Include="GameView.h">
-      <Filter>GameApp\View</Filter>
-    </ClInclude>
     <ClInclude Include="Camera2D.h">
       <Filter>Engine\Graphics</Filter>
     </ClInclude>
@@ -202,13 +199,13 @@
       <Filter>GameApp\View</Filter>
     </ClInclude>
     <ClInclude Include="DefineLogic.h">
-      <Filter>GameLogic</Filter>
+      <Filter>OLDGameLogic</Filter>
     </ClInclude>
     <ClInclude Include="Items.h">
-      <Filter>GameLogic</Filter>
+      <Filter>OLDGameLogic</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>GameLogic</Filter>
+      <Filter>OLDGameLogic</Filter>
     </ClInclude>
     <ClInclude Include="AudioSystem.h">
       <Filter>Engine\Audio</Filter>
@@ -217,10 +214,13 @@
       <Filter>Engine\App</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>GameLogic</Filter>
+      <Filter>OLDGameLogic</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>GameLogic</Filter>
+      <Filter>OLDGameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="OLDGameView.h">
+      <Filter>GameApp\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -263,7 +263,7 @@
     <Filter Include="GameApp\View">
       <UniqueIdentifier>{22580868-f7d6-4a6d-b891-f9e3dbcf834a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameLogic">
+    <Filter Include="OLDGameLogic">
       <UniqueIdentifier>{70694b97-0cff-4802-a553-5939d6614286}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

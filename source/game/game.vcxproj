@@ -186,7 +186,7 @@
     <ClInclude Include="FontParticleBatch2D.h" />
     <ClInclude Include="FPSLimiter.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameView.h" />
+    <ClInclude Include="OLDGameView.h" />
     <ClInclude Include="GameViewManager.h" />
     <ClInclude Include="GLSLProgram.h" />
     <ClInclude Include="IGameApp.h" />
@@ -224,7 +224,7 @@
     <ClCompile Include="FontParticleBatch2D.cpp" />
     <ClCompile Include="FPSLimiter.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameView.cpp" />
+    <ClCompile Include="OLDGameView.cpp" />
     <ClCompile Include="GameViewManager.cpp" />
     <ClCompile Include="glad.cpp" />
     <ClCompile Include="GLSLProgram.cpp" />

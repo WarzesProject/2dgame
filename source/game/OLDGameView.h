@@ -14,7 +14,7 @@
 #include "Monster.h"
 #include "Player.h"
 
-class GameView : public IGameView
+class OLDGameView : public IGameView
 {
 public:
 	virtual void Build() override {}

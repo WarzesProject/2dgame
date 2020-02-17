@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "GameView.h"
+#include "OLDGameView.h"
 #include "Application.h"
 #include "TileSheet.h"
 #include "GLSLProgram.h"
 #include "SpriteBatch.h"
 //-----------------------------------------------------------------------------
-void GameView::OnEntry()
+void OLDGameView::OnEntry()
 {
 	const int screenWidth = m_app->GetScreenWidth();
 	const int screenHeight = m_app->GetScreenHeight();
@@ -30,7 +30,7 @@ void GameView::OnEntry()
 	initLevel();	
 }
 //-----------------------------------------------------------------------------
-void GameView::OnExit()
+void OLDGameView::OnExit()
 {
 	for ( auto &it : m_monsters )
 		delete it;
@@ -46,7 +46,7 @@ void GameView::OnExit()
 		m_player->SetReachedState(false);
 }
 //-----------------------------------------------------------------------------
-void GameView::Update()
+void OLDGameView::Update()
 {
 	m_camera.SetPosition(m_level->GetCameraPos(m_player->GetPosition(), m_screenSize, m_camera.GetScale()));
 	m_camera.Update();
@@ -57,7 +57,7 @@ void GameView::Update()
 	updateObject();
 }
 //-----------------------------------------------------------------------------
-void GameView::Draw()
+void OLDGameView::Draw()
 {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -100,17 +100,17 @@ void GameView::Draw()
 		DrawDebug(projectionMatrix);
 }
 //-----------------------------------------------------------------------------
-int GameView::GetNextViewIndex() const
+int OLDGameView::GetNextViewIndex() const
 {
 	return -1;
 }
 //-----------------------------------------------------------------------------
-int GameView::GetPreviousViewIndex() const
+int OLDGameView::GetPreviousViewIndex() const
 {
 	return -1;
 }
 //-----------------------------------------------------------------------------
-void GameView::initLevel()
+void OLDGameView::initLevel()
 {
 	m_level = std::make_unique<Level>("../test/Levels/testLevel.txt");
 
@@ -181,7 +181,7 @@ void GameView::initLevel()
 	m_player->Init(m_level->GetStartPlayerPosition(), PLAYER_SPEED);
 }
 //-----------------------------------------------------------------------------
-void GameView::DrawDebug(const glm::mat4 &projectionMatrix)
+void OLDGameView::DrawDebug(const glm::mat4 &projectionMatrix)
 {
 	glm::vec4 destRect;
 	for ( auto &it : m_monsters )
@@ -196,7 +196,7 @@ void GameView::DrawDebug(const glm::mat4 &projectionMatrix)
 	m_debuger.Render(projectionMatrix, 2.0);
 }
 //-----------------------------------------------------------------------------
-void GameView::updateObject()
+void OLDGameView::updateObject()
 {
 	auto eventHandler = m_app->GetEventHandler();
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IGameApp.h"
-#include "GameView.h"
+#include "OLDGameView.h"
 
 class Game final : public IGameApp
 {
@@ -15,5 +15,5 @@ private:
 	Game& operator=(const Game&) = delete;
 	Game& operator=(Game&&) = delete;
 
-	std::unique_ptr<GameView> m_gameplayScreen = nullptr;
+	std::unique_ptr<OLDGameView> m_gameplayScreen = nullptr;
 };
