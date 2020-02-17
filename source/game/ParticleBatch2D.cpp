@@ -10,6 +10,6 @@ void ParticleBatch2D::Init(int maxParticles, float decayRate, Texture texture, s
 //-----------------------------------------------------------------------------
 void  ParticleBatch2D::Draw(SpriteBatch &spriteBatch, Particle2D &p)
 {
-	spriteBatch.Draw(p.destRect, m_uvRect, m_texture.id, 0.0f, p.color);
+	spriteBatch.Draw(p.destRect, m_uvRect, m_texture.ID(), 0.0f, p.color);
 }
 //-----------------------------------------------------------------------------

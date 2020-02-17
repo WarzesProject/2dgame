@@ -1,5 +1,11 @@
 #pragma once
 
+enum class TextureFilter
+{
+	Point,
+	Linear
+};
+
 struct ApplicationConfig
 {
 	// app config
@@ -24,6 +30,8 @@ struct ApplicationConfig
 	struct Graphics
 	{		
 		float maxFPS = 60.0f;
+
+		TextureFilter textureFilter = TextureFilter::Point;
 	} graphics;
 
 	// audio config

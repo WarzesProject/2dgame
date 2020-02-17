@@ -2,7 +2,7 @@
 
 #include "Vertex.h"
 
-struct Texture;
+class Texture;
 class SpriteBatch;
 
 struct CharGlyph

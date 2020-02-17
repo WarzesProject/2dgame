@@ -37,7 +37,7 @@ void Tile::Reset()
 //-----------------------------------------------------------------------------
 void Tile::Draw(SpriteBatch &spriteBatch)
 {
-	spriteBatch.Draw(m_destRect, uvRect, m_texture.id, 0.0f, m_color);
+	spriteBatch.Draw(m_destRect, uvRect, m_texture.ID(), 0.0f, m_color);
 }
 //-----------------------------------------------------------------------------
 void Tile::Draw(DebugRenderer &debugRender, const ColorRGBA8 &color)

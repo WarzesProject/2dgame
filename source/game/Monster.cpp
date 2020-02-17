@@ -32,9 +32,9 @@ void Monster::Draw(SpriteBatch &spriteBatch)
 		m_color = ColorRGBA8(m_monsterRed, m_monsterGreen, m_monsterBlue, m_monsterAlpha);
 
 		if ( (m_state == MonsterState::NORMAL || m_state == MonsterState::WAITING) && !m_startDeathAnimation )
-			spriteBatch.Draw(destRect, uvRect, m_texture.texture.id, 1.0f, m_color);
+			spriteBatch.Draw(destRect, uvRect, m_texture.texture.ID(), 1.0f, m_color);
 		else if ( m_state == MonsterState::ATTACKING || m_startDeathAnimation )
-			spriteBatch.Draw(destRect, uvRect, m_attackMotion.texture.id, 1.0f, m_color);
+			spriteBatch.Draw(destRect, uvRect, m_attackMotion.texture.ID(), 1.0f, m_color);
 	}
 
 	{//This is for HitPoint
@@ -53,8 +53,8 @@ void Monster::Draw(SpriteBatch &spriteBatch)
 		m_hpColor.r = 255 - m_hpGreen;
 		m_hpColor.g = m_hpGreen;
 
-		spriteBatch.Draw(hpBarDestRect, UVRect, m_hpBarTexture.id, 2.0f, m_color);
-		spriteBatch.Draw(hpDestRect, UVRect, m_hpTexture.id, 2.0f, m_hpColor);
+		spriteBatch.Draw(hpBarDestRect, UVRect, m_hpBarTexture.ID(), 2.0f, m_color);
+		spriteBatch.Draw(hpDestRect, UVRect, m_hpTexture.ID(), 2.0f, m_hpColor);
 	}
 }
 //-----------------------------------------------------------------------------

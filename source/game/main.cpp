@@ -19,6 +19,10 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **args)
 		config.resources.coreFolder = "";
 
 		Application app(config);
+
+		auto g = Application::Get();
+
+
 		app.Run(std::make_unique<Game>());
 	}
 	catch ( const ExceptionSDL &exc )

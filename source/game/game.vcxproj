@@ -192,7 +192,6 @@
     <ClInclude Include="GLSLProgram.h" />
     <ClInclude Include="IGameApp.h" />
     <ClInclude Include="IGameView.h" />
-    <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="IOManager.h" />
     <ClInclude Include="IParticleBatch2D.h" />
     <ClInclude Include="Items.h" />
@@ -231,7 +230,6 @@
     <ClCompile Include="glad.cpp" />
     <ClCompile Include="GLSLProgram.cpp" />
     <ClCompile Include="IGameApp.cpp" />
-    <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="IParticleBatch2D.cpp" />
     <ClCompile Include="Items.cpp" />
@@ -253,6 +251,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestView.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureCache.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Timer.cpp" />

@@ -52,7 +52,7 @@ void Sprite::Init(float x, float y, float width, float height, std::string_view 
 void Sprite::Draw()
 {
 	//bind the texture
-	glBindTexture(GL_TEXTURE_2D, m_texture.id);
+	glBindTexture(GL_TEXTURE_2D, m_texture.ID());
 
 	// bind the buffer object
 	glBindBuffer(GL_ARRAY_BUFFER, m_vboID);

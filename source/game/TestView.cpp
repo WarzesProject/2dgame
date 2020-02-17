@@ -131,7 +131,7 @@ void TestView::Draw()
 		// позиция спрайта
 		glm::vec4 dest(0.0f, 0.0f, 200.0f, 200.0f);
 		glm::vec4 uv(0.0f, 0.0f, 1.0f, 1.0f);
-		m_spriteBatch.Draw(dest, uv, texture.id, 0.0f, color);
+		m_spriteBatch.Draw(dest, uv, texture.ID(), 0.0f, color);
 	}
 	m_spriteBatch.End();
 	m_spriteBatch.RenderBatch();
@@ -146,7 +146,7 @@ void TestView::Draw()
 	{
 		glm::vec4 dest(300.0f, 0.0f, 32.0f, 64.0f);
 		glm::vec4 uvRect = tiletexture.GetUV(0, 0);
-		m_spriteBatch.Draw(dest, uvRect, tiletexture.texture.id, 0.0f, color);
+		m_spriteBatch.Draw(dest, uvRect, tiletexture.texture.ID(), 0.0f, color);
 	}
 	m_spriteBatch.End();
 	m_spriteBatch.RenderBatch();

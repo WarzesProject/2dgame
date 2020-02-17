@@ -16,6 +16,9 @@ public:
 
 	void Run(std::unique_ptr<IGameApp> game);
 
+	static Application* Get() { SDL_assert(sApp); return sApp; }
+
+	ApplicationConfig GetConfig() const { return m_config; }
 	int GetScreenWidth() const { return m_config.window.width; }
 	int GetScreenHeight() const { return m_config.window.height; }
 	std::shared_ptr<InputSystem> GetEventHandler() { return m_eventHandler; }
@@ -26,6 +29,8 @@ private:
 	Application(Application&&) = delete;
 	Application& operator=(const Application&) = delete;
 	Application& operator=(Application&&) = delete;
+
+	inline static Application *sApp = nullptr;
 
 	void redirectIOToConsole();
 	void draw();

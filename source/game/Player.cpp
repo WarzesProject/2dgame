@@ -184,11 +184,11 @@ void Player::Draw(SpriteBatch &spriteBatch)
 
 		if( m_playerState == PlayerState::NORMAL && !m_startDeathAnimation )
 		{
-			spriteBatch.Draw(destRect, uvRect, m_texture.texture.id, 1.0f, m_color);
+			spriteBatch.Draw(destRect, uvRect, m_texture.texture.ID(), 1.0f, m_color);
 		}
 		else
 		{
-			spriteBatch.Draw(destRect, uvRect, m_weapon[m_currentWeaponIndex].attackTexture.texture.id, 1.0f, m_color);
+			spriteBatch.Draw(destRect, uvRect, m_weapon[m_currentWeaponIndex].attackTexture.texture.ID(), 1.0f, m_color);
 		}
 	}
 
@@ -213,8 +213,8 @@ void Player::Draw(SpriteBatch &spriteBatch)
 		m_hpColor.r = 255 - m_hpGreen;
 		m_hpColor.g = m_hpGreen;
 
-		spriteBatch.Draw(hpBarDestRect, hpUVRect, m_hpBar.id, 2.0f, m_color);
-		spriteBatch.Draw(hpDestRect, hpUVRect, m_hitPoint.id, 2.0f, m_hpColor);
+		spriteBatch.Draw(hpBarDestRect, hpUVRect, m_hpBar.ID(), 2.0f, m_color);
+		spriteBatch.Draw(hpDestRect, hpUVRect, m_hitPoint.ID(), 2.0f, m_hpColor);
 	}
 }
 //-----------------------------------------------------------------------------

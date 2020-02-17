@@ -22,6 +22,7 @@ Application::Application(const ApplicationConfig &config)
 	m_eventHandler = std::make_shared<InputSystem>(m_config.window.width, m_config.window.height);
 
 	m_isRunning = true;
+	sApp = this;
 }
 //-----------------------------------------------------------------------------
 Application::~Application()

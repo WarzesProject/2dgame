@@ -10,9 +10,6 @@
     <ClCompile Include="TextureCache.cpp">
       <Filter>Engine\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="ImageLoader.cpp">
-      <Filter>Engine\Resource</Filter>
-    </ClCompile>
     <ClCompile Include="FontCache.cpp">
       <Filter>Engine\Resource</Filter>
     </ClCompile>
@@ -103,6 +100,9 @@
       <Filter>View</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Texture.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h">
@@ -118,9 +118,6 @@
       <Filter>Engine\Utility</Filter>
     </ClInclude>
     <ClInclude Include="TextureCache.h">
-      <Filter>Engine\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageLoader.h">
       <Filter>Engine\Resource</Filter>
     </ClInclude>
     <ClInclude Include="FontCache.h">
@@ -140,9 +137,6 @@
     </ClInclude>
     <ClInclude Include="Window.h">
       <Filter>Engine\App</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>Engine\Graphics</Filter>
@@ -224,6 +218,9 @@
       <Filter>View</Filter>
     </ClInclude>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Texture.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="3rdparty">
@@ -264,6 +261,9 @@
     </Filter>
     <Filter Include="View">
       <UniqueIdentifier>{22580868-f7d6-4a6d-b891-f9e3dbcf834a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameLogic">
+      <UniqueIdentifier>{983bea30-5e3a-4d07-8c41-92bfd7845c48}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

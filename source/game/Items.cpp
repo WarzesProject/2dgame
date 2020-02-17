@@ -15,7 +15,7 @@ void Item::Draw(SpriteBatch &spriteBatch)
 		}
 	}
 	m_color.a = m_alpha;
-	spriteBatch.Draw(destRect, UVRect, m_texture.id, 0.0f, m_color);
+	spriteBatch.Draw(destRect, UVRect, m_texture.ID(), 0.0f, m_color);
 }
 //-----------------------------------------------------------------------------
 void Item::DrawDebug(DebugRenderer &debuger)
