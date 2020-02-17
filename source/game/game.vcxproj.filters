@@ -47,9 +47,6 @@
     <ClCompile Include="GameViewManager.cpp">
       <Filter>Engine\App\AppView</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>GameApp</Filter>
-    </ClCompile>
     <ClCompile Include="Camera2D.cpp">
       <Filter>Engine\Graphics</Filter>
     </ClCompile>
@@ -79,7 +76,7 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TestView.cpp">
-      <Filter>GameApp\View</Filter>
+      <Filter>View</Filter>
     </ClCompile>
     <ClCompile Include="Items.cpp">
       <Filter>OLDGameLogic</Filter>
@@ -100,8 +97,12 @@
       <Filter>OLDGameLogic</Filter>
     </ClCompile>
     <ClCompile Include="OLDGameView.cpp">
-      <Filter>GameApp\View</Filter>
+      <Filter>View</Filter>
     </ClCompile>
+    <ClCompile Include="GameView.cpp">
+      <Filter>View</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h">
@@ -161,9 +162,6 @@
     <ClInclude Include="GameViewManager.h">
       <Filter>Engine\App\AppView</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>GameApp</Filter>
-    </ClInclude>
     <ClInclude Include="Camera2D.h">
       <Filter>Engine\Graphics</Filter>
     </ClInclude>
@@ -196,7 +194,7 @@
     </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TestView.h">
-      <Filter>GameApp\View</Filter>
+      <Filter>View</Filter>
     </ClInclude>
     <ClInclude Include="DefineLogic.h">
       <Filter>OLDGameLogic</Filter>
@@ -220,8 +218,12 @@
       <Filter>OLDGameLogic</Filter>
     </ClInclude>
     <ClInclude Include="OLDGameView.h">
-      <Filter>GameApp\View</Filter>
+      <Filter>View</Filter>
     </ClInclude>
+    <ClInclude Include="GameView.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="3rdparty">
@@ -257,14 +259,11 @@
     <Filter Include="Engine\Graphics\old">
       <UniqueIdentifier>{cfa61b9c-09e3-4179-8abb-ee8c400b9285}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameApp">
-      <UniqueIdentifier>{cdf10ca1-36f7-4cbe-9b8c-b4227ea2fdee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameApp\View">
-      <UniqueIdentifier>{22580868-f7d6-4a6d-b891-f9e3dbcf834a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="OLDGameLogic">
       <UniqueIdentifier>{70694b97-0cff-4802-a553-5939d6614286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View">
+      <UniqueIdentifier>{22580868-f7d6-4a6d-b891-f9e3dbcf834a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
